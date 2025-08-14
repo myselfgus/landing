@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-key="pageTitle">VOITHER MedicalScribe | The Future of Clinical Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css" />
+    <!-- Font Awesome for scalable vector icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.13.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="page-container">
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">
+                    <span>VOITHER</span>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#technology" data-key="sectionTitleTechnology">The Voither Difference</a></li>
+                    <li><a href="#how-it-works" data-key="sectionTitleHowItWorks">How It Works</a></li>
+                    <li><a href="#augmented-ai" data-key="sectionTitleUpdates">Latest Updates & Roadmap</a></li>
+                    <li><a href="#about" data-key="navTitleAbout" class="nav-quote">About Voither</a></li>
+                    <li><a href="#contact" data-key="navContact">Contact & FAQ</a></li>
+                    <li class="medscribe-nav-group">
+                        <button class="medscribe-button" data-key="medscribeButton">MEDSCRIBE</button>
+                        <button class="medscribe-button" data-key="holofractorButton">HOLOFRACTOR</button>
+                        <button class="medscribe-button" data-key="peeraiButton">PEER-AI</button>
+                    </li>
+                </ul>
+            </nav>
+            <div class="compliance-section">
+                <h4 class="compliance-title" data-key="complianceTitle"></h4>
+                <div class="compliance-list">
+                    <span class="compliance-item" data-key="complianceLGPD"></span>
+                    <span class="compliance-item" data-key="complianceHIPAA"></span>
+                    <span class="compliance-item" data-key="complianceFHIR"></span>
+                    <span class="compliance-item" data-key="complianceRDoC"></span>
+                    <span class="compliance-item" data-key="complianceHiTOP"></span>
+                    <span class="compliance-item" data-key="complianceBigFive"></span>
+                    <span class="compliance-item" data-key="compliancePERMA"></span>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <button class="lang-switcher" aria-label="Toggle language">EN</button>
+                <button class="theme-switcher" aria-label="Toggle theme">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+        </aside>
+        
+        <div class="content-wrapper">
+            <header class="main-header">
+                <nav class="container">
+                     <div class="partner-banner">
+                        <a href="#" class="logo header-logo-mobile">VOITHER</a>
+                        <span data-key="proudlyPartOf" class="hide-on-mobile"></span>
+                        <div class="partner-logos">
+                            <div class="partner-item">
+                                <svg class="partner-logo" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="0" y="0" width="4.7" height="4.7" fill="#F25022"></rect>
+                                    <rect x="5.3" y="0" width="4.7" height="4.7" fill="#7FBA00"></rect>
+                                    <rect x="0" y="5.3" width="4.7" height="4.7" fill="#00A4EF"></rect>
+                                    <rect x="5.3" y="5.3" width="4.7" height="4.7" fill="#FFB900"></rect>
+                                </svg>
+                                <span class="partner-logo-text" data-key="msForStartups"></span>
+                            </div>
+                            <div class="partner-item hide-on-mobile">
+                                <img src="https://assets.santanderx.com/images/logos/logo-santanderx.png" alt="Santander X Logo" class="partner-img-logo santander-x-logo" />
+                            </div>
+                            <div class="partner-item hide-on-mobile">
+                               <img src="https://miro.medium.com/v2/resize:fit:1400/1*9VNthQb_I7B0voN97E21hg.png" alt="MongoDB Logo" class="partner-img-logo mongodb-logo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                    </div>
+                </nav>
+            </header>
+            
+            <main>
+                <section class="hero-section hero-section-1" id="home">
+                    <div class="hero-visual-container">
+                       <div class="hero-visual"></div>
+                    </div>
+                    <div class="hero-content">
+                        <h1 data-key="heroTitleNew"></h1>
+                        <p class="hero-subtext" data-key="heroPitchNew"></p>
+                        <div class="hero-actions">
+                            <button class="hero-action-button" data-key="heroInvestorsButton"></button>
+                            <button class="hero-action-button" data-key="heroDevButton"></button>
+                            <button class="hero-action-button" data-key="heroHealthButton"></button>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="content-section" id="technology">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="sectionTitleTechnology"></h2>
+                        </div>
+                        <div class="tech-grid">
+                            <div class="tech-card">
+                                <div class="tech-visual tech-visual-1"></div>
+                                <div class="tech-content">
+                                    <h3 data-key="techPane1Title"></h3>
+                                    <p data-key="techPane1Desc"></p>
+                                </div>
+                            </div>
+                             <div class="tech-card">
+                                <div class="tech-visual tech-visual-2"></div>
+                                <div class="tech-content">
+                                    <h3 data-key="feature2Title"></h3>
+                                    <p data-key="feature2Desc"></p>
+                                </div>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-visual tech-visual-4"></div>
+                                <div class="tech-content">
+                                    <h3 data-key="feature1Title"></h3>
+                                    <p data-key="feature1Desc"></p>
+                                </div>
+                            </div>
+                             <div class="tech-card">
+                                <div class="tech-visual tech-visual-5"></div>
+                                <div class="tech-content">
+                                    <h3 data-key="feature3Title"></h3>
+                                    <p data-key="feature3Desc"></p>
+                                </div>
+                            </div>
+                             <div class="tech-card">
+                                <div class="tech-visual tech-visual-6"></div>
+                                <div class="tech-content">
+                                    <h3 data-key="feature4Title"></h3>
+                                    <p data-key="feature4Desc"></p>
+                                </div>
+                            </div>
+                             <div class="tech-card">
+                                <div class="tech-visual tech-visual-3"></div>
+                                <div class="tech-content">
+                                    <h3 data-key="techPane3Title"></h3>
+                                    <p data-key="techPane3Desc"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="content-section" id="how-it-works">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="sectionTitleHowItWorks">How It Works</h2>
+                        </div>
+                        <!-- Restored timeline layout: each item is connected by a central line. This structure
+                             allows rich content per step and a clear narrative flow. -->
+                        <div class="how-it-works-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <i class="fa-solid fa-microphone-lines timeline-icon" aria-hidden="true"></i>
+                                    <h3 data-key="howItWorksStep1Title"></h3>
+                                    <p data-key="howItWorksStep1Desc"></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <i class="fa-solid fa-wave-square timeline-icon" aria-hidden="true"></i>
+                                    <h3 data-key="howItWorksStep2Title"></h3>
+                                    <p data-key="howItWorksStep2Desc"></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <i class="fa-solid fa-file-lines timeline-icon" aria-hidden="true"></i>
+                                    <h3 data-key="howItWorksStep3Title"></h3>
+                                    <p data-key="howItWorksStep3Desc"></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <i class="fa-solid fa-bolt timeline-icon" aria-hidden="true"></i>
+                                    <h3 data-key="howItWorksStep4Title"></h3>
+                                    <p data-key="howItWorksStep4Desc"></p>
+                                </div>
+                            </div>
+                            <!-- Result card: summarises the outcome of the previous steps -->
+                            <div class="timeline-item result-card">
+                                <div class="timeline-content">
+                                    <i class="fa-solid fa-circle-check timeline-icon" aria-hidden="true"></i>
+                                    <h3 data-key="howItWorksResultTitle"></h3>
+                                    <p data-key="howItWorksResultDesc"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="augmented-ai">
+                     <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="sectionTitleUpdates">Latest Updates & Roadmap</h2>
+                            <a href="#" class="view-all-link" data-key="viewAll">View all</a>
+                        </div>
+                         <div class="augmented-ai-grid">
+                            <div class="update-card card-1">
+                                <div class="card-visual card-visual-1"></div>
+                                <div class="update-content">
+                                    <h3 data-key="pioneer1Title"></h3>
+                                    <p data-key="pioneer1Desc"></p>
+                                </div>
+                            </div>
+                            <div class="update-card card-2">
+                                 <div class="card-visual card-visual-2"></div>
+                                <div class="update-content">
+                                    <h3 data-key="pioneer2Title"></h3>
+                                    <p data-key="pioneer2Desc"></p>
+                                </div>
+                            </div>
+                             <div class="update-card card-3">
+                                 <div class="card-visual card-visual-3"></div>
+                                <div class="update-content">
+                                    <h3 data-key="pioneer3Title"></h3>
+                                    <p data-key="pioneer3Desc"></p>
+                                </div>
+                            </div>
+                            <div class="update-card card-4">
+                                 <div class="card-visual card-visual-4"></div>
+                                <div class="update-content">
+                                    <h3 data-key="pioneer4Title"></h3>
+                                    <p data-key="pioneer4Desc"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="content-section quote-section" id="about">
+                    <div class="container">
+                        <blockquote>
+                            <span data-key="thesis">"Today, clinical practice is about talking and writing—but systems only understand checkboxes. Voither is born to listen to human language, turn it into objective signals, and act, with no learning curve. This is only possible because we bring together three things that almost no one has in the same place: a reasoning engine 'with time inside' (BRRE), proprietary languages that turn law into code (.ee), and a timed E2E pipeline from conversation to action."</span>
+                        </blockquote>
+                        <cite data-key="quoteAttribution"></cite>
+                    </div>
+                </section>
+                
+                <section class="content-section" id="contact">
+                    <div class="contact-bg-glow"></div>
+                    <div class="container">
+                        <div class="contact-grid">
+                            <div class="faq-container">
+                                <h3 class="faq-title" data-key="faqTitle"></h3>
+                                <div class="faq-accordion">
+                                    <div class="faq-item">
+                                        <button class="faq-question">
+                                            <span data-key="faqQ1"></span>
+                                        </button>
+                                        <div class="faq-answer">
+                                            <p data-key="faqA1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <button class="faq-question">
+                                            <span data-key="faqQ2"></span>
+                                        </button>
+                                        <div class="faq-answer">
+                                            <p data-key="faqA2"></p>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <button class="faq-question">
+                                            <span data-key="faqQ3"></span>
+                                        </button>
+                                        <div class="faq-answer">
+                                            <p data-key="faqA3"></p>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <button class="faq-question">
+                                            <span data-key="faqQ4"></span>
+                                        </button>
+                                        <div class="faq-answer">
+                                            <p data-key="faqA4"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-info">
+                                <h2 class="section-title" data-key="contactTitle"></h2>
+                                <p class="section-subtitle" data-key="contactSubtitle"></p>
+                                <a href="mailto:hello@voither.com" class="cta-button large" data-key="contactButton"></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <footer class="main-footer">
+                     <div class="container footer-content">
+                        <p class="copyright" data-key="copyright">&copy; 2025 VOITHER. All rights reserved.</p>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+    <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
