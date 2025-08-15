@@ -1,0 +1,67 @@
+{
+  "category": "concepts",
+  "items": [
+    {
+      "term": "BRRE",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "AUTOAGENCY",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "HOLOFRACTOR",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "MEDSCRIBE",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "PEER-AI",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "kairos",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "lived time",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "clinical time",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "compliance that compiles",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "rhizomatic memory",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "signal layers",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "term": "E2E Pipeline",
+      "category": "voither_concept",
+      "found_at": "2025-08-15T00:54:59Z"
+    }
+  ],
+  "count": 12,
+  "generated_at": "2025-08-15T00:54:59Z"
+}

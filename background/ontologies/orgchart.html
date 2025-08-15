@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voither Ecosystem Organization</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .orgchart { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        .org-title { text-align: center; color: white; font-size: 2em; margin-bottom: 30px; }
+        .org-level { display: flex; justify-content: center; margin: 30px 0; flex-wrap: wrap; gap: 20px; }
+        .org-node { 
+            background: white; 
+            border-radius: 8px; 
+            padding: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            text-align: center;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+        .org-node:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .org-root { background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 1.2em; }
+        .org-category { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
+        .org-item { background: #f8f9fa; border-left: 4px solid #007bff; }
+        .org-name { font-weight: bold; margin-bottom: 8px; }
+        .org-desc { font-size: 0.9em; opacity: 0.8; }
+        .connection { height: 2px; background: rgba(255,255,255,0.3); margin: -15px auto 15px; width: 60%; }
+    </style>
+</head>
+<body>
+    <div class="orgchart">
+        <h1 class="org-title">🏢 Voither Ecosystem Organization</h1>
+        
+        <!-- Root Level -->
+        <div class="org-level">
+            <div class="org-node org-root">
+                <div class="org-name">Voither Ecosystem</div>
+                <div class="org-desc">Complete Ecosystem</div>
+            </div>
+        </div>
+        
+        <div class="connection"></div>
+        
+        <!-- Category Level -->
+        <div class="org-level">
+            <div class="org-node org-category">
+                <div class="org-name">Products</div>
+                <div class="org-desc">Category</div>
+            </div>
+            <div class="org-node org-category">
+                <div class="org-name">Technologies</div>
+                <div class="org-desc">Category</div>
+            </div>
+            <div class="org-node org-category">
+                <div class="org-name">Concepts</div>
+                <div class="org-desc">Category</div>
+            </div>
+        </div>
+        
+        <div class="connection"></div>
+        
+        <!-- Items Level -->
+        <div class="org-level">
+            <div class="org-node org-item">
+                <div class="org-name">MEDSCRIBE</div>
+                <div class="org-desc">Clinical documentation system</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">HOLOFRACTOR</div>
+                <div class="org-desc">Data analysis platform</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">PEER-AI</div>
+                <div class="org-desc">Collaborative intelligence</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">BRRE</div>
+                <div class="org-desc">Biological Reasoning and Reality Engine</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">AUTOAGENCY</div>
+                <div class="org-desc">Autonomous agency framework</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">E2E Pipeline</div>
+                <div class="org-desc">End-to-end processing pipeline</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">kairos</div>
+                <div class="org-desc">Strategic timing and opportunity</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">AUTODOCS</div>
+                <div class="org-desc">Automated documentation</div>
+            </div>
+            <div class="org-node org-item">
+                <div class="org-name">fidedignidade conceitual</div>
+                <div class="org-desc">Conceptual fidelity</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; color: white; margin-top: 40px; opacity: 0.8;">
+            <p>Generated: 2025-08-15T00:54:59Z</p>
+        </div>
+    </div>
+</body>
+</html>

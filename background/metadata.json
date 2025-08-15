@@ -1,15 +1,15 @@
 {
   "sync_info": {
-    "last_sync": "2025-08-15T00:12:41.455254Z",
-    "commit_sha": "demo-run",
+    "last_sync": "2025-08-15T00:55:00.025908Z",
+    "commit_sha": "complete-pipeline-1755219299",
     "docs_repository": "myselfgus/docs",
     "sync_trigger": "docs_repository_update"
   },
   "content_statistics": {
     "directories": {
       "ontologies": {
-        "total_files": 4,
-        "total_size": 1630,
+        "total_files": 12,
+        "total_size": 29478,
         "subdirectories": {
           "taxonomies": {
             "total_files": 1,
@@ -18,54 +18,60 @@
             "file_types": {
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:51.536932Z"
+            "last_modified": "2025-08-15T00:40:04.832880Z"
           },
           "frameworks": {
-            "total_files": 1,
-            "total_size": 0,
+            "total_files": 2,
+            "total_size": 544,
             "subdirectories": {},
             "file_types": {
-              "no_extension": 1
+              "no_extension": 1,
+              ".json": 1
             },
-            "last_modified": "2025-08-15T00:10:51.537932Z"
+            "last_modified": "2025-08-15T00:54:59.970429Z"
           },
           "concepts": {
-            "total_files": 1,
-            "total_size": 185,
+            "total_files": 2,
+            "total_size": 1731,
             "subdirectories": {},
             "file_types": {
+              ".json": 1,
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:41.266836Z"
+            "last_modified": "2025-08-15T00:54:59.969429Z"
           }
         },
         "file_types": {
-          ".json": 1,
+          ".html": 2,
+          ".svg": 1,
+          ".json": 6,
           "no_extension": 3
         },
-        "last_modified": "2025-08-15T00:10:51.537932Z"
+        "last_modified": "2025-08-15T00:54:59.972429Z"
       },
       "parsings": {
-        "total_files": 3,
-        "total_size": 0,
+        "total_files": 6,
+        "total_size": 4284,
         "subdirectories": {
           "markdown": {
-            "total_files": 1,
-            "total_size": 0,
+            "total_files": 2,
+            "total_size": 3566,
             "subdirectories": {},
             "file_types": {
-              "no_extension": 1
+              "no_extension": 1,
+              ".json": 1
             },
-            "last_modified": "2025-08-15T00:10:51.538932Z"
+            "last_modified": "2025-08-15T00:53:49.217171Z"
           },
           "structured": {
-            "total_files": 1,
-            "total_size": 0,
+            "total_files": 2,
+            "total_size": 547,
             "subdirectories": {},
             "file_types": {
-              "no_extension": 1
+              "no_extension": 1,
+              ".json": 1
             },
-            "last_modified": "2025-08-15T00:10:51.539932Z"
+            "last_modified": "2025-08-15T00:54:59.968429Z"
           },
           "extracted": {
             "total_files": 1,
@@ -74,13 +80,14 @@
             "file_types": {
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:51.540932Z"
+            "last_modified": "2025-08-15T00:40:04.832880Z"
           }
         },
         "file_types": {
+          ".json": 3,
           "no_extension": 3
         },
-        "last_modified": "2025-08-15T00:10:51.540932Z"
+        "last_modified": "2025-08-15T00:54:59.971429Z"
       },
       "vectors": {
         "total_files": 3,
@@ -93,7 +100,7 @@
             "file_types": {
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:51.534932Z"
+            "last_modified": "2025-08-15T00:40:04.833880Z"
           },
           "embeddings": {
             "total_files": 1,
@@ -102,14 +109,14 @@
             "file_types": {
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:51.535932Z"
+            "last_modified": "2025-08-15T00:40:04.833880Z"
           }
         },
         "file_types": {
           ".json": 1,
           "no_extension": 2
         },
-        "last_modified": "2025-08-15T00:10:51.535932Z"
+        "last_modified": "2025-08-15T00:40:04.833880Z"
       },
       "graphs": {
         "total_files": 8,
@@ -122,7 +129,7 @@
             "file_types": {
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:51.532932Z"
+            "last_modified": "2025-08-15T00:40:04.832880Z"
           },
           "relationships": {
             "total_files": 1,
@@ -131,7 +138,7 @@
             "file_types": {
               "no_extension": 1
             },
-            "last_modified": "2025-08-15T00:10:51.533932Z"
+            "last_modified": "2025-08-15T00:40:04.832880Z"
           }
         },
         "file_types": {
@@ -140,13 +147,15 @@
           ".graphml": 1,
           "no_extension": 2
         },
-        "last_modified": "2025-08-15T00:12:29.213758Z"
+        "last_modified": "2025-08-15T00:40:04.832880Z"
       }
     },
     "files": {},
-    "total_size": 57115,
+    "total_size": 89247,
     "content_types": {
-      ".json": 6,
+      ".html": 2,
+      ".svg": 1,
+      ".json": 14,
       "no_extension": 10,
       ".cypher": 1,
       ".graphml": 1
@@ -193,14 +202,14 @@
   "quality_metrics": {
     "completeness": {
       "ontologies": {
-        "file_count": 4,
+        "file_count": 12,
         "has_content": true,
-        "size_bytes": 1630
+        "size_bytes": 29478
       },
       "parsings": {
-        "file_count": 3,
+        "file_count": 6,
         "has_content": true,
-        "size_bytes": 0
+        "size_bytes": 4284
       },
       "vectors": {
         "file_count": 3,
@@ -218,7 +227,7 @@
       "total_axes": 4,
       "coverage_percentage": 100.0
     },
-    "freshness": "2025-08-15T00:12:41.455254Z"
+    "freshness": "2025-08-15T00:55:00.025908Z"
   },
   "system_info": {
     "format_version": "1.0",
@@ -243,6 +252,13 @@
     {
       "timestamp": "2025-08-15T00:12:41.455254Z",
       "commit_sha": "demo-run",
+      "docs_repository": "myselfgus/docs",
+      "sync_type": "automatic",
+      "status": "completed"
+    },
+    {
+      "timestamp": "2025-08-15T00:55:00.025908Z",
+      "commit_sha": "complete-pipeline-1755219299",
       "docs_repository": "myselfgus/docs",
       "sync_type": "automatic",
       "status": "completed"

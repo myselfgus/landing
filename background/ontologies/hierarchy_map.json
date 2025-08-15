@@ -1,0 +1,69 @@
+{
+  "name": "Voither Ecosystem",
+  "type": "organization",
+  "children": [
+    {
+      "name": "Products",
+      "type": "category",
+      "children": [
+        {
+          "name": "MEDSCRIBE",
+          "type": "product",
+          "description": "Clinical documentation system"
+        },
+        {
+          "name": "HOLOFRACTOR",
+          "type": "product",
+          "description": "Data analysis platform"
+        },
+        {
+          "name": "PEER-AI",
+          "type": "product",
+          "description": "Collaborative intelligence"
+        }
+      ]
+    },
+    {
+      "name": "Technologies",
+      "type": "category",
+      "children": [
+        {
+          "name": "BRRE",
+          "type": "technology",
+          "description": "Biological Reasoning and Reality Engine"
+        },
+        {
+          "name": "AUTOAGENCY",
+          "type": "technology",
+          "description": "Autonomous agency framework"
+        },
+        {
+          "name": "E2E Pipeline",
+          "type": "technology",
+          "description": "End-to-end processing pipeline"
+        }
+      ]
+    },
+    {
+      "name": "Concepts",
+      "type": "category",
+      "children": [
+        {
+          "name": "kairos",
+          "type": "concept",
+          "description": "Strategic timing and opportunity"
+        },
+        {
+          "name": "AUTODOCS",
+          "type": "concept",
+          "description": "Automated documentation"
+        },
+        {
+          "name": "fidedignidade conceitual",
+          "type": "concept",
+          "description": "Conceptual fidelity"
+        }
+      ]
+    }
+  ]
+}

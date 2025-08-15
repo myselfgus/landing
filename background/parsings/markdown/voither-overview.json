@@ -1,0 +1,86 @@
+{
+  "original_path": "voither-overview.md",
+  "title": "Voither Medical Platform",
+  "headings": [
+    {
+      "level": 1,
+      "text": "Voither Medical Platform",
+      "id": "voither-medical-platform"
+    },
+    {
+      "level": 2,
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": 2,
+      "text": "Core Technologies",
+      "id": "core-technologies"
+    },
+    {
+      "level": 2,
+      "text": "Key Features",
+      "id": "key-features"
+    },
+    {
+      "level": 2,
+      "text": "Products",
+      "id": "products"
+    },
+    {
+      "level": 3,
+      "text": "BRRE Engine",
+      "id": "brre-engine"
+    },
+    {
+      "level": 3,
+      "text": "E2E Pipeline",
+      "id": "e2e-pipeline"
+    },
+    {
+      "level": 3,
+      "text": "AUTOAGENCY",
+      "id": "autoagency"
+    }
+  ],
+  "concepts": [
+    "Time",
+    "Products",
+    "HOLOFRACTOR",
+    "Features",
+    "Engine",
+    "Overview",
+    "Medical",
+    "Voither",
+    "AUTOAGENCY",
+    "Compliance",
+    "Key",
+    "Compiles",
+    "Pipeline",
+    "PEER",
+    "Platform",
+    "Citizen",
+    "Collaborative",
+    "E2E",
+    "Layers",
+    "Memory",
+    "Patient",
+    "ROI",
+    "Core",
+    "Native",
+    "MEDSCRIBE",
+    "Executes",
+    "Automation",
+    "Technologies",
+    "Clinical",
+    "BRRE",
+    "ReEngine",
+    "Rhizomatic",
+    "Signal",
+    "Class"
+  ],
+  "content": "# Voither Medical Platform\n\n## Overview\nVoither is a revolutionary medical AI platform that transforms clinical workflows through intelligent automation.\n\n## Core Technologies\n\n### BRRE Engine\nA reasoning engine that operates in lived time (kairos), not just clock time. It detects *when* to act, not just *what* to do.\n\n### E2E Pipeline\nA pipeline that connects speech to signal, decision, and paperwork in seconds, with measurable ROI.\n\n### AUTOAGENCY\nExecutes documentation, orders, scheduling, and billing with auditing and measured time savings.\n\n## Key Features\n- Clinical Time as a 1st Class Citizen (kairos)\n- Compliance that Compiles (.ee)\n- Rhizomatic Memory + Signal Layers\n- Native Clinical Automation (ReEngine)\n\n## Products\n- MEDSCRIBE: Clinical documentation assistant\n- HOLOFRACTOR: Patient data analysis\n- PEER-AI: Collaborative intelligence system\n",
+  "html": "<h1 id=\"voither-medical-platform\">Voither Medical Platform</h1>\n<h2 id=\"overview\">Overview</h2>\n<p>Voither is a revolutionary medical AI platform that transforms clinical workflows through intelligent automation.</p>\n<h2 id=\"core-technologies\">Core Technologies</h2>\n<h3 id=\"brre-engine\">BRRE Engine</h3>\n<p>A reasoning engine that operates in lived time (kairos), not just clock time. It detects <em>when</em> to act, not just <em>what</em> to do.</p>\n<h3 id=\"e2e-pipeline\">E2E Pipeline</h3>\n<p>A pipeline that connects speech to signal, decision, and paperwork in seconds, with measurable ROI.</p>\n<h3 id=\"autoagency\">AUTOAGENCY</h3>\n<p>Executes documentation, orders, scheduling, and billing with auditing and measured time savings.</p>\n<h2 id=\"key-features\">Key Features</h2>\n<ul>\n<li>Clinical Time as a 1st Class Citizen (kairos)</li>\n<li>Compliance that Compiles (.ee)</li>\n<li>Rhizomatic Memory + Signal Layers</li>\n<li>Native Clinical Automation (ReEngine)</li>\n</ul>\n<h2 id=\"products\">Products</h2>\n<ul>\n<li>MEDSCRIBE: Clinical documentation assistant</li>\n<li>HOLOFRACTOR: Patient data analysis</li>\n<li>PEER-AI: Collaborative intelligence system</li>\n</ul>",
+  "processed_at": "2025-08-15T00:53:49Z",
+  "content_hash": -4859836594622434417
+}

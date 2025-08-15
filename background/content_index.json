@@ -1,13 +1,55 @@
 {
-  "generated_at": "2025-08-15T00:12:41.455254Z",
+  "generated_at": "2025-08-15T00:55:00.025908Z",
   "structure": {
     "ontologies": {
       "files": [
         {
+          "name": "concept_tree.html",
+          "path": "ontologies/concept_tree.html",
+          "size": 8792,
+          "modified": "2025-08-15T00:54:59.970429Z",
+          "type": ".html"
+        },
+        {
+          "name": "concept_tree.svg",
+          "path": "ontologies/concept_tree.svg",
+          "size": 2187,
+          "modified": "2025-08-15T00:54:59.971429Z",
+          "type": ".svg"
+        },
+        {
+          "name": "index.json",
+          "path": "ontologies/index.json",
+          "size": 199,
+          "modified": "2025-08-15T00:54:59.972429Z",
+          "type": ".json"
+        },
+        {
           "name": "sample.json",
           "path": "ontologies/sample.json",
           "size": 1445,
-          "modified": "2025-08-15T00:08:04.012355Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
+          "type": ".json"
+        },
+        {
+          "name": "concept_tree.json",
+          "path": "ontologies/concept_tree.json",
+          "size": 8372,
+          "modified": "2025-08-15T00:54:59.970429Z",
+          "type": ".json"
+        },
+        {
+          "name": "orgchart.html",
+          "path": "ontologies/orgchart.html",
+          "size": 4602,
+          "modified": "2025-08-15T00:54:59.971429Z",
+          "type": ".html"
+        },
+        {
+          "name": "hierarchy_map.json",
+          "path": "ontologies/hierarchy_map.json",
+          "size": 1606,
+          "modified": "2025-08-15T00:54:59.971429Z",
           "type": ".json"
         }
       ],
@@ -18,7 +60,7 @@
               "name": ".gitkeep",
               "path": "ontologies/taxonomies/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.536932Z",
+              "modified": "2025-08-15T00:40:04.832880Z",
               "type": "no_extension"
             }
           ],
@@ -30,8 +72,15 @@
               "name": ".gitkeep",
               "path": "ontologies/frameworks/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.537932Z",
+              "modified": "2025-08-15T00:40:04.832880Z",
               "type": "no_extension"
+            },
+            {
+              "name": "frameworks.json",
+              "path": "ontologies/frameworks/frameworks.json",
+              "size": 544,
+              "modified": "2025-08-15T00:54:59.970429Z",
+              "type": ".json"
             }
           ],
           "subdirectories": {}
@@ -39,10 +88,17 @@
         "concepts": {
           "files": [
             {
+              "name": "concepts.json",
+              "path": "ontologies/concepts/concepts.json",
+              "size": 1546,
+              "modified": "2025-08-15T00:54:59.969429Z",
+              "type": ".json"
+            },
+            {
               "name": ".gitkeep",
               "path": "ontologies/concepts/.gitkeep",
               "size": 185,
-              "modified": "2025-08-15T00:10:41.266836Z",
+              "modified": "2025-08-15T00:40:04.832880Z",
               "type": "no_extension"
             }
           ],
@@ -51,7 +107,15 @@
       }
     },
     "parsings": {
-      "files": [],
+      "files": [
+        {
+          "name": "index.json",
+          "path": "parsings/index.json",
+          "size": 171,
+          "modified": "2025-08-15T00:54:59.971429Z",
+          "type": ".json"
+        }
+      ],
       "subdirectories": {
         "markdown": {
           "files": [
@@ -59,8 +123,15 @@
               "name": ".gitkeep",
               "path": "parsings/markdown/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.538932Z",
+              "modified": "2025-08-15T00:40:04.833880Z",
               "type": "no_extension"
+            },
+            {
+              "name": "voither-overview.json",
+              "path": "parsings/markdown/voither-overview.json",
+              "size": 3566,
+              "modified": "2025-08-15T00:53:49.217171Z",
+              "type": ".json"
             }
           ],
           "subdirectories": {}
@@ -71,8 +142,15 @@
               "name": ".gitkeep",
               "path": "parsings/structured/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.539932Z",
+              "modified": "2025-08-15T00:40:04.833880Z",
               "type": "no_extension"
+            },
+            {
+              "name": "config.json",
+              "path": "parsings/structured/config.json",
+              "size": 547,
+              "modified": "2025-08-15T00:54:59.968429Z",
+              "type": ".json"
             }
           ],
           "subdirectories": {}
@@ -83,7 +161,7 @@
               "name": ".gitkeep",
               "path": "parsings/extracted/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.540932Z",
+              "modified": "2025-08-15T00:40:04.832880Z",
               "type": "no_extension"
             }
           ],
@@ -97,7 +175,7 @@
           "name": "sample.json",
           "path": "vectors/sample.json",
           "size": 751,
-          "modified": "2025-08-15T00:08:19.910494Z",
+          "modified": "2025-08-15T00:40:04.833880Z",
           "type": ".json"
         }
       ],
@@ -108,7 +186,7 @@
               "name": ".gitkeep",
               "path": "vectors/indices/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.534932Z",
+              "modified": "2025-08-15T00:40:04.833880Z",
               "type": "no_extension"
             }
           ],
@@ -120,7 +198,7 @@
               "name": ".gitkeep",
               "path": "vectors/embeddings/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.535932Z",
+              "modified": "2025-08-15T00:40:04.833880Z",
               "type": "no_extension"
             }
           ],
@@ -134,42 +212,42 @@
           "name": "knowledge_graph.cypher",
           "path": "graphs/knowledge_graph.cypher",
           "size": 10956,
-          "modified": "2025-08-15T00:12:29.212758Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
           "type": ".cypher"
         },
         {
           "name": "knowledge_graph.json",
           "path": "graphs/knowledge_graph.json",
           "size": 18746,
-          "modified": "2025-08-15T00:12:29.211758Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
           "type": ".json"
         },
         {
           "name": "graph_metadata.json",
           "path": "graphs/graph_metadata.json",
           "size": 976,
-          "modified": "2025-08-15T00:12:29.213758Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
           "type": ".json"
         },
         {
           "name": "sample.json",
           "path": "graphs/sample.json",
           "size": 1331,
-          "modified": "2025-08-15T00:08:35.616634Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
           "type": ".json"
         },
         {
           "name": "knowledge_graph.graphml",
           "path": "graphs/knowledge_graph.graphml",
           "size": 13430,
-          "modified": "2025-08-15T00:12:29.212758Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
           "type": ".graphml"
         },
         {
           "name": "relationship_matrix.json",
           "path": "graphs/relationship_matrix.json",
           "size": 9295,
-          "modified": "2025-08-15T00:12:29.212758Z",
+          "modified": "2025-08-15T00:40:04.832880Z",
           "type": ".json"
         }
       ],
@@ -180,7 +258,7 @@
               "name": ".gitkeep",
               "path": "graphs/knowledge/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.532932Z",
+              "modified": "2025-08-15T00:40:04.832880Z",
               "type": "no_extension"
             }
           ],
@@ -192,7 +270,7 @@
               "name": ".gitkeep",
               "path": "graphs/relationships/.gitkeep",
               "size": 0,
-              "modified": "2025-08-15T00:10:51.533932Z",
+              "modified": "2025-08-15T00:40:04.832880Z",
               "type": "no_extension"
             }
           ],
@@ -204,54 +282,75 @@
   "quick_access": {
     "latest_ontologies": [
       {
-        "name": ".gitkeep",
-        "path": "ontologies/frameworks/.gitkeep",
-        "size": 0,
-        "modified": "2025-08-15T00:10:51.537932Z",
-        "type": "no_extension"
-      },
-      {
-        "name": ".gitkeep",
-        "path": "ontologies/taxonomies/.gitkeep",
-        "size": 0,
-        "modified": "2025-08-15T00:10:51.536932Z",
-        "type": "no_extension"
-      },
-      {
-        "name": ".gitkeep",
-        "path": "ontologies/concepts/.gitkeep",
-        "size": 185,
-        "modified": "2025-08-15T00:10:41.266836Z",
-        "type": "no_extension"
-      },
-      {
-        "name": "sample.json",
-        "path": "ontologies/sample.json",
-        "size": 1445,
-        "modified": "2025-08-15T00:08:04.012355Z",
+        "name": "index.json",
+        "path": "ontologies/index.json",
+        "size": 199,
+        "modified": "2025-08-15T00:54:59.972429Z",
         "type": ".json"
+      },
+      {
+        "name": "concept_tree.svg",
+        "path": "ontologies/concept_tree.svg",
+        "size": 2187,
+        "modified": "2025-08-15T00:54:59.971429Z",
+        "type": ".svg"
+      },
+      {
+        "name": "orgchart.html",
+        "path": "ontologies/orgchart.html",
+        "size": 4602,
+        "modified": "2025-08-15T00:54:59.971429Z",
+        "type": ".html"
+      },
+      {
+        "name": "hierarchy_map.json",
+        "path": "ontologies/hierarchy_map.json",
+        "size": 1606,
+        "modified": "2025-08-15T00:54:59.971429Z",
+        "type": ".json"
+      },
+      {
+        "name": "concept_tree.html",
+        "path": "ontologies/concept_tree.html",
+        "size": 8792,
+        "modified": "2025-08-15T00:54:59.970429Z",
+        "type": ".html"
       }
     ],
     "latest_parsings": [
       {
+        "name": "index.json",
+        "path": "parsings/index.json",
+        "size": 171,
+        "modified": "2025-08-15T00:54:59.971429Z",
+        "type": ".json"
+      },
+      {
+        "name": "config.json",
+        "path": "parsings/structured/config.json",
+        "size": 547,
+        "modified": "2025-08-15T00:54:59.968429Z",
+        "type": ".json"
+      },
+      {
+        "name": "voither-overview.json",
+        "path": "parsings/markdown/voither-overview.json",
+        "size": 3566,
+        "modified": "2025-08-15T00:53:49.217171Z",
+        "type": ".json"
+      },
+      {
         "name": ".gitkeep",
-        "path": "parsings/extracted/.gitkeep",
+        "path": "parsings/markdown/.gitkeep",
         "size": 0,
-        "modified": "2025-08-15T00:10:51.540932Z",
+        "modified": "2025-08-15T00:40:04.833880Z",
         "type": "no_extension"
       },
       {
         "name": ".gitkeep",
         "path": "parsings/structured/.gitkeep",
         "size": 0,
-        "modified": "2025-08-15T00:10:51.539932Z",
-        "type": "no_extension"
-      },
-      {
-        "name": ".gitkeep",
-        "path": "parsings/markdown/.gitkeep",
-        "size": 0,
-        "modified": "2025-08-15T00:10:51.538932Z",
+        "modified": "2025-08-15T00:40:04.833880Z",
         "type": "no_extension"
       }
     ],
@@ -261,100 +360,140 @@
         "name": "knowledge_graph.cypher",
         "path": "graphs/knowledge_graph.cypher",
         "size": 10956,
-        "modified": "2025-08-15T00:12:29.212758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".cypher"
       },
       {
         "name": "knowledge_graph.json",
         "path": "graphs/knowledge_graph.json",
         "size": 18746,
-        "modified": "2025-08-15T00:12:29.211758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".json"
       },
       {
         "name": "graph_metadata.json",
         "path": "graphs/graph_metadata.json",
         "size": 976,
-        "modified": "2025-08-15T00:12:29.213758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".json"
       },
       {
         "name": "knowledge_graph.graphml",
         "path": "graphs/knowledge_graph.graphml",
         "size": 13430,
-        "modified": "2025-08-15T00:12:29.212758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".graphml"
       },
       {
         "name": "relationship_matrix.json",
         "path": "graphs/relationship_matrix.json",
         "size": 9295,
-        "modified": "2025-08-15T00:12:29.212758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".json"
       }
     ],
     "latest_vectors": [
       {
-        "name": ".gitkeep",
-        "path": "vectors/embeddings/.gitkeep",
-        "size": 0,
-        "modified": "2025-08-15T00:10:51.535932Z",
-        "type": "no_extension"
+        "name": "sample.json",
+        "path": "vectors/sample.json",
+        "size": 751,
+        "modified": "2025-08-15T00:40:04.833880Z",
+        "type": ".json"
       },
       {
         "name": ".gitkeep",
         "path": "vectors/indices/.gitkeep",
         "size": 0,
-        "modified": "2025-08-15T00:10:51.534932Z",
+        "modified": "2025-08-15T00:40:04.833880Z",
         "type": "no_extension"
       },
       {
-        "name": "sample.json",
-        "path": "vectors/sample.json",
-        "size": 751,
-        "modified": "2025-08-15T00:08:19.910494Z",
-        "type": ".json"
+        "name": ".gitkeep",
+        "path": "vectors/embeddings/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:40:04.833880Z",
+        "type": "no_extension"
       }
     ],
     "latest_graphs": [
       {
-        "name": "graph_metadata.json",
-        "path": "graphs/graph_metadata.json",
-        "size": 976,
-        "modified": "2025-08-15T00:12:29.213758Z",
-        "type": ".json"
-      },
-      {
         "name": "knowledge_graph.cypher",
         "path": "graphs/knowledge_graph.cypher",
         "size": 10956,
-        "modified": "2025-08-15T00:12:29.212758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".cypher"
-      },
-      {
-        "name": "knowledge_graph.graphml",
-        "path": "graphs/knowledge_graph.graphml",
-        "size": 13430,
-        "modified": "2025-08-15T00:12:29.212758Z",
-        "type": ".graphml"
-      },
-      {
-        "name": "relationship_matrix.json",
-        "path": "graphs/relationship_matrix.json",
-        "size": 9295,
-        "modified": "2025-08-15T00:12:29.212758Z",
-        "type": ".json"
       },
       {
         "name": "knowledge_graph.json",
         "path": "graphs/knowledge_graph.json",
         "size": 18746,
-        "modified": "2025-08-15T00:12:29.211758Z",
+        "modified": "2025-08-15T00:40:04.832880Z",
         "type": ".json"
+      },
+      {
+        "name": "graph_metadata.json",
+        "path": "graphs/graph_metadata.json",
+        "size": 976,
+        "modified": "2025-08-15T00:40:04.832880Z",
+        "type": ".json"
+      },
+      {
+        "name": "sample.json",
+        "path": "graphs/sample.json",
+        "size": 1331,
+        "modified": "2025-08-15T00:40:04.832880Z",
+        "type": ".json"
+      },
+      {
+        "name": "knowledge_graph.graphml",
+        "path": "graphs/knowledge_graph.graphml",
+        "size": 13430,
+        "modified": "2025-08-15T00:40:04.832880Z",
+        "type": ".graphml"
       }
     ]
   },
   "search_index": [
+    {
+      "title": "concept_tree.html",
+      "path": "ontologies/concept_tree.html",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "concept",
+        "tree"
+      ],
+      "size": 8792,
+      "modified": "2025-08-15T00:54:59.970429Z"
+    },
+    {
+      "title": "concept_tree.svg",
+      "path": "ontologies/concept_tree.svg",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "concept",
+        "tree"
+      ],
+      "size": 2187,
+      "modified": "2025-08-15T00:54:59.971429Z"
+    },
+    {
+      "title": "index.json",
+      "path": "ontologies/index.json",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "index",
+        "files",
+        "categories",
+        "concepts",
+        "taxonomies",
+        "frameworks"
+      ],
+      "size": 199,
+      "modified": "2025-08-15T00:54:59.972429Z"
+    },
     {
       "title": "sample.json",
       "path": "ontologies/sample.json",
@@ -362,27 +501,100 @@
       "type": "file",
       "keywords": [
         "sample",
-        "message",
-        "kairos",
-        "taxonomies",
-        "description",
-        "medscribe",
-        "holofractor",
-        "components",
-        "category",
-        "term",
-        "autoagency",
         "concepts",
-        "billing",
-        "hierarchy",
+        "kairos",
+        "medscribe",
+        "message",
         "frameworks",
-        "brre",
         "relations",
+        "definition",
+        "category",
+        "brre",
+        "term",
+        "billing",
+        "taxonomies",
+        "holofractor",
+        "hierarchy",
         "name",
-        "definition"
+        "autoagency",
+        "components",
+        "description"
       ],
       "size": 1445,
-      "modified": "2025-08-15T00:08:04.012355Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
+    },
+    {
+      "title": "concept_tree.json",
+      "path": "ontologies/concept_tree.json",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "concept",
+        "tree",
+        "voither",
+        "quality",
+        "patient",
+        "kairos",
+        "medscribe",
+        "technologies",
+        "compiles",
+        "technology",
+        "time",
+        "core",
+        "clinical",
+        "source",
+        "e2e",
+        "reasoning",
+        "memory",
+        "signal",
+        "automation",
+        "overview",
+        "level",
+        "peer"
+      ],
+      "size": 8372,
+      "modified": "2025-08-15T00:54:59.970429Z"
+    },
+    {
+      "title": "orgchart.html",
+      "path": "ontologies/orgchart.html",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "orgchart"
+      ],
+      "size": 4602,
+      "modified": "2025-08-15T00:54:59.971429Z"
+    },
+    {
+      "title": "hierarchy_map.json",
+      "path": "ontologies/hierarchy_map.json",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "hierarchy",
+        "map",
+        "concepts",
+        "technologies",
+        "kairos",
+        "medscribe",
+        "technology",
+        "type",
+        "category",
+        "product",
+        "brre",
+        "autodocs",
+        "holofractor",
+        "products",
+        "concept",
+        "organization",
+        "name",
+        "autoagency",
+        "children",
+        "description"
+      ],
+      "size": 1606,
+      "modified": "2025-08-15T00:54:59.971429Z"
     },
     {
       "title": ".gitkeep",
@@ -391,7 +603,7 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.536932Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": ".gitkeep",
@@ -400,7 +612,47 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.537932Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
+    },
+    {
+      "title": "frameworks.json",
+      "path": "ontologies/frameworks/frameworks.json",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "frameworks",
+        "description",
+        "items",
+        "type",
+        "category",
+        "count",
+        "engine",
+        "frameworks",
+        "pipeline"
+      ],
+      "size": 544,
+      "modified": "2025-08-15T00:54:59.970429Z"
+    },
+    {
+      "title": "concepts.json",
+      "path": "ontologies/concepts/concepts.json",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "concepts",
+        "concepts",
+        "kairos",
+        "medscribe",
+        "count",
+        "category",
+        "brre",
+        "term",
+        "holofractor",
+        "autoagency",
+        "items"
+      ],
+      "size": 1546,
+      "modified": "2025-08-15T00:54:59.969429Z"
     },
     {
       "title": ".gitkeep",
@@ -409,7 +661,18 @@
       "type": "file",
       "keywords": [],
       "size": 185,
-      "modified": "2025-08-15T00:10:41.266836Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
+    },
+    {
+      "title": "index.json",
+      "path": "parsings/index.json",
+      "category": "parsings",
+      "type": "file",
+      "keywords": [
+        "index"
+      ],
+      "size": 171,
+      "modified": "2025-08-15T00:54:59.971429Z"
     },
     {
       "title": ".gitkeep",
@@ -418,7 +681,39 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.538932Z"
+      "modified": "2025-08-15T00:40:04.833880Z"
+    },
+    {
+      "title": "voither-overview.json",
+      "path": "parsings/markdown/voither-overview.json",
+      "category": "parsings",
+      "type": "file",
+      "keywords": [
+        "voither",
+        "overview",
+        "voither",
+        "text",
+        "concepts",
+        "patient",
+        "medscribe",
+        "technologies",
+        "compiles",
+        "core",
+        "time",
+        "clinical",
+        "e2e",
+        "memory",
+        "signal",
+        "overview",
+        "automation",
+        "level",
+        "peer",
+        "html",
+        "compliance",
+        "brre"
+      ],
+      "size": 3566,
+      "modified": "2025-08-15T00:53:49.217171Z"
     },
     {
       "title": ".gitkeep",
@@ -427,7 +722,33 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.539932Z"
+      "modified": "2025-08-15T00:40:04.833880Z"
+    },
+    {
+      "title": "config.json",
+      "path": "parsings/structured/config.json",
+      "category": "parsings",
+      "type": "file",
+      "keywords": [
+        "config",
+        "voither",
+        "version",
+        "data",
+        "lgpd",
+        "standards",
+        "workflow",
+        "hipaa",
+        "automation",
+        "type",
+        "compliance",
+        "brre",
+        "platform",
+        "name",
+        "modules",
+        "autoagency"
+      ],
+      "size": 547,
+      "modified": "2025-08-15T00:54:59.968429Z"
     },
     {
       "title": ".gitkeep",
@@ -436,7 +757,7 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.540932Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": "sample.json",
@@ -445,26 +766,26 @@
       "type": "file",
       "keywords": [
         "sample",
-        "note",
         "kairos",
-        "type",
         "time",
-        "vectors",
-        "concept",
-        "documents",
-        "usage",
-        "decision",
-        "method",
-        "process",
+        "note",
         "clinical",
         "workflow",
-        "title",
         "reasoning",
+        "documents",
+        "type",
+        "decision",
+        "brre",
+        "method",
+        "usage",
+        "process",
+        "title",
         "engine",
-        "brre"
+        "concept",
+        "vectors"
       ],
       "size": 751,
-      "modified": "2025-08-15T00:08:19.910494Z"
+      "modified": "2025-08-15T00:40:04.833880Z"
     },
     {
       "title": ".gitkeep",
@@ -473,7 +794,7 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.534932Z"
+      "modified": "2025-08-15T00:40:04.833880Z"
     },
     {
       "title": ".gitkeep",
@@ -482,7 +803,7 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.535932Z"
+      "modified": "2025-08-15T00:40:04.833880Z"
     },
     {
       "title": "knowledge_graph.cypher",
@@ -494,7 +815,7 @@
         "graph"
       ],
       "size": 10956,
-      "modified": "2025-08-15T00:12:29.212758Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": "knowledge_graph.json",
@@ -504,29 +825,29 @@
       "keywords": [
         "knowledge",
         "graph",
+        "kairos",
         "medscribe",
         "target",
-        "statistics",
-        "automation",
-        "predefined",
-        "hipaa",
+        "brre",
         "process",
-        "workflow",
-        "lgpd",
+        "holofractor",
         "name",
-        "inferred",
-        "temporal",
-        "type",
-        "standard",
-        "privacy",
+        "processes",
+        "uses",
+        "automates",
+        "version",
         "represents",
-        "confidence",
-        "architecture",
-        "leverages",
-        "contains"
+        "source",
+        "interoperability",
+        "automation",
+        "analyzes",
+        "product",
+        "standard",
+        "nodes",
+        "enforces"
       ],
       "size": 18746,
-      "modified": "2025-08-15T00:12:29.211758Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": "graph_metadata.json",
@@ -536,29 +857,29 @@
       "keywords": [
         "graph",
         "metadata",
-        "processes",
-        "standard",
-        "implements",
-        "product",
-        "concept",
-        "automates",
-        "graphml",
-        "represents",
         "background",
-        "matrix",
-        "includes",
-        "json",
-        "leverages",
-        "contains",
-        "uses",
-        "process",
-        "feature",
-        "analyzes",
+        "facilitates",
         "technology",
-        "cypher"
+        "includes",
+        "represents",
+        "json",
+        "analyzes",
+        "graphml",
+        "product",
+        "standard",
+        "matrix",
+        "process",
+        "leverages",
+        "enforces",
+        "contains",
+        "concept",
+        "cypher",
+        "processes",
+        "feature",
+        "uses"
       ],
       "size": 976,
-      "modified": "2025-08-15T00:12:29.213758Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": "sample.json",
@@ -567,29 +888,29 @@
       "type": "file",
       "keywords": [
         "sample",
-        "note",
-        "kairos",
-        "temporal",
-        "type",
-        "format",
-        "description",
-        "implements",
-        "medscribe",
-        "product",
-        "concept",
-        "category",
-        "confidence",
-        "nodes",
-        "target",
-        "statistics",
         "version",
-        "uses",
-        "edges",
+        "kairos",
+        "medscribe",
+        "technology",
+        "note",
+        "target",
         "source",
-        "brre"
+        "statistics",
+        "type",
+        "category",
+        "product",
+        "brre",
+        "edges",
+        "nodes",
+        "concept",
+        "name",
+        "uses",
+        "temporal",
+        "implements",
+        "format"
       ],
       "size": 1331,
-      "modified": "2025-08-15T00:08:35.616634Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": "knowledge_graph.graphml",
@@ -601,7 +922,7 @@
         "graph"
       ],
       "size": 13430,
-      "modified": "2025-08-15T00:12:29.212758Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": "relationship_matrix.json",
@@ -612,15 +933,15 @@
         "relationship",
         "matrix",
         "kairos",
-        "holofractor",
         "medscribe",
-        "autoagency",
-        "hipaa",
         "lgpd",
-        "brre"
+        "hipaa",
+        "brre",
+        "holofractor",
+        "autoagency"
       ],
       "size": 9295,
-      "modified": "2025-08-15T00:12:29.212758Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": ".gitkeep",
@@ -629,7 +950,7 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.532932Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     },
     {
       "title": ".gitkeep",
@@ -638,7 +959,7 @@
       "type": "file",
       "keywords": [],
       "size": 0,
-      "modified": "2025-08-15T00:10:51.533932Z"
+      "modified": "2025-08-15T00:40:04.832880Z"
     }
   ]
 }

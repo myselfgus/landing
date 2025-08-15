@@ -21,27 +21,49 @@ class MetadataUpdater:
         self.commit_sha = commit_sha
         self.docs_repo = docs_repo
         self.timestamp = datetime.utcnow().isoformat() + 'Z'
+        self.existing_metadata = {}
+        self.sync_history = []
     
     def update_all(self):
-        """Main function to update all metadata."""
-        print("📊 Updating content metadata...")
+        """Main function to update all metadata incrementally."""
+        print("📊 Incrementally updating content metadata...")
         
-        # Collect statistics
-        stats = self.collect_statistics()
+        # Load existing metadata
+        self.load_existing_metadata()
         
-        # Update main metadata
-        self.update_main_metadata(stats)
-        
-        # Update sync history
+        # Update sync history (append new entry)
         self.update_sync_history()
         
-        # Generate content index
+        # Collect current statistics
+        stats = self.collect_statistics()
+        
+        # Update main metadata (incremental)
+        self.update_main_metadata(stats)
+        
+        # Generate/update content index
         self.generate_content_index()
         
         # Update configuration
         self.update_configuration()
         
-        print("✅ Metadata update complete.")
+        print("✅ Incremental metadata update complete.")
+    
+    def load_existing_metadata(self):
+        """Load existing metadata to maintain sync history."""
+        metadata_file = self.background_dir / "metadata.json"
+        self.existing_metadata = {}
+        
+        if metadata_file.exists():
+            try:
+                with open(metadata_file, 'r', encoding='utf-8') as f:
+                    self.existing_metadata = json.load(f)
+                sync_count = len(self.existing_metadata.get('sync_history', []))
+                print(f"📊 Loaded existing metadata with {sync_count} sync records")
+            except Exception as e:
+                print(f"⚠️  Could not load existing metadata: {e}")
+                self.existing_metadata = {}
+        else:
+            print("📊 No existing metadata found - starting fresh")
     
     def collect_statistics(self) -> Dict[str, Any]:
         """Collect statistics about the background content."""
@@ -153,21 +175,11 @@ class MetadataUpdater:
             }
         }
         
-        # Load existing metadata if available
-        metadata_file = self.background_dir / "metadata.json"
-        if metadata_file.exists():
-            try:
-                with open(metadata_file, 'r', encoding='utf-8') as f:
-                    existing_metadata = json.load(f)
-                
-                # Preserve sync history
-                if "sync_history" in existing_metadata:
-                    metadata["sync_history"] = existing_metadata["sync_history"]
-                
-            except Exception as e:
-                print(f"⚠️  Could not load existing metadata: {e}")
+        # Include the updated sync history
+        metadata["sync_history"] = self.sync_history
         
         # Save updated metadata
+        metadata_file = self.background_dir / "metadata.json"
         with open(metadata_file, 'w', encoding='utf-8') as f:
             json.dump(metadata, f, indent=2, ensure_ascii=False)
         
@@ -207,7 +219,7 @@ class MetadataUpdater:
         return metrics
     
     def update_sync_history(self):
-        """Update the synchronization history."""
+        """Update the synchronization history incrementally."""
         history_entry = {
             "timestamp": self.timestamp,
             "commit_sha": self.commit_sha,
@@ -216,31 +228,22 @@ class MetadataUpdater:
             "status": "completed"
         }
         
-        metadata_file = self.background_dir / "metadata.json"
+        # Get existing sync history from loaded metadata  
+        existing_history = self.existing_metadata.get("sync_history", [])
         
-        # Load existing metadata
-        metadata = {}
-        if metadata_file.exists():
-            try:
-                with open(metadata_file, 'r', encoding='utf-8') as f:
-                    metadata = json.load(f)
-            except Exception as e:
-                print(f"⚠️  Error loading metadata for history update: {e}")
+        # Check if this exact sync already exists (avoid duplicates)
+        if not any(entry.get("commit_sha") == self.commit_sha and 
+                  entry.get("timestamp") == self.timestamp 
+                  for entry in existing_history):
+            existing_history.append(history_entry)
+            print(f"➕ Added new sync record for commit {self.commit_sha}")
+        else:
+            print(f"⏭️  Sync record already exists for commit {self.commit_sha}")
+            
+        # Keep only last 20 sync records (increased from 10 for better history)
+        self.sync_history = existing_history[-20:]
         
-        # Initialize or update sync history
-        if "sync_history" not in metadata:
-            metadata["sync_history"] = []
-        
-        metadata["sync_history"].append(history_entry)
-        
-        # Keep only last 10 sync records
-        metadata["sync_history"] = metadata["sync_history"][-10:]
-        
-        # Save updated metadata
-        with open(metadata_file, 'w', encoding='utf-8') as f:
-            json.dump(metadata, f, indent=2, ensure_ascii=False)
-        
-        print(f"📈 Updated sync history: {len(metadata['sync_history'])} records")
+        print(f"📈 Updated sync history: {len(self.sync_history)} total records")
     
     def generate_content_index(self):
         """Generate a comprehensive content index."""

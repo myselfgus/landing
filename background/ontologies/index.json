@@ -1,0 +1,12 @@
+{
+  "generated_at": "2025-08-15T00:54:59Z",
+  "categories": [
+    "concepts",
+    "taxonomies",
+    "frameworks"
+  ],
+  "files": [
+    "concepts/concepts.json",
+    "frameworks/frameworks.json"
+  ]
+}

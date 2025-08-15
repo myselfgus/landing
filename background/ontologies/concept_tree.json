@@ -1,0 +1,336 @@
+{
+  "name": "Voither Knowledge Base",
+  "type": "root",
+  "children": [
+    {
+      "name": "Product",
+      "type": "category",
+      "children": [
+        {
+          "name": "Clinical",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "MEDSCRIBE",
+              "type": "concept",
+              "level": 1,
+              "source": "system"
+            }
+          ]
+        },
+        {
+          "name": "Analytics",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "HOLOFRACTOR",
+              "type": "concept",
+              "level": 1,
+              "source": "system"
+            }
+          ]
+        },
+        {
+          "name": "Collaboration",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "PEER-AI",
+              "type": "concept",
+              "level": 1,
+              "source": "system"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Technology",
+      "type": "category",
+      "children": [
+        {
+          "name": "Reasoning",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "BRRE",
+              "type": "concept",
+              "level": 2,
+              "source": "system"
+            }
+          ]
+        },
+        {
+          "name": "Automation",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "AUTOAGENCY",
+              "type": "concept",
+              "level": 2,
+              "source": "system"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Concept",
+      "type": "category",
+      "children": [
+        {
+          "name": "Temporal",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "kairos",
+              "type": "concept",
+              "level": 3,
+              "source": "system"
+            }
+          ]
+        },
+        {
+          "name": "Quality",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "fidedignidade conceitual",
+              "type": "concept",
+              "level": 3,
+              "source": "system"
+            }
+          ]
+        },
+        {
+          "name": "Automation",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "AUTODOCS",
+              "type": "concept",
+              "level": 3,
+              "source": "system"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Extracted",
+      "type": "category",
+      "children": [
+        {
+          "name": "Document_Derived",
+          "type": "subcategory",
+          "children": [
+            {
+              "name": "Time",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Products",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "HOLOFRACTOR",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Features",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Engine",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Overview",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Medical",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Voither",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "AUTOAGENCY",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Compliance",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Key",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Compiles",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Pipeline",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "PEER",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Platform",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Citizen",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Collaborative",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "E2E",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Layers",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Memory",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Patient",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "ROI",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Core",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Native",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "MEDSCRIBE",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Executes",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Automation",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Technologies",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Clinical",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "BRRE",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "ReEngine",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Rhizomatic",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Signal",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            },
+            {
+              "name": "Class",
+              "type": "concept",
+              "level": 4,
+              "source": "voither-overview"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
