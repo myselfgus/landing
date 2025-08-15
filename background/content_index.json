@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-08-15T00:11:50.337311Z",
+  "generated_at": "2025-08-15T00:12:41.455254Z",
   "structure": {
     "ontologies": {
       "files": [
@@ -134,21 +134,21 @@
           "name": "knowledge_graph.cypher",
           "path": "graphs/knowledge_graph.cypher",
           "size": 10956,
-          "modified": "2025-08-15T00:11:50.294461Z",
+          "modified": "2025-08-15T00:12:29.212758Z",
           "type": ".cypher"
         },
         {
           "name": "knowledge_graph.json",
           "path": "graphs/knowledge_graph.json",
           "size": 18746,
-          "modified": "2025-08-15T00:11:50.294461Z",
+          "modified": "2025-08-15T00:12:29.211758Z",
           "type": ".json"
         },
         {
           "name": "graph_metadata.json",
           "path": "graphs/graph_metadata.json",
-          "size": 1076,
-          "modified": "2025-08-15T00:11:50.295461Z",
+          "size": 976,
+          "modified": "2025-08-15T00:12:29.213758Z",
           "type": ".json"
         },
         {
@@ -162,14 +162,14 @@
           "name": "knowledge_graph.graphml",
           "path": "graphs/knowledge_graph.graphml",
           "size": 13430,
-          "modified": "2025-08-15T00:11:50.295461Z",
+          "modified": "2025-08-15T00:12:29.212758Z",
           "type": ".graphml"
         },
         {
           "name": "relationship_matrix.json",
           "path": "graphs/relationship_matrix.json",
           "size": 9295,
-          "modified": "2025-08-15T00:11:50.295461Z",
+          "modified": "2025-08-15T00:12:29.212758Z",
           "type": ".json"
         }
       ],
@@ -261,35 +261,35 @@
         "name": "knowledge_graph.cypher",
         "path": "graphs/knowledge_graph.cypher",
         "size": 10956,
-        "modified": "2025-08-15T00:11:50.294461Z",
+        "modified": "2025-08-15T00:12:29.212758Z",
         "type": ".cypher"
       },
       {
         "name": "knowledge_graph.json",
         "path": "graphs/knowledge_graph.json",
         "size": 18746,
-        "modified": "2025-08-15T00:11:50.294461Z",
+        "modified": "2025-08-15T00:12:29.211758Z",
         "type": ".json"
       },
       {
         "name": "graph_metadata.json",
         "path": "graphs/graph_metadata.json",
-        "size": 1076,
-        "modified": "2025-08-15T00:11:50.295461Z",
+        "size": 976,
+        "modified": "2025-08-15T00:12:29.213758Z",
         "type": ".json"
       },
       {
         "name": "knowledge_graph.graphml",
         "path": "graphs/knowledge_graph.graphml",
         "size": 13430,
-        "modified": "2025-08-15T00:11:50.295461Z",
+        "modified": "2025-08-15T00:12:29.212758Z",
         "type": ".graphml"
       },
       {
         "name": "relationship_matrix.json",
         "path": "graphs/relationship_matrix.json",
         "size": 9295,
-        "modified": "2025-08-15T00:11:50.295461Z",
+        "modified": "2025-08-15T00:12:29.212758Z",
         "type": ".json"
       }
     ],
@@ -320,36 +320,36 @@
       {
         "name": "graph_metadata.json",
         "path": "graphs/graph_metadata.json",
-        "size": 1076,
-        "modified": "2025-08-15T00:11:50.295461Z",
-        "type": ".json"
-      },
-      {
-        "name": "knowledge_graph.graphml",
-        "path": "graphs/knowledge_graph.graphml",
-        "size": 13430,
-        "modified": "2025-08-15T00:11:50.295461Z",
-        "type": ".graphml"
-      },
-      {
-        "name": "relationship_matrix.json",
-        "path": "graphs/relationship_matrix.json",
-        "size": 9295,
-        "modified": "2025-08-15T00:11:50.295461Z",
+        "size": 976,
+        "modified": "2025-08-15T00:12:29.213758Z",
         "type": ".json"
       },
       {
         "name": "knowledge_graph.cypher",
         "path": "graphs/knowledge_graph.cypher",
         "size": 10956,
-        "modified": "2025-08-15T00:11:50.294461Z",
+        "modified": "2025-08-15T00:12:29.212758Z",
         "type": ".cypher"
+      },
+      {
+        "name": "knowledge_graph.graphml",
+        "path": "graphs/knowledge_graph.graphml",
+        "size": 13430,
+        "modified": "2025-08-15T00:12:29.212758Z",
+        "type": ".graphml"
+      },
+      {
+        "name": "relationship_matrix.json",
+        "path": "graphs/relationship_matrix.json",
+        "size": 9295,
+        "modified": "2025-08-15T00:12:29.212758Z",
+        "type": ".json"
       },
       {
         "name": "knowledge_graph.json",
         "path": "graphs/knowledge_graph.json",
         "size": 18746,
-        "modified": "2025-08-15T00:11:50.294461Z",
+        "modified": "2025-08-15T00:12:29.211758Z",
         "type": ".json"
       }
     ]
@@ -362,24 +362,24 @@
       "type": "file",
       "keywords": [
         "sample",
-        "frameworks",
-        "components",
-        "description",
-        "brre",
-        "taxonomies",
         "message",
-        "billing",
-        "name",
-        "holofractor",
-        "concepts",
         "kairos",
-        "term",
-        "relations",
+        "taxonomies",
+        "description",
         "medscribe",
-        "hierarchy",
+        "holofractor",
+        "components",
+        "category",
+        "term",
         "autoagency",
-        "definition",
-        "category"
+        "concepts",
+        "billing",
+        "hierarchy",
+        "frameworks",
+        "brre",
+        "relations",
+        "name",
+        "definition"
       ],
       "size": 1445,
       "modified": "2025-08-15T00:08:04.012355Z"
@@ -445,23 +445,23 @@
       "type": "file",
       "keywords": [
         "sample",
-        "reasoning",
-        "concept",
-        "workflow",
-        "brre",
-        "usage",
         "note",
-        "clinical",
-        "method",
-        "time",
-        "process",
         "kairos",
-        "decision",
-        "engine",
-        "documents",
         "type",
+        "time",
+        "vectors",
+        "concept",
+        "documents",
+        "usage",
+        "decision",
+        "method",
+        "process",
+        "clinical",
+        "workflow",
         "title",
-        "vectors"
+        "reasoning",
+        "engine",
+        "brre"
       ],
       "size": 751,
       "modified": "2025-08-15T00:08:19.910494Z"
@@ -494,7 +494,7 @@
         "graph"
       ],
       "size": 10956,
-      "modified": "2025-08-15T00:11:50.294461Z"
+      "modified": "2025-08-15T00:12:29.212758Z"
     },
     {
       "title": "knowledge_graph.json",
@@ -504,29 +504,29 @@
       "keywords": [
         "knowledge",
         "graph",
-        "concept",
-        "technology",
-        "hipaa",
-        "kairos",
-        "edges",
-        "metadata",
-        "format",
-        "temporal",
-        "methodology",
-        "architecture",
-        "workflow",
-        "name",
-        "holofractor",
-        "origin",
-        "uses",
         "medscribe",
-        "product",
-        "hierarchy",
+        "target",
+        "statistics",
+        "automation",
+        "predefined",
+        "hipaa",
+        "process",
+        "workflow",
+        "lgpd",
+        "name",
+        "inferred",
+        "temporal",
         "type",
-        "facilitates"
+        "standard",
+        "privacy",
+        "represents",
+        "confidence",
+        "architecture",
+        "leverages",
+        "contains"
       ],
       "size": 18746,
-      "modified": "2025-08-15T00:11:50.294461Z"
+      "modified": "2025-08-15T00:12:29.211758Z"
     },
     {
       "title": "graph_metadata.json",
@@ -536,29 +536,29 @@
       "keywords": [
         "graph",
         "metadata",
-        "concept",
-        "technology",
-        "feature",
-        "standard",
-        "cypher",
-        "includes",
-        "process",
-        "enforces",
-        "uses",
-        "product",
-        "graphml",
-        "automates",
-        "matrix",
-        "leverages",
-        "facilitates",
         "processes",
-        "json",
-        "contains",
+        "standard",
         "implements",
-        "represents"
+        "product",
+        "concept",
+        "automates",
+        "graphml",
+        "represents",
+        "background",
+        "matrix",
+        "includes",
+        "json",
+        "leverages",
+        "contains",
+        "uses",
+        "process",
+        "feature",
+        "analyzes",
+        "technology",
+        "cypher"
       ],
-      "size": 1076,
-      "modified": "2025-08-15T00:11:50.295461Z"
+      "size": 976,
+      "modified": "2025-08-15T00:12:29.213758Z"
     },
     {
       "title": "sample.json",
@@ -567,26 +567,26 @@
       "type": "file",
       "keywords": [
         "sample",
-        "concept",
-        "description",
-        "brre",
-        "technology",
         "note",
-        "name",
-        "target",
         "kairos",
-        "edges",
-        "uses",
+        "temporal",
+        "type",
+        "format",
+        "description",
+        "implements",
         "medscribe",
         "product",
-        "statistics",
-        "format",
-        "source",
-        "type",
-        "temporal",
+        "concept",
         "category",
         "confidence",
-        "implements"
+        "nodes",
+        "target",
+        "statistics",
+        "version",
+        "uses",
+        "edges",
+        "source",
+        "brre"
       ],
       "size": 1331,
       "modified": "2025-08-15T00:08:35.616634Z"
@@ -601,7 +601,7 @@
         "graph"
       ],
       "size": 13430,
-      "modified": "2025-08-15T00:11:50.295461Z"
+      "modified": "2025-08-15T00:12:29.212758Z"
     },
     {
       "title": "relationship_matrix.json",
@@ -611,16 +611,16 @@
       "keywords": [
         "relationship",
         "matrix",
-        "brre",
-        "holofractor",
-        "hipaa",
         "kairos",
+        "holofractor",
         "medscribe",
         "autoagency",
-        "lgpd"
+        "hipaa",
+        "lgpd",
+        "brre"
       ],
       "size": 9295,
-      "modified": "2025-08-15T00:11:50.295461Z"
+      "modified": "2025-08-15T00:12:29.212758Z"
     },
     {
       "title": ".gitkeep",

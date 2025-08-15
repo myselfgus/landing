@@ -1,6 +1,6 @@
 {
-  "input_directory": "/home/runner/work/voither_landing/voither_landing/background",
-  "output_directory": "/home/runner/work/voither_landing/voither_landing/background/graphs",
+  "input_directory": "background",
+  "output_directory": "background/graphs",
   "total_entities": 29,
   "total_relationships": 54,
   "entity_distribution": {
@@ -12,21 +12,21 @@
     "feature": 0
   },
   "relationship_types": [
-    "AUTOMATES",
+    "REPRESENTS",
+    "INCLUDES",
     "BELONGS_TO_CATEGORY",
+    "ANALYZES",
+    "AUTOMATES",
+    "COMPLIES_WITH",
+    "USES",
+    "CONTAINS",
+    "PROCESSES",
+    "BELONGS_TO",
+    "IMPLEMENTS",
     "LEVERAGES",
     "FACILITATES",
-    "ANALYZES",
-    "IMPLEMENTS",
-    "INSTANCE_OF",
-    "REPRESENTS",
-    "BELONGS_TO",
-    "COMPLIES_WITH",
-    "INCLUDES",
-    "PROCESSES",
     "ENFORCES",
-    "USES",
-    "CONTAINS"
+    "INSTANCE_OF"
   ],
   "files_generated": [
     "knowledge_graph.json",
