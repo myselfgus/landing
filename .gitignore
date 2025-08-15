@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Background content (keep structure but allow sample files)
+# Note: Remove this exclusion when you want to commit background content
+# background/*/
+# !background/README.md
+# !background/*.json

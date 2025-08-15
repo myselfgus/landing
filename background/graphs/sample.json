@@ -1,0 +1,51 @@
+{
+  "generated_at": "2025-08-14T23:58:00Z",
+  "format": "knowledge_graph_json",
+  "version": "1.0",
+  "note": "Sample knowledge graph - will be enriched with docs content",
+  "nodes": [
+    {
+      "id": "brre",
+      "name": "BRRE Engine",
+      "type": "technology",
+      "category": "reasoning_engine",
+      "description": "Bidirectional Reasoning and Reflection Engine"
+    },
+    {
+      "id": "kairos",
+      "name": "Kairos",
+      "type": "concept", 
+      "category": "temporal",
+      "description": "Qualitative time - the right moment for action"
+    },
+    {
+      "id": "medscribe",
+      "name": "MEDSCRIBE",
+      "type": "product",
+      "category": "clinical_documentation",
+      "description": "AI-powered clinical documentation assistant"
+    }
+  ],
+  "edges": [
+    {
+      "source": "brre",
+      "target": "kairos",
+      "type": "IMPLEMENTS",
+      "confidence": 1.0,
+      "description": "BRRE implements kairos-based reasoning"
+    },
+    {
+      "source": "medscribe", 
+      "target": "brre",
+      "type": "USES",
+      "confidence": 0.9,
+      "description": "MEDSCRIBE uses BRRE for intelligent processing"
+    }
+  ],
+  "statistics": {
+    "total_nodes": 3,
+    "total_edges": 2,
+    "node_types": {"technology": 1, "concept": 1, "product": 1},
+    "edge_types": {"IMPLEMENTS": 1, "USES": 1}
+  }
+}

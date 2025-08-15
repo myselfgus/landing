@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="name" for="node" attr.name="name" attr.type="string"/>
+  <key id="type" for="node" attr.name="type" attr.type="string"/>
+  <key id="relationship" for="edge" attr.name="relationship" attr.type="string"/>
+  <key id="confidence" for="edge" attr.name="confidence" attr.type="double"/>
+  <graph id="voither_knowledge_graph" edgedefault="directed">
+    <node id="medscribe">
+      <data key="name">MEDSCRIBE</data>
+      <data key="type">product</data>
+    </node>
+    <node id="holofractor">
+      <data key="name">HOLOFRACTOR</data>
+      <data key="type">product</data>
+    </node>
+    <node id="peer_ai">
+      <data key="name">PEER-AI</data>
+      <data key="type">product</data>
+    </node>
+    <node id="brre">
+      <data key="name">BRRE</data>
+      <data key="type">technology</data>
+    </node>
+    <node id="autoagency">
+      <data key="name">AUTOAGENCY</data>
+      <data key="type">technology</data>
+    </node>
+    <node id="e2e_pipeline">
+      <data key="name">E2E Pipeline</data>
+      <data key="type">technology</data>
+    </node>
+    <node id="kairos">
+      <data key="name">kairos</data>
+      <data key="type">concept</data>
+    </node>
+    <node id="lived_time">
+      <data key="name">lived time</data>
+      <data key="type">concept</data>
+    </node>
+    <node id="clinical_time">
+      <data key="name">clinical time</data>
+      <data key="type">concept</data>
+    </node>
+    <node id="compliance_that_compiles">
+      <data key="name">compliance that compiles</data>
+      <data key="type">concept</data>
+    </node>
+    <node id="rhizomatic_memory">
+      <data key="name">rhizomatic memory</data>
+      <data key="type">concept</data>
+    </node>
+    <node id="signal_layers">
+      <data key="name">signal layers</data>
+      <data key="type">concept</data>
+    </node>
+    <node id="hipaa">
+      <data key="name">HIPAA</data>
+      <data key="type">standard</data>
+    </node>
+    <node id="lgpd">
+      <data key="name">LGPD</data>
+      <data key="type">standard</data>
+    </node>
+    <node id="fhir_r4">
+      <data key="name">FHIR R4</data>
+      <data key="type">standard</data>
+    </node>
+    <node id="iec_62304">
+      <data key="name">IEC 62304</data>
+      <data key="type">standard</data>
+    </node>
+    <node id="speech_to_signal">
+      <data key="name">speech to signal</data>
+      <data key="type">process</data>
+    </node>
+    <node id="clinical_documentation">
+      <data key="name">clinical documentation</data>
+      <data key="type">process</data>
+    </node>
+    <node id="automated_billing">
+      <data key="name">automated billing</data>
+      <data key="type">process</data>
+    </node>
+    <node id="product_category">
+      <data key="name">Product Category</data>
+      <data key="type">category</data>
+    </node>
+    <node id="technology_category">
+      <data key="name">Technology Category</data>
+      <data key="type">category</data>
+    </node>
+    <node id="concept_category">
+      <data key="name">Concept Category</data>
+      <data key="type">category</data>
+    </node>
+    <node id="process_category">
+      <data key="name">Process Category</data>
+      <data key="type">category</data>
+    </node>
+    <node id="standard_category">
+      <data key="name">Standard Category</data>
+      <data key="type">category</data>
+    </node>
+    <node id="voither_platform">
+      <data key="name">Voither Platform</data>
+      <data key="type">main_category</data>
+    </node>
+    <node id="medical_concepts">
+      <data key="name">Medical Concepts</data>
+      <data key="type">main_category</data>
+    </node>
+    <node id="technical_architecture">
+      <data key="name">Technical Architecture</data>
+      <data key="type">main_category</data>
+    </node>
+    <node id="compliance_standards">
+      <data key="name">Compliance Standards</data>
+      <data key="type">main_category</data>
+    </node>
+    <node id="automation_processes">
+      <data key="name">Automation Processes</data>
+      <data key="type">main_category</data>
+    </node>
+    <edge id="e0" source="brre" target="kairos">
+      <data key="relationship">IMPLEMENTS</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e1" source="brre" target="clinical_time">
+      <data key="relationship">PROCESSES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e2" source="autoagency" target="clinical_documentation">
+      <data key="relationship">AUTOMATES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e3" source="autoagency" target="automated_billing">
+      <data key="relationship">AUTOMATES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e4" source="e2e_pipeline" target="speech_to_signal">
+      <data key="relationship">INCLUDES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e5" source="medscribe" target="brre">
+      <data key="relationship">USES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e6" source="medscribe" target="clinical_documentation">
+      <data key="relationship">FACILITATES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e7" source="holofractor" target="signal_layers">
+      <data key="relationship">ANALYZES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e8" source="peer_ai" target="rhizomatic_memory">
+      <data key="relationship">LEVERAGES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e9" source="compliance_that_compiles" target="hipaa">
+      <data key="relationship">ENFORCES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e10" source="compliance_that_compiles" target="lgpd">
+      <data key="relationship">ENFORCES</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e11" source="compliance_that_compiles" target="fhir_r4">
+      <data key="relationship">IMPLEMENTS</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e12" source="compliance_that_compiles" target="iec_62304">
+      <data key="relationship">COMPLIES_WITH</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e13" source="rhizomatic_memory" target="signal_layers">
+      <data key="relationship">CONTAINS</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e14" source="kairos" target="lived_time">
+      <data key="relationship">REPRESENTS</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e15" source="clinical_time" target="kairos">
+      <data key="relationship">INSTANCE_OF</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e16" source="medscribe" target="product_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e17" source="holofractor" target="product_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e18" source="peer_ai" target="product_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e19" source="brre" target="technology_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e20" source="autoagency" target="technology_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e21" source="e2e_pipeline" target="technology_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e22" source="kairos" target="concept_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e23" source="lived_time" target="concept_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e24" source="clinical_time" target="concept_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e25" source="compliance_that_compiles" target="concept_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e26" source="rhizomatic_memory" target="concept_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e27" source="signal_layers" target="concept_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e28" source="speech_to_signal" target="process_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e29" source="clinical_documentation" target="process_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e30" source="automated_billing" target="process_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e31" source="hipaa" target="standard_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e32" source="lgpd" target="standard_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e33" source="fhir_r4" target="standard_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e34" source="iec_62304" target="standard_category">
+      <data key="relationship">BELONGS_TO</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e35" source="medscribe" target="voither_platform">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e36" source="holofractor" target="voither_platform">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e37" source="peer_ai" target="voither_platform">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e38" source="brre" target="technical_architecture">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e39" source="autoagency" target="technical_architecture">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e40" source="e2e_pipeline" target="technical_architecture">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e41" source="rhizomatic_memory" target="technical_architecture">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e42" source="signal_layers" target="technical_architecture">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e43" source="kairos" target="medical_concepts">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e44" source="lived_time" target="medical_concepts">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e45" source="clinical_time" target="medical_concepts">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e46" source="clinical_documentation" target="medical_concepts">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e47" source="hipaa" target="compliance_standards">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e48" source="lgpd" target="compliance_standards">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e49" source="fhir_r4" target="compliance_standards">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e50" source="iec_62304" target="compliance_standards">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e51" source="compliance_that_compiles" target="compliance_standards">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e52" source="speech_to_signal" target="automation_processes">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e53" source="automated_billing" target="automation_processes">
+      <data key="relationship">BELONGS_TO_CATEGORY</data>
+      <data key="confidence">0.95</data>
+    </edge>
+  </graph>
+</graphml>
