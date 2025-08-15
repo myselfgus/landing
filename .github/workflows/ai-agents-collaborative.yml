@@ -1,0 +1,468 @@
+name: AI Agents Collaborative System
+
+on:
+  # Trigger via issues comments with AI agents commands
+  issue_comment:
+    types: [created]
+  
+  # Trigger via PR comments for collaborative review
+  pull_request_review_comment:
+    types: [created]
+    
+  # Manual trigger with agent selection
+  workflow_dispatch:
+    inputs:
+      agent_mode:
+        description: 'Agent collaboration mode'
+        required: true
+        default: 'full-pipeline'
+        type: choice
+        options:
+        - full-pipeline
+        - planner-only
+        - executor-only
+        - auditor-only
+        - staging-review
+      target_component:
+        description: 'Component to improve'
+        required: false
+        default: 'full-site'
+        type: choice
+        options:
+        - full-site
+        - landing-page
+        - components
+        - styling
+        - performance
+        - seo
+      approval_required:
+        description: 'Require manual approval before deployment'
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  ai-agent-planner:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@ai-agents')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@ai-agents')) ||
+      github.event_name == 'workflow_dispatch'
+    
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      pages: write
+      actions: read
+      
+    outputs:
+      plan-status: ${{ steps.planner.outputs.status }}
+      plan-checksum: ${{ steps.planner.outputs.checksum }}
+      components-to-update: ${{ steps.planner.outputs.components }}
+      priority-level: ${{ steps.planner.outputs.priority }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js and Python
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          python -m pip install --upgrade pip
+          pip install openai anthropic requests beautifulsoup4 pandas numpy scikit-learn nltk markdown pyyaml
+
+      - name: Sync Latest Docs Knowledge
+        run: |
+          python .github/scripts/ai-agents/sync-docs-knowledge.py \
+            --docs-repo "myselfgus/docs" \
+            --output "./knowledge-base" \
+            --timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+      - name: AI Agent 1 - Strategic Planner
+        id: planner
+        run: |
+          python .github/scripts/ai-agents/agent-planner.py \
+            --command "${{ github.event.comment.body || github.event.review.body || '' }}" \
+            --knowledge-base "./knowledge-base" \
+            --current-site "./" \
+            --output "./planning" \
+            --ai-model "claude-3.5-sonnet" \
+            --mode "${{ github.event.inputs.agent_mode || 'auto-detect' }}"
+
+      - name: Create Planning Checkpoint
+        run: |
+          python .github/scripts/ai-agents/create-checkpoint.py \
+            --agent "planner" \
+            --output "./planning" \
+            --checksum-file "./planning/checkpoint.json"
+
+      - name: Upload Planning Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: planning-artifacts
+          path: |
+            ./planning/
+            ./knowledge-base/
+          retention-days: 30
+
+  ai-agent-executor:
+    runs-on: ubuntu-latest
+    needs: ai-agent-planner
+    if: needs.ai-agent-planner.outputs.plan-status == 'success'
+    
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      
+    outputs:
+      execution-status: ${{ steps.executor.outputs.status }}
+      staging-checksum: ${{ steps.executor.outputs.checksum }}
+      files-generated: ${{ steps.executor.outputs.files }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js and Python
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          python -m pip install --upgrade pip
+          pip install openai anthropic requests beautifulsoup4 pandas numpy scikit-learn nltk markdown pyyaml jinja2
+
+      - name: Download Planning Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: planning-artifacts
+
+      - name: Validate Planning Checkpoint
+        run: |
+          python .github/scripts/ai-agents/validate-checkpoint.py \
+            --checkpoint "./planning/checkpoint.json" \
+            --expected-checksum "${{ needs.ai-agent-planner.outputs.plan-checksum }}"
+
+      - name: AI Agent 2 - Code Executor
+        id: executor
+        run: |
+          python .github/scripts/ai-agents/agent-executor.py \
+            --planning-dir "./planning" \
+            --knowledge-base "./knowledge-base" \
+            --source "./" \
+            --staging-output "./staging" \
+            --ai-model "gpt-4-turbo" \
+            --components "${{ needs.ai-agent-planner.outputs.components-to-update }}" \
+            --safety-level "conservative"
+
+      - name: Create Execution Checkpoint
+        run: |
+          python .github/scripts/ai-agents/create-checkpoint.py \
+            --agent "executor" \
+            --output "./staging" \
+            --checksum-file "./staging/checkpoint.json"
+
+      - name: Generate Staging Documentation
+        run: |
+          python .github/scripts/ai-agents/generate-staging-docs.py \
+            --staging-dir "./staging" \
+            --output "./staging/README.md" \
+            --changes-summary "./staging/CHANGES.md"
+
+      - name: Upload Staging Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-artifacts
+          path: |
+            ./staging/
+          retention-days: 30
+
+  ai-agent-auditor:
+    runs-on: ubuntu-latest
+    needs: [ai-agent-planner, ai-agent-executor]
+    if: needs.ai-agent-executor.outputs.execution-status == 'success'
+    
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      
+    outputs:
+      audit-status: ${{ steps.auditor.outputs.status }}
+      audit-score: ${{ steps.auditor.outputs.score }}
+      recommendations: ${{ steps.auditor.outputs.recommendations }}
+      approval-required: ${{ steps.auditor.outputs.approval-required }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js and Python
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          python -m pip install --upgrade pip
+          pip install openai anthropic requests beautifulsoup4 pandas numpy scikit-learn nltk markdown pyyaml eslint
+
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-artifacts"
+
+      - name: Validate All Checkpoints
+        run: |
+          python .github/scripts/ai-agents/validate-checkpoint.py \
+            --checkpoint "./planning-artifacts/planning/checkpoint.json" \
+            --expected-checksum "${{ needs.ai-agent-planner.outputs.plan-checksum }}"
+          
+          python .github/scripts/ai-agents/validate-checkpoint.py \
+            --checkpoint "./staging-artifacts/staging/checkpoint.json" \
+            --expected-checksum "${{ needs.ai-agent-executor.outputs.staging-checksum }}"
+
+      - name: AI Agent 3 - Quality Auditor
+        id: auditor
+        run: |
+          python .github/scripts/ai-agents/agent-auditor.py \
+            --planning-dir "./planning-artifacts/planning" \
+            --staging-dir "./staging-artifacts/staging" \
+            --current-source "./" \
+            --audit-output "./audit" \
+            --ai-model "llama-3.1-405b-instruct" \
+            --audit-depth "comprehensive" \
+            --quality-threshold "85"
+
+      - name: Generate Quality Report
+        run: |
+          python .github/scripts/ai-agents/generate-quality-report.py \
+            --audit-dir "./audit" \
+            --output "./audit/quality-report.html" \
+            --format "html,json,markdown"
+
+      - name: Create Parallel Todo Lists
+        run: |
+          python .github/scripts/ai-agents/create-parallel-todos.py \
+            --audit-dir "./audit" \
+            --output "./audit/todos" \
+            --categories "security,performance,accessibility,seo,maintainability"
+
+      - name: Upload Audit Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-artifacts
+          path: |
+            ./audit/
+          retention-days: 30
+
+  approval-gate:
+    runs-on: ubuntu-latest
+    needs: [ai-agent-planner, ai-agent-executor, ai-agent-auditor]
+    if: |
+      needs.ai-agent-auditor.outputs.audit-status == 'success' && 
+      (github.event.inputs.approval_required == 'true' || 
+       needs.ai-agent-auditor.outputs.approval-required == 'true')
+    
+    environment:
+      name: staging-approval
+      url: ${{ steps.create-preview.outputs.preview-url }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-artifacts"
+
+      - name: Create Staging Preview
+        id: create-preview
+        run: |
+          python .github/scripts/ai-agents/create-staging-preview.py \
+            --staging-dir "./staging-artifacts/staging" \
+            --current-source "./" \
+            --preview-output "./preview" \
+            --base-url "https://myselfgus.github.io/voither_landing"
+
+      - name: Deploy Preview to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./preview
+          destination_dir: staging-preview
+          
+      - name: Create Approval Request Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let issueBody = "## 🤖 AI Agents Collaboration - Approval Required\n\n";
+            issueBody += "### 📋 Summary:\n";
+            issueBody += `- **Planner Status**: ${{ needs.ai-agent-planner.outputs.plan-status }}\n`;
+            issueBody += `- **Executor Status**: ${{ needs.ai-agent-executor.outputs.execution-status }}\n`;
+            issueBody += `- **Auditor Status**: ${{ needs.ai-agent-auditor.outputs.audit-status }}\n`;
+            issueBody += `- **Quality Score**: ${{ needs.ai-agent-auditor.outputs.audit-score }}/100\n\n`;
+            
+            issueBody += "### 🔗 Review Links:\n";
+            issueBody += "- [Staging Preview](https://myselfgus.github.io/voither_landing/staging-preview/)\n";
+            issueBody += "- [Quality Report](https://myselfgus.github.io/voither_landing/staging-preview/audit/quality-report.html)\n";
+            issueBody += "- [Parallel Todo Lists](https://myselfgus.github.io/voither_landing/staging-preview/audit/todos/)\n\n";
+            
+            issueBody += "### 📁 Generated Files:\n";
+            issueBody += `${{ needs.ai-agent-executor.outputs.files-generated }}\n\n`;
+            
+            issueBody += "### 🎯 Recommendations:\n";
+            issueBody += `${{ needs.ai-agent-auditor.outputs.recommendations }}\n\n`;
+            
+            issueBody += "### ✅ Approval Commands:\n";
+            issueBody += "- `@ai-agents approve-deploy` - Deploy to production\n";
+            issueBody += "- `@ai-agents request-changes` - Request modifications\n";
+            issueBody += "- `@ai-agents reject` - Reject and revert\n\n";
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🤖 AI Agents Approval Required - ${new Date().toISOString().split('T')[0]}`,
+              body: issueBody,
+              labels: ['ai-agents', 'approval-required', 'staging']
+            });
+            
+            console.log(`Approval issue created: #${issue.data.number}`);
+
+  deployment:
+    runs-on: ubuntu-latest
+    needs: [ai-agent-planner, ai-agent-executor, ai-agent-auditor, approval-gate]
+    if: |
+      always() && 
+      needs.ai-agent-auditor.outputs.audit-status == 'success' &&
+      (needs.approval-gate.result == 'success' || 
+       (github.event.inputs.approval_required == 'false' && 
+        needs.ai-agent-auditor.outputs.approval-required == 'false'))
+    
+    permissions:
+      contents: write
+      pages: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-artifacts"
+
+      - name: Final Validation
+        run: |
+          python .github/scripts/ai-agents/final-validation.py \
+            --staging-dir "./staging-artifacts/staging" \
+            --audit-dir "./audit-artifacts/audit" \
+            --quality-threshold "80"
+
+      - name: Apply Staged Changes
+        run: |
+          python .github/scripts/ai-agents/apply-staged-changes.py \
+            --staging-dir "./staging-artifacts/staging" \
+            --target-dir "./" \
+            --backup-dir "./backup-$(date +%Y%m%d-%H%M%S)" \
+            --safety-checks "true"
+
+      - name: Update Background Knowledge
+        run: |
+          python .github/scripts/ai-agents/update-knowledge-post-deployment.py \
+            --audit-dir "./audit-artifacts/audit" \
+            --background-dir "./background" \
+            --deployment-timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+      - name: Commit AI Agents Improvements
+        run: |
+          git config --local user.email "ai-agents@github.com"
+          git config --local user.name "AI Agents Collaborative System"
+          git add .
+          git commit -m "ai: collaborative improvements by AI agents system
+          
+          🤖 AI Agents Collaboration Complete:
+          - Planner: ${{ needs.ai-agent-planner.outputs.plan-status }}
+          - Executor: ${{ needs.ai-agent-executor.outputs.execution-status }}  
+          - Auditor: ${{ needs.ai-agent-auditor.outputs.audit-status }}
+          - Quality Score: ${{ needs.ai-agent-auditor.outputs.audit-score }}/100
+          
+          Components Updated:
+          ${{ needs.ai-agent-planner.outputs.components-to-update }}
+          
+          Files Generated:
+          ${{ needs.ai-agent-executor.outputs.files-generated }}
+          
+          Deployment: $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+          git push
+
+      - name: Create Success Summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const summary = `## 🎉 AI Agents Deployment Successful!
+            
+            ### ✅ All Agents Completed Successfully:
+            - **🤖 Planner** (Claude 3.5 Sonnet): Strategic analysis complete
+            - **🛠️ Executor** (GPT-4 Turbo): Code generation and staging complete  
+            - **🔍 Auditor** (Llama 3.1 405B): Quality review passed
+            
+            ### 📊 Results:
+            - **Quality Score**: ${{ needs.ai-agent-auditor.outputs.audit-score }}/100
+            - **Components Updated**: ${{ needs.ai-agent-planner.outputs.components-to-update }}
+            - **Files Generated**: ${{ needs.ai-agent-executor.outputs.files-generated }}
+            
+            ### 🔗 View Results:
+            - [Live Site](https://myselfgus.github.io/voither_landing/)
+            - [Quality Report](https://myselfgus.github.io/voither_landing/ai-reports/)
+            
+            The AI agents system has successfully improved your site with comprehensive analysis, safe code generation, and quality assurance!`;
+            
+            if (context.eventName === 'issue_comment') {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: summary
+              });
+            }
