@@ -1,7 +1,7 @@
 {
   "sync_info": {
-    "last_sync": "2025-08-15T00:11:50.337311Z",
-    "commit_sha": "test-commit-sha",
+    "last_sync": "2025-08-15T00:12:41.455254Z",
+    "commit_sha": "demo-run",
     "docs_repository": "myselfgus/docs",
     "sync_trigger": "docs_repository_update"
   },
@@ -113,7 +113,7 @@
       },
       "graphs": {
         "total_files": 8,
-        "total_size": 54834,
+        "total_size": 54734,
         "subdirectories": {
           "knowledge": {
             "total_files": 1,
@@ -140,11 +140,11 @@
           ".graphml": 1,
           "no_extension": 2
         },
-        "last_modified": "2025-08-15T00:11:50.295461Z"
+        "last_modified": "2025-08-15T00:12:29.213758Z"
       }
     },
     "files": {},
-    "total_size": 57215,
+    "total_size": 57115,
     "content_types": {
       ".json": 6,
       "no_extension": 10,
@@ -210,7 +210,7 @@
       "graphs": {
         "file_count": 8,
         "has_content": true,
-        "size_bytes": 54834
+        "size_bytes": 54734
       }
     },
     "coverage": {
@@ -218,7 +218,7 @@
       "total_axes": 4,
       "coverage_percentage": 100.0
     },
-    "freshness": "2025-08-15T00:11:50.337311Z"
+    "freshness": "2025-08-15T00:12:41.455254Z"
   },
   "system_info": {
     "format_version": "1.0",
@@ -236,6 +236,13 @@
     {
       "timestamp": "2025-08-15T00:11:50.337311Z",
       "commit_sha": "test-commit-sha",
+      "docs_repository": "myselfgus/docs",
+      "sync_type": "automatic",
+      "status": "completed"
+    },
+    {
+      "timestamp": "2025-08-15T00:12:41.455254Z",
+      "commit_sha": "demo-run",
       "docs_repository": "myselfgus/docs",
       "sync_type": "automatic",
       "status": "completed"
