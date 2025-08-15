@@ -1,0 +1,326 @@
+name: AI Site Orchestrator
+
+on:
+  # Trigger via issues comments with AI commands
+  issue_comment:
+    types: [created]
+  
+  # Trigger via PR comments for review automation  
+  pull_request_review_comment:
+    types: [created]
+    
+  # Schedule regular site analysis
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly on Monday 2AM UTC
+    
+  # Manual trigger with options
+  workflow_dispatch:
+    inputs:
+      analysis_type:
+        description: 'Type of analysis to run'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+        - full
+        - performance
+        - content
+        - visual
+        - seo
+      target_environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+      ai_model:
+        description: 'AI Model to use'
+        required: true
+        default: 'claude-3.5-sonnet'
+        type: choice
+        options:
+        - claude-3.5-sonnet
+        - gpt-4
+        - llama-3.1-405b
+
+jobs:
+  ai-orchestrator:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@ai-orchestrator')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@ai-orchestrator')) ||
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch'
+    
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      pages: write
+      actions: read
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Python for AI processing
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          python -m pip install --upgrade pip
+          pip install openai anthropic requests beautifulsoup4 lighthouse-python playwright pandas numpy scikit-learn nltk
+
+      - name: Parse AI command
+        id: parse-command
+        run: |
+          python .github/scripts/ai-orchestrator/parse-command.py \
+            --event-type "${{ github.event_name }}" \
+            --comment-body "${{ github.event.comment.body || github.event.review.body || '' }}" \
+            --analysis-type "${{ github.event.inputs.analysis_type || 'auto' }}" \
+            --ai-model "${{ github.event.inputs.ai_model || 'claude-3.5-sonnet' }}"
+
+      - name: Site Performance Analysis
+        if: contains(steps.parse-command.outputs.tasks, 'performance')
+        run: |
+          python .github/scripts/ai-orchestrator/analyze-performance.py \
+            --url "https://myselfgus.github.io/voither_landing" \
+            --output "./analysis/performance" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}"
+
+      - name: Content Quality Analysis
+        if: contains(steps.parse-command.outputs.tasks, 'content')
+        run: |
+          python .github/scripts/ai-orchestrator/analyze-content.py \
+            --source "./background" \
+            --website "./" \
+            --output "./analysis/content" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}"
+
+      - name: Visual Enhancement Generation
+        if: contains(steps.parse-command.outputs.tasks, 'visual')
+        run: |
+          python .github/scripts/ai-orchestrator/generate-visuals.py \
+            --background-dir "./background" \
+            --output "./generated/visuals" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}"
+
+      - name: SEO Optimization Analysis
+        if: contains(steps.parse-command.outputs.tasks, 'seo')
+        run: |
+          python .github/scripts/ai-orchestrator/analyze-seo.py \
+            --url "https://myselfgus.github.io/voither_landing" \
+            --content "./" \
+            --output "./analysis/seo" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}"
+
+      - name: Code Quality Analysis
+        if: contains(steps.parse-command.outputs.tasks, 'code')
+        run: |
+          python .github/scripts/ai-orchestrator/analyze-code.py \
+            --source "./" \
+            --output "./analysis/code" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}"
+
+      - name: Generate AI Recommendations
+        run: |
+          python .github/scripts/ai-orchestrator/generate-recommendations.py \
+            --analysis-dir "./analysis" \
+            --background-dir "./background" \
+            --output "./recommendations" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}" \
+            --context "${{ steps.parse-command.outputs.context }}"
+
+      - name: Create Implementation Plan
+        run: |
+          python .github/scripts/ai-orchestrator/create-implementation-plan.py \
+            --recommendations "./recommendations" \
+            --output "./implementation" \
+            --priority "${{ steps.parse-command.outputs.priority || 'high' }}"
+
+      - name: Auto-implement Safe Changes
+        if: contains(steps.parse-command.outputs.mode, 'auto-implement')
+        run: |
+          python .github/scripts/ai-orchestrator/auto-implement.py \
+            --plan "./implementation" \
+            --source "./" \
+            --ai-model "${{ steps.parse-command.outputs.ai-model }}" \
+            --safety-level "conservative"
+
+      - name: Generate Visual Reports
+        run: |
+          python .github/scripts/ai-orchestrator/generate-reports.py \
+            --analysis "./analysis" \
+            --recommendations "./recommendations" \
+            --output "./reports" \
+            --format "html,json,markdown"
+
+      - name: Update Background Knowledge
+        run: |
+          python .github/scripts/ai-orchestrator/update-background.py \
+            --analysis "./analysis" \
+            --recommendations "./recommendations" \
+            --background-dir "./background" \
+            --timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "changed_files=$(git diff --name-only | tr '\n' ' ')" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit AI improvements
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config --local user.email "ai-orchestrator@github.com"
+          git config --local user.name "AI Site Orchestrator"
+          git add analysis/ recommendations/ implementation/ reports/ background/ generated/
+          git add index.html index.css index.tsx # Safe auto-implementations
+          git commit -m "ai: automated site improvements via AI orchestrator
+
+          🤖 AI Analysis Complete:
+          - Model: ${{ steps.parse-command.outputs.ai-model }}
+          - Tasks: ${{ steps.parse-command.outputs.tasks }}
+          - Context: ${{ steps.parse-command.outputs.context }}
+          - Changed files: ${{ steps.check-changes.outputs.changed_files }}
+          
+          Generated:
+          - Performance analysis
+          - Content optimization recommendations  
+          - Visual enhancement suggestions
+          - SEO improvement plan
+          - Code quality insights
+          
+          Timestamp: $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+          git push
+
+      - name: Create AI Response Comment
+        if: github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Read AI analysis results
+            let response = "## 🤖 AI Site Orchestrator - Analysis Complete\n\n";
+            
+            try {
+              if (fs.existsSync('./recommendations/summary.md')) {
+                const summary = fs.readFileSync('./recommendations/summary.md', 'utf8');
+                response += summary + "\n\n";
+              }
+              
+              response += "### 📊 Generated Reports:\n";
+              response += "- [Performance Analysis](./reports/performance.html)\n";
+              response += "- [Content Optimization](./reports/content.html)\n";
+              response += "- [Visual Enhancements](./reports/visual.html)\n";
+              response += "- [SEO Recommendations](./reports/seo.html)\n\n";
+              
+              response += "### 🛠️ Implementation Plan:\n";
+              response += "Check the `implementation/` folder for detailed action items.\n\n";
+              
+              response += `### 🔄 Changes Applied:\n`;
+              if ('${{ steps.check-changes.outputs.changes }}' === 'true') {
+                response += "✅ Automated improvements have been applied\n";
+                response += `📝 Files modified: ${{ steps.check-changes.outputs.changed_files }}\n`;
+              } else {
+                response += "ℹ️ No automatic changes were applied (analysis only)\n";
+              }
+              
+            } catch (error) {
+              response += "⚠️ Error generating detailed response. Check workflow logs for details.\n";
+            }
+            
+            // Post comment
+            if (context.eventName === 'issue_comment') {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: response
+              });
+            } else if (context.eventName === 'pull_request_review_comment') {
+              github.rest.pulls.createReview({
+                pull_number: context.payload.pull_request.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: response,
+                event: 'COMMENT'
+              });
+            }
+
+      - name: Deploy Reports to GitHub Pages
+        if: steps.check-changes.outputs.changes == 'true'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports
+          destination_dir: ai-reports
+          
+      - name: Create Implementation Issues
+        if: contains(steps.parse-command.outputs.mode, 'create-issues')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            try {
+              if (fs.existsSync('./implementation/issues.json')) {
+                const issues = JSON.parse(fs.readFileSync('./implementation/issues.json', 'utf8'));
+                
+                for (const issue of issues) {
+                  await github.rest.issues.create({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    title: issue.title,
+                    body: issue.body,
+                    labels: issue.labels || ['ai-generated', 'enhancement']
+                  });
+                }
+              }
+            } catch (error) {
+              console.log('No implementation issues to create or error occurred:', error);
+            }
+
+      - name: Performance Summary
+        run: |
+          echo "## 🚀 AI Orchestrator Performance Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Analysis Completed:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Model Used**: ${{ steps.parse-command.outputs.ai-model }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tasks Executed**: ${{ steps.parse-command.outputs.tasks }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Context**: ${{ steps.parse-command.outputs.context }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Outputs Generated:" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 Performance analysis and metrics" >> $GITHUB_STEP_SUMMARY
+          echo "- 📝 Content optimization recommendations" >> $GITHUB_STEP_SUMMARY
+          echo "- 🎨 Visual enhancement suggestions" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 SEO improvement strategies" >> $GITHUB_STEP_SUMMARY
+          echo "- 💻 Code quality insights" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [[ '${{ steps.check-changes.outputs.changes }}' == 'true' ]]; then
+            echo "### ✅ Changes Applied:" >> $GITHUB_STEP_SUMMARY
+            echo "- Files modified: ${{ steps.check-changes.outputs.changed_files }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Reports available at: [AI Reports](https://myselfgus.github.io/voither_landing/ai-reports/)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ℹ️ Analysis Only:" >> $GITHUB_STEP_SUMMARY
+            echo "No automatic changes were applied. Review recommendations in the analysis folder." >> $GITHUB_STEP_SUMMARY
+          fi
