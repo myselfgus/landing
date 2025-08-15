@@ -84,7 +84,7 @@ jobs:
           parent: false
 
       - name: 'Setup Rclone for Google Drive'
-        if: ${{ secrets.RCLONE_CONF != '' }}
+        if: secrets.RCLONE_CONF != ''
         run: |
           sudo apt-get update && sudo apt-get install -y rclone
           mkdir -p ~/.config/rclone
@@ -102,7 +102,7 @@ jobs:
           echo "✅ Rclone setup complete."
 
       - name: 'Upload Snapshot to Google Drive VAULT'
-        if: ${{ secrets.RCLONE_CONF != '' }}
+        if: secrets.RCLONE_CONF != ''
         run: |
           echo "Uploading snapshot to Google Drive..."
           rclone copy --progress --check-first \
