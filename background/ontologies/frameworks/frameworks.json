@@ -1,0 +1,17 @@
+{
+  "category": "frameworks",
+  "items": [
+    {
+      "type": "engine",
+      "description": "A reasoning engine that operates in lived time (kairos), not just clock time. It detects *when* to act, not just *what* to do.",
+      "extracted_at": "2025-08-15T00:54:59Z"
+    },
+    {
+      "type": "pipeline",
+      "description": "A pipeline that connects speech to signal, decision, and paperwork in seconds, with measurable ROI.",
+      "extracted_at": "2025-08-15T00:54:59Z"
+    }
+  ],
+  "count": 2,
+  "generated_at": "2025-08-15T00:54:59Z"
+}

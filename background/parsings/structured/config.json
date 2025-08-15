@@ -1,0 +1,32 @@
+{
+  "original_path": "config.yml",
+  "data": {
+    "platform": {
+      "name": "Voither",
+      "version": "1.0.0"
+    },
+    "modules": [
+      {
+        "name": "BRRE",
+        "type": "reasoning_engine"
+      },
+      {
+        "name": "AUTOAGENCY",
+        "type": "automation"
+      },
+      {
+        "name": "E2E Pipeline",
+        "type": "workflow"
+      }
+    ],
+    "compliance": {
+      "standards": [
+        "HIPAA",
+        "LGPD",
+        "FHIR R4",
+        "IEC 62304"
+      ]
+    }
+  },
+  "processed_at": "2025-08-15T00:54:59Z"
+}

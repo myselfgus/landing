@@ -1,0 +1,34 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .root-text { font: bold 16px sans-serif; fill: #333; }
+            .category-text { font: bold 14px sans-serif; fill: #666; }
+            .concept-text { font: 12px sans-serif; fill: #999; }
+            .tree-line { stroke: #ccc; stroke-width: 2; }
+            .root-circle { fill: #667eea; stroke: #333; stroke-width: 2; }
+            .category-circle { fill: #764ba2; stroke: #333; stroke-width: 1; }
+            .concept-circle { fill: #e3f2fd; stroke: #2196f3; stroke-width: 1; }
+        </style>
+    </defs>
+    
+    <g transform="translate(400,50)">
+        <!-- Root node -->
+        <circle cx="0" cy="0" r="25" class="root-circle"/>
+        <text x="0" y="5" text-anchor="middle" class="root-text">Voither</text>
+        
+        <!-- Category nodes -->
+        <line x1="0" y1="0" x2="150.0" y2="0.0" class="tree-line"/>
+        <circle cx="150.0" cy="0.0" r="20" class="category-circle"/>
+        <text x="150.0" y="5.0" text-anchor="middle" class="category-text">Product</text>
+        <line x1="0" y1="0" x2="0.00019901923450162993" y2="149.99999999986798" class="tree-line"/>
+        <circle cx="0.00019901923450162993" cy="149.99999999986798" r="20" class="category-circle"/>
+        <text x="0.00019901923450162993" y="154.99999999986798" text-anchor="middle" class="category-text">Technology</text>
+        <line x1="0" y1="0" x2="-149.9999999994719" y2="0.0003980384690029095" class="tree-line"/>
+        <circle cx="-149.9999999994719" cy="0.0003980384690029095" r="20" class="category-circle"/>
+        <text x="-149.9999999994719" y="5.000398038469003" text-anchor="middle" class="category-text">Concept</text>
+        <line x1="0" y1="0" x2="-0.0005970577035701018" y2="-149.99999999881175" class="tree-line"/>
+        <circle cx="-0.0005970577035701018" cy="-149.99999999881175" r="20" class="category-circle"/>
+        <text x="-0.0005970577035701018" y="-144.99999999881175" text-anchor="middle" class="category-text">Extracted</text>
+    </g>
+    <text x="400" y="580" text-anchor="middle" class="concept-text">Generated: 2025-08-15T00:54:59Z</text>
+</svg>

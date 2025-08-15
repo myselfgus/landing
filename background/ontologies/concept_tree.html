@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voither Concept Tree</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background: #f5f7fa; }
+        .tree { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .tree ul { list-style: none; padding-left: 20px; }
+        .tree li { margin: 8px 0; }
+        .tree-node { 
+            padding: 8px 12px; 
+            border-radius: 4px; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .root { background: #667eea; color: white; font-weight: bold; }
+        .category { background: #764ba2; color: white; }
+        .subcategory { background: #f093fb; color: white; }
+        .concept { background: #e3f2fd; color: #1565c0; border-left: 4px solid #2196f3; }
+        .tree-node:hover { transform: translateX(5px); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .children { display: none; }
+        .expanded .children { display: block; }
+        .toggle { font-weight: bold; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="tree">
+        <h1>🌳 Voither Knowledge Concept Tree</h1>
+        <p><em>Generated at: 2025-08-15T00:54:59Z</em></p>
+<ul><li><div class="tree-node root" onclick="toggleNode(this)"><span class="toggle">▼</span>Voither Knowledge Base</div><ul class="children"><li><div class="tree-node category" onclick="toggleNode(this)"><span class="toggle">▼</span>Product</div><ul class="children"><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Clinical</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>MEDSCRIBE</div></li></ul></li><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Analytics</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>HOLOFRACTOR</div></li></ul></li><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Collaboration</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>PEER-AI</div></li></ul></li></ul></li><li><div class="tree-node category" onclick="toggleNode(this)"><span class="toggle">▼</span>Technology</div><ul class="children"><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Reasoning</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>BRRE</div></li></ul></li><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Automation</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>AUTOAGENCY</div></li></ul></li></ul></li><li><div class="tree-node category" onclick="toggleNode(this)"><span class="toggle">▼</span>Concept</div><ul class="children"><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Temporal</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>kairos</div></li></ul></li><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Quality</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>fidedignidade conceitual</div></li></ul></li><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Automation</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>AUTODOCS</div></li></ul></li></ul></li><li><div class="tree-node category" onclick="toggleNode(this)"><span class="toggle">▼</span>Extracted</div><ul class="children"><li><div class="tree-node subcategory" onclick="toggleNode(this)"><span class="toggle">▼</span>Document_Derived</div><ul class="children"><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Time</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Products</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>HOLOFRACTOR</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Features</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Engine</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Overview</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Medical</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Voither</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>AUTOAGENCY</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Compliance</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Key</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Compiles</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Pipeline</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>PEER</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Platform</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Citizen</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Collaborative</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>E2E</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Layers</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Memory</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Patient</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>ROI</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Core</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Native</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>MEDSCRIBE</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Executes</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Automation</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Technologies</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Clinical</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>BRRE</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>ReEngine</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Rhizomatic</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Signal</div></li><li><div class="tree-node concept" onclick="toggleNode(this)"><span class="toggle">●</span>Class</div></li></ul></li></ul></li></ul></li></ul>
+    </div>
+    <script>
+        function toggleNode(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('expanded');
+            const toggle = element.querySelector('.toggle');
+            if (parent.classList.contains('expanded')) {
+                toggle.textContent = '▲';
+            } else {
+                toggle.textContent = '▼';
+            }
+        }
+        
+        // Expand first level by default
+        document.querySelectorAll('.tree > ul > li').forEach(li => {
+            li.classList.add('expanded');
+            const toggle = li.querySelector('.toggle');
+            if (toggle) toggle.textContent = '▲';
+        });
+    </script>
+</body>
+</html>
