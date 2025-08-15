@@ -1,0 +1,153 @@
+# Este workflow automatiza o backup e espelhamento do repositório.
+# A cada push na branch 'main', ele executa duas tarefas principais:
+# 1. GCS Mirror: Sincroniza o código para um bucket no Google Cloud Storage.
+#    - Uma cópia "latest" para uso operacional.
+#    - Uma cópia versionada (snapshot .tar.gz) para histórico imutável.
+# 2. Drive Snapshot: Envia o mesmo snapshot .tar.gz para um Shared Drive no Google Drive.
+#    - Serve como um backup visual e de fácil acesso para humanos.
+
+name: 'CI: Mirror Code to GCS and Backup to Drive'
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # Permite acionar manualmente pela UI do GitHub
+
+env:
+  GCS_BUCKET: voither-code-mirror # Bucket principal para código
+  DRIVE_REMOTE: 'VAULT' # Nome do remote do rclone para o Shared Drive
+  DRIVE_PATH: 'artefatos/versions' # Pasta de destino no Shared Drive
+
+jobs:
+  mirror-and-backup:
+    name: Mirror & Backup
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Necessário para obter o SHA completo do commit
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: 'Verify GCS Bucket Access'
+        run: |
+          echo "Verifying access to GCS bucket: gs://${{ env.GCS_BUCKET }}"
+          if ! gsutil ls gs://${{ env.GCS_BUCKET }}/ >/dev/null 2>&1; then
+            echo "::error::Failed to access GCS bucket gs://${{ env.GCS_BUCKET }}. Please check permissions or if the bucket exists."
+            exit 1
+          fi
+          echo "✅ GCS access verified."
+
+      - name: 'Upload "latest" version to GCS'
+        uses: 'google-github-actions/upload-cloud-storage@v2'
+        with:
+          path: '.'
+          destination: '${{ env.GCS_BUCKET }}/${{ github.event.repository.name }}/latest'
+          parent: false
+          process_gcloudignore: false # Garante que todos os arquivos do repo sejam incluídos
+
+      - name: 'Create Versioned Snapshot'
+        id: snapshot
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H%M%SZ")
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          FILENAME="${{ github.event.repository.name }}-${TIMESTAMP}_${SHORT_SHA}.tar.gz"
+          
+          echo "Creating snapshot: ${FILENAME}"
+          tar --exclude-from=.gitignore --exclude='./.git' --exclude='node_modules' --exclude='dist' --exclude='*.log' -czf "${FILENAME}" .
+          
+          if [ ! -f "${FILENAME}" ]; then
+            echo "::error::Failed to create snapshot archive."
+            exit 1
+          fi
+          
+          ls -lh "${FILENAME}"
+          echo "filename=${FILENAME}" >> $GITHUB_OUTPUT
+
+      - name: 'Upload Versioned Snapshot to GCS'
+        uses: 'google-github-actions/upload-cloud-storage@v2'
+        with:
+          path: '${{ steps.snapshot.outputs.filename }}'
+          destination: '${{ env.GCS_BUCKET }}/${{ github.event.repository.name }}/versions'
+          parent: false
+
+      - name: 'Setup Rclone for Google Drive'
+        if: ${{ secrets.RCLONE_CONF != '' }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y rclone
+          mkdir -p ~/.config/rclone
+          echo "${{ secrets.RCLONE_CONF }}" | base64 -d > ~/.config/rclone/rclone.conf
+          
+          if [ ! -s ~/.config/rclone/rclone.conf ]; then
+            echo "::error::Rclone config file was not created correctly."
+            exit 1
+          fi
+          
+          if ! rclone listremotes | grep -q "${{ env.DRIVE_REMOTE }}"; then
+            echo "::error::Rclone remote '${{ env.DRIVE_REMOTE }}' not found in configuration."
+            exit 1
+          fi
+          echo "✅ Rclone setup complete."
+
+      - name: 'Upload Snapshot to Google Drive VAULT'
+        if: ${{ secrets.RCLONE_CONF != '' }}
+        run: |
+          echo "Uploading snapshot to Google Drive..."
+          rclone copy --progress --check-first \
+            '${{ steps.snapshot.outputs.filename }}' \
+            '${{ env.DRIVE_REMOTE }}:${{ github.event.repository.name }}/${{ env.DRIVE_PATH }}/'
+          
+          echo "Verifying upload..."
+          if rclone ls '${{ env.DRIVE_REMOTE }}:${{ github.event.repository.name }}/${{ env.DRIVE_PATH }}/' | grep -q '${{ steps.snapshot.outputs.filename }}'; then
+            echo "✅ Upload to Google Drive verified successfully."
+          else
+            echo "::warning::Could not verify the file upload on Google Drive."
+          fi
+
+      - name: 'Cleanup Temporary Files'
+        if: always()
+        run: |
+          echo "Cleaning up temporary files..."
+          rm -f "${{ steps.snapshot.outputs.filename }}"
+          # Securely remove the rclone config
+          if [ -f ~/.config/rclone/rclone.conf ]; then
+            shred -u ~/.config/rclone/rclone.conf
+          fi
+
+      - name: 'Generate Deployment Summary'
+        if: always()
+        run: |
+          echo "## 🚀 Mirror & Backup Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Workflow completed with status: **${{ job.status }}**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Operations" >> $GITHUB_STEP_SUMMARY
+          echo "- **GCS Latest Sync**: ${{ job.status == 'success' && '✅ Succeeded' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **GCS Snapshot Upload**: ${{ job.status == 'success' && '✅ Succeeded' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ secrets.RCLONE_CONF }}" != "" ]; then
+            echo "- **Google Drive Backup**: ${{ job.status == 'success' && '✅ Succeeded' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Google Drive Backup**: 🟡 Skipped (secret not configured)" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Details" >> $GITHUB_STEP_SUMMARY
+          echo "| | |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Snapshot File** | \`${{ steps.snapshot.outputs.filename }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Commit** | \`$(git rev-parse --short HEAD)\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Repository** | \`${{ github.repository }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔗 Useful Links" >> $GITHUB_STEP_SUMMARY
+          echo "- View GCS Bucket" >> $GITHUB_STEP_SUMMARY
+          echo "- View Workflow Run" >> $GITHUB_STEP_SUMMARY
