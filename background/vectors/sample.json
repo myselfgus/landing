@@ -1,0 +1,22 @@
+{
+  "generated_at": "2025-08-14T23:58:00Z",
+  "method": "tfidf_sample",
+  "document_count": 8,
+  "vocabulary_size": 156,
+  "note": "Sample embeddings - will be replaced when docs repository is connected",
+  "vectors": [
+    [0.1, 0.2, 0.3, 0.0, 0.4, 0.0, 0.5],
+    [0.0, 0.3, 0.1, 0.2, 0.0, 0.4, 0.3],
+    [0.2, 0.0, 0.4, 0.1, 0.3, 0.2, 0.0]
+  ],
+  "feature_names": [
+    "brre", "reasoning", "engine", "kairos", "clinical", "time", "decision"
+  ],
+  "documents": [
+    {"title": "BRRE Engine Overview", "type": "concept"},
+    {"title": "AUTOAGENCY Automation", "type": "process"},
+    {"title": "E2E Pipeline", "type": "workflow"}
+  ],
+  "similarity_threshold": 0.1,
+  "usage": "Semantic search and content recommendation for landing page context"
+}

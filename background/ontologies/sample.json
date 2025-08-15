@@ -1,0 +1,41 @@
+{
+  "message": "Sample ontologies - replace with docs content",
+  "generated_at": "2025-08-14T23:58:00Z",
+  "concepts": [
+    {
+      "term": "BRRE",
+      "definition": "Bidirectional Reasoning and Reflection Engine - operates in lived time (kairos)",
+      "category": "core_technology",
+      "relations": ["kairos", "clinical_reasoning", "temporal_processing"]
+    },
+    {
+      "term": "AUTOAGENCY", 
+      "definition": "Automated clinical workflow execution system",
+      "category": "automation_technology",
+      "relations": ["workflow_automation", "clinical_documentation", "billing"]
+    },
+    {
+      "term": "kairos",
+      "definition": "Qualitative time - the right moment for action in clinical context",
+      "category": "temporal_concept",
+      "relations": ["lived_time", "clinical_time", "BRRE"]
+    }
+  ],
+  "taxonomies": [
+    {
+      "name": "Voither Products",
+      "hierarchy": {
+        "MEDSCRIBE": ["clinical_documentation", "speech_to_text", "automated_notes"],
+        "HOLOFRACTOR": ["data_analysis", "patient_insights", "pattern_recognition"], 
+        "PEER-AI": ["collaborative_intelligence", "consultation_support", "knowledge_sharing"]
+      }
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "Compliance Architecture",
+      "components": ["HIPAA_compliance", "LGPD_compliance", "FHIR_R4", "IEC_62304"],
+      "description": "Compliance that compiles - regulations become code constraints"
+    }
+  ]
+}

@@ -1,0 +1,719 @@
+{
+  "nodes": [
+    {
+      "id": "medscribe",
+      "name": "MEDSCRIBE",
+      "type": "product",
+      "category": "clinical_documentation",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "holofractor",
+      "name": "HOLOFRACTOR",
+      "type": "product",
+      "category": "data_analysis",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "peer_ai",
+      "name": "PEER-AI",
+      "type": "product",
+      "category": "collaborative_intelligence",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "brre",
+      "name": "BRRE",
+      "type": "technology",
+      "category": "reasoning_engine",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "autoagency",
+      "name": "AUTOAGENCY",
+      "type": "technology",
+      "category": "automation",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "e2e_pipeline",
+      "name": "E2E Pipeline",
+      "type": "technology",
+      "category": "workflow",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "kairos",
+      "name": "kairos",
+      "type": "concept",
+      "category": "temporal",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "lived_time",
+      "name": "lived time",
+      "type": "concept",
+      "category": "temporal",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "clinical_time",
+      "name": "clinical time",
+      "type": "concept",
+      "category": "temporal",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "compliance_that_compiles",
+      "name": "compliance that compiles",
+      "type": "concept",
+      "category": "methodology",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "rhizomatic_memory",
+      "name": "rhizomatic memory",
+      "type": "concept",
+      "category": "architecture",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "signal_layers",
+      "name": "signal layers",
+      "type": "concept",
+      "category": "architecture",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "hipaa",
+      "name": "HIPAA",
+      "type": "standard",
+      "category": "privacy",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "lgpd",
+      "name": "LGPD",
+      "type": "standard",
+      "category": "privacy",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "fhir_r4",
+      "name": "FHIR R4",
+      "type": "standard",
+      "category": "interoperability",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "iec_62304",
+      "name": "IEC 62304",
+      "type": "standard",
+      "category": "medical_device",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "speech_to_signal",
+      "name": "speech to signal",
+      "type": "process",
+      "category": "workflow",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "clinical_documentation",
+      "name": "clinical documentation",
+      "type": "process",
+      "category": "workflow",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "automated_billing",
+      "name": "automated billing",
+      "type": "process",
+      "category": "workflow",
+      "source": "voither_predefined"
+    },
+    {
+      "id": "product_category",
+      "name": "Product Category",
+      "type": "category",
+      "source": "inferred"
+    },
+    {
+      "id": "technology_category",
+      "name": "Technology Category",
+      "type": "category",
+      "source": "inferred"
+    },
+    {
+      "id": "concept_category",
+      "name": "Concept Category",
+      "type": "category",
+      "source": "inferred"
+    },
+    {
+      "id": "process_category",
+      "name": "Process Category",
+      "type": "category",
+      "source": "inferred"
+    },
+    {
+      "id": "standard_category",
+      "name": "Standard Category",
+      "type": "category",
+      "source": "inferred"
+    },
+    {
+      "id": "voither_platform",
+      "name": "Voither Platform",
+      "type": "main_category",
+      "source": "hierarchy"
+    },
+    {
+      "id": "medical_concepts",
+      "name": "Medical Concepts",
+      "type": "main_category",
+      "source": "hierarchy"
+    },
+    {
+      "id": "technical_architecture",
+      "name": "Technical Architecture",
+      "type": "main_category",
+      "source": "hierarchy"
+    },
+    {
+      "id": "compliance_standards",
+      "name": "Compliance Standards",
+      "type": "main_category",
+      "source": "hierarchy"
+    },
+    {
+      "id": "automation_processes",
+      "name": "Automation Processes",
+      "type": "main_category",
+      "source": "hierarchy"
+    }
+  ],
+  "edges": [
+    {
+      "source": "brre",
+      "target": "kairos",
+      "type": "IMPLEMENTS",
+      "source_name": "BRRE",
+      "target_name": "kairos",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "brre",
+      "target": "clinical_time",
+      "type": "PROCESSES",
+      "source_name": "BRRE",
+      "target_name": "clinical time",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "autoagency",
+      "target": "clinical_documentation",
+      "type": "AUTOMATES",
+      "source_name": "AUTOAGENCY",
+      "target_name": "clinical documentation",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "autoagency",
+      "target": "automated_billing",
+      "type": "AUTOMATES",
+      "source_name": "AUTOAGENCY",
+      "target_name": "automated billing",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "e2e_pipeline",
+      "target": "speech_to_signal",
+      "type": "INCLUDES",
+      "source_name": "E2E Pipeline",
+      "target_name": "speech to signal",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "medscribe",
+      "target": "brre",
+      "type": "USES",
+      "source_name": "MEDSCRIBE",
+      "target_name": "BRRE",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "medscribe",
+      "target": "clinical_documentation",
+      "type": "FACILITATES",
+      "source_name": "MEDSCRIBE",
+      "target_name": "clinical documentation",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "holofractor",
+      "target": "signal_layers",
+      "type": "ANALYZES",
+      "source_name": "HOLOFRACTOR",
+      "target_name": "signal layers",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "peer_ai",
+      "target": "rhizomatic_memory",
+      "type": "LEVERAGES",
+      "source_name": "PEER-AI",
+      "target_name": "rhizomatic memory",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "compliance_that_compiles",
+      "target": "hipaa",
+      "type": "ENFORCES",
+      "source_name": "compliance that compiles",
+      "target_name": "HIPAA",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "compliance_that_compiles",
+      "target": "lgpd",
+      "type": "ENFORCES",
+      "source_name": "compliance that compiles",
+      "target_name": "LGPD",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "compliance_that_compiles",
+      "target": "fhir_r4",
+      "type": "IMPLEMENTS",
+      "source_name": "compliance that compiles",
+      "target_name": "FHIR R4",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "compliance_that_compiles",
+      "target": "iec_62304",
+      "type": "COMPLIES_WITH",
+      "source_name": "compliance that compiles",
+      "target_name": "IEC 62304",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "rhizomatic_memory",
+      "target": "signal_layers",
+      "type": "CONTAINS",
+      "source_name": "rhizomatic memory",
+      "target_name": "signal layers",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "kairos",
+      "target": "lived_time",
+      "type": "REPRESENTS",
+      "source_name": "kairos",
+      "target_name": "lived time",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "clinical_time",
+      "target": "kairos",
+      "type": "INSTANCE_OF",
+      "source_name": "clinical time",
+      "target_name": "kairos",
+      "confidence": 1.0,
+      "origin": "predefined"
+    },
+    {
+      "source": "medscribe",
+      "target": "product_category",
+      "type": "BELONGS_TO",
+      "source_name": "MEDSCRIBE",
+      "target_name": "Product Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "holofractor",
+      "target": "product_category",
+      "type": "BELONGS_TO",
+      "source_name": "HOLOFRACTOR",
+      "target_name": "Product Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "peer_ai",
+      "target": "product_category",
+      "type": "BELONGS_TO",
+      "source_name": "PEER-AI",
+      "target_name": "Product Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "brre",
+      "target": "technology_category",
+      "type": "BELONGS_TO",
+      "source_name": "BRRE",
+      "target_name": "Technology Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "autoagency",
+      "target": "technology_category",
+      "type": "BELONGS_TO",
+      "source_name": "AUTOAGENCY",
+      "target_name": "Technology Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "e2e_pipeline",
+      "target": "technology_category",
+      "type": "BELONGS_TO",
+      "source_name": "E2E Pipeline",
+      "target_name": "Technology Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "kairos",
+      "target": "concept_category",
+      "type": "BELONGS_TO",
+      "source_name": "kairos",
+      "target_name": "Concept Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "lived_time",
+      "target": "concept_category",
+      "type": "BELONGS_TO",
+      "source_name": "lived time",
+      "target_name": "Concept Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "clinical_time",
+      "target": "concept_category",
+      "type": "BELONGS_TO",
+      "source_name": "clinical time",
+      "target_name": "Concept Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "compliance_that_compiles",
+      "target": "concept_category",
+      "type": "BELONGS_TO",
+      "source_name": "compliance that compiles",
+      "target_name": "Concept Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "rhizomatic_memory",
+      "target": "concept_category",
+      "type": "BELONGS_TO",
+      "source_name": "rhizomatic memory",
+      "target_name": "Concept Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "signal_layers",
+      "target": "concept_category",
+      "type": "BELONGS_TO",
+      "source_name": "signal layers",
+      "target_name": "Concept Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "speech_to_signal",
+      "target": "process_category",
+      "type": "BELONGS_TO",
+      "source_name": "speech to signal",
+      "target_name": "Process Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "clinical_documentation",
+      "target": "process_category",
+      "type": "BELONGS_TO",
+      "source_name": "clinical documentation",
+      "target_name": "Process Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "automated_billing",
+      "target": "process_category",
+      "type": "BELONGS_TO",
+      "source_name": "automated billing",
+      "target_name": "Process Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "hipaa",
+      "target": "standard_category",
+      "type": "BELONGS_TO",
+      "source_name": "HIPAA",
+      "target_name": "Standard Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "lgpd",
+      "target": "standard_category",
+      "type": "BELONGS_TO",
+      "source_name": "LGPD",
+      "target_name": "Standard Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "fhir_r4",
+      "target": "standard_category",
+      "type": "BELONGS_TO",
+      "source_name": "FHIR R4",
+      "target_name": "Standard Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "iec_62304",
+      "target": "standard_category",
+      "type": "BELONGS_TO",
+      "source_name": "IEC 62304",
+      "target_name": "Standard Category",
+      "confidence": 0.9,
+      "origin": "type_hierarchy"
+    },
+    {
+      "source": "medscribe",
+      "target": "voither_platform",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "MEDSCRIBE",
+      "target_name": "Voither Platform",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "holofractor",
+      "target": "voither_platform",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "HOLOFRACTOR",
+      "target_name": "Voither Platform",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "peer_ai",
+      "target": "voither_platform",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "PEER-AI",
+      "target_name": "Voither Platform",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "brre",
+      "target": "technical_architecture",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "BRRE",
+      "target_name": "Technical Architecture",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "autoagency",
+      "target": "technical_architecture",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "AUTOAGENCY",
+      "target_name": "Technical Architecture",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "e2e_pipeline",
+      "target": "technical_architecture",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "E2E Pipeline",
+      "target_name": "Technical Architecture",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "rhizomatic_memory",
+      "target": "technical_architecture",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "rhizomatic memory",
+      "target_name": "Technical Architecture",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "signal_layers",
+      "target": "technical_architecture",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "signal layers",
+      "target_name": "Technical Architecture",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "kairos",
+      "target": "medical_concepts",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "kairos",
+      "target_name": "Medical Concepts",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "lived_time",
+      "target": "medical_concepts",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "lived time",
+      "target_name": "Medical Concepts",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "clinical_time",
+      "target": "medical_concepts",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "clinical time",
+      "target_name": "Medical Concepts",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "clinical_documentation",
+      "target": "medical_concepts",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "clinical documentation",
+      "target_name": "Medical Concepts",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "hipaa",
+      "target": "compliance_standards",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "HIPAA",
+      "target_name": "Compliance Standards",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "lgpd",
+      "target": "compliance_standards",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "LGPD",
+      "target_name": "Compliance Standards",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "fhir_r4",
+      "target": "compliance_standards",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "FHIR R4",
+      "target_name": "Compliance Standards",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "iec_62304",
+      "target": "compliance_standards",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "IEC 62304",
+      "target_name": "Compliance Standards",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "compliance_that_compiles",
+      "target": "compliance_standards",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "compliance that compiles",
+      "target_name": "Compliance Standards",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "speech_to_signal",
+      "target": "automation_processes",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "speech to signal",
+      "target_name": "Automation Processes",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    },
+    {
+      "source": "automated_billing",
+      "target": "automation_processes",
+      "type": "BELONGS_TO_CATEGORY",
+      "source_name": "automated billing",
+      "target_name": "Automation Processes",
+      "confidence": 0.95,
+      "origin": "manual_categorization"
+    }
+  ],
+  "statistics": {
+    "total_nodes": 29,
+    "total_edges": 54,
+    "node_types": {
+      "product": 3,
+      "technology": 3,
+      "concept": 6,
+      "process": 3,
+      "standard": 4,
+      "feature": 0
+    },
+    "edge_types": {
+      "IMPLEMENTS": 2,
+      "PROCESSES": 1,
+      "AUTOMATES": 2,
+      "INCLUDES": 1,
+      "USES": 1,
+      "FACILITATES": 1,
+      "ANALYZES": 1,
+      "LEVERAGES": 1,
+      "ENFORCES": 2,
+      "COMPLIES_WITH": 1,
+      "CONTAINS": 1,
+      "REPRESENTS": 1,
+      "INSTANCE_OF": 1,
+      "BELONGS_TO": 19,
+      "BELONGS_TO_CATEGORY": 19
+    }
+  },
+  "metadata": {
+    "generated_at": "2025-08-14T23:58:00Z",
+    "format": "knowledge_graph_json",
+    "version": "1.0"
+  }
+}

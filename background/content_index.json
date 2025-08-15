@@ -1,0 +1,644 @@
+{
+  "generated_at": "2025-08-15T00:11:50.337311Z",
+  "structure": {
+    "ontologies": {
+      "files": [
+        {
+          "name": "sample.json",
+          "path": "ontologies/sample.json",
+          "size": 1445,
+          "modified": "2025-08-15T00:08:04.012355Z",
+          "type": ".json"
+        }
+      ],
+      "subdirectories": {
+        "taxonomies": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "ontologies/taxonomies/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.536932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        },
+        "frameworks": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "ontologies/frameworks/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.537932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        },
+        "concepts": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "ontologies/concepts/.gitkeep",
+              "size": 185,
+              "modified": "2025-08-15T00:10:41.266836Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        }
+      }
+    },
+    "parsings": {
+      "files": [],
+      "subdirectories": {
+        "markdown": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "parsings/markdown/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.538932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        },
+        "structured": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "parsings/structured/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.539932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        },
+        "extracted": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "parsings/extracted/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.540932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        }
+      }
+    },
+    "vectors": {
+      "files": [
+        {
+          "name": "sample.json",
+          "path": "vectors/sample.json",
+          "size": 751,
+          "modified": "2025-08-15T00:08:19.910494Z",
+          "type": ".json"
+        }
+      ],
+      "subdirectories": {
+        "indices": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "vectors/indices/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.534932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        },
+        "embeddings": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "vectors/embeddings/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.535932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        }
+      }
+    },
+    "graphs": {
+      "files": [
+        {
+          "name": "knowledge_graph.cypher",
+          "path": "graphs/knowledge_graph.cypher",
+          "size": 10956,
+          "modified": "2025-08-15T00:11:50.294461Z",
+          "type": ".cypher"
+        },
+        {
+          "name": "knowledge_graph.json",
+          "path": "graphs/knowledge_graph.json",
+          "size": 18746,
+          "modified": "2025-08-15T00:11:50.294461Z",
+          "type": ".json"
+        },
+        {
+          "name": "graph_metadata.json",
+          "path": "graphs/graph_metadata.json",
+          "size": 1076,
+          "modified": "2025-08-15T00:11:50.295461Z",
+          "type": ".json"
+        },
+        {
+          "name": "sample.json",
+          "path": "graphs/sample.json",
+          "size": 1331,
+          "modified": "2025-08-15T00:08:35.616634Z",
+          "type": ".json"
+        },
+        {
+          "name": "knowledge_graph.graphml",
+          "path": "graphs/knowledge_graph.graphml",
+          "size": 13430,
+          "modified": "2025-08-15T00:11:50.295461Z",
+          "type": ".graphml"
+        },
+        {
+          "name": "relationship_matrix.json",
+          "path": "graphs/relationship_matrix.json",
+          "size": 9295,
+          "modified": "2025-08-15T00:11:50.295461Z",
+          "type": ".json"
+        }
+      ],
+      "subdirectories": {
+        "knowledge": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "graphs/knowledge/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.532932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        },
+        "relationships": {
+          "files": [
+            {
+              "name": ".gitkeep",
+              "path": "graphs/relationships/.gitkeep",
+              "size": 0,
+              "modified": "2025-08-15T00:10:51.533932Z",
+              "type": "no_extension"
+            }
+          ],
+          "subdirectories": {}
+        }
+      }
+    }
+  },
+  "quick_access": {
+    "latest_ontologies": [
+      {
+        "name": ".gitkeep",
+        "path": "ontologies/frameworks/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.537932Z",
+        "type": "no_extension"
+      },
+      {
+        "name": ".gitkeep",
+        "path": "ontologies/taxonomies/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.536932Z",
+        "type": "no_extension"
+      },
+      {
+        "name": ".gitkeep",
+        "path": "ontologies/concepts/.gitkeep",
+        "size": 185,
+        "modified": "2025-08-15T00:10:41.266836Z",
+        "type": "no_extension"
+      },
+      {
+        "name": "sample.json",
+        "path": "ontologies/sample.json",
+        "size": 1445,
+        "modified": "2025-08-15T00:08:04.012355Z",
+        "type": ".json"
+      }
+    ],
+    "latest_parsings": [
+      {
+        "name": ".gitkeep",
+        "path": "parsings/extracted/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.540932Z",
+        "type": "no_extension"
+      },
+      {
+        "name": ".gitkeep",
+        "path": "parsings/structured/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.539932Z",
+        "type": "no_extension"
+      },
+      {
+        "name": ".gitkeep",
+        "path": "parsings/markdown/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.538932Z",
+        "type": "no_extension"
+      }
+    ],
+    "vector_files": [],
+    "graph_files": [
+      {
+        "name": "knowledge_graph.cypher",
+        "path": "graphs/knowledge_graph.cypher",
+        "size": 10956,
+        "modified": "2025-08-15T00:11:50.294461Z",
+        "type": ".cypher"
+      },
+      {
+        "name": "knowledge_graph.json",
+        "path": "graphs/knowledge_graph.json",
+        "size": 18746,
+        "modified": "2025-08-15T00:11:50.294461Z",
+        "type": ".json"
+      },
+      {
+        "name": "graph_metadata.json",
+        "path": "graphs/graph_metadata.json",
+        "size": 1076,
+        "modified": "2025-08-15T00:11:50.295461Z",
+        "type": ".json"
+      },
+      {
+        "name": "knowledge_graph.graphml",
+        "path": "graphs/knowledge_graph.graphml",
+        "size": 13430,
+        "modified": "2025-08-15T00:11:50.295461Z",
+        "type": ".graphml"
+      },
+      {
+        "name": "relationship_matrix.json",
+        "path": "graphs/relationship_matrix.json",
+        "size": 9295,
+        "modified": "2025-08-15T00:11:50.295461Z",
+        "type": ".json"
+      }
+    ],
+    "latest_vectors": [
+      {
+        "name": ".gitkeep",
+        "path": "vectors/embeddings/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.535932Z",
+        "type": "no_extension"
+      },
+      {
+        "name": ".gitkeep",
+        "path": "vectors/indices/.gitkeep",
+        "size": 0,
+        "modified": "2025-08-15T00:10:51.534932Z",
+        "type": "no_extension"
+      },
+      {
+        "name": "sample.json",
+        "path": "vectors/sample.json",
+        "size": 751,
+        "modified": "2025-08-15T00:08:19.910494Z",
+        "type": ".json"
+      }
+    ],
+    "latest_graphs": [
+      {
+        "name": "graph_metadata.json",
+        "path": "graphs/graph_metadata.json",
+        "size": 1076,
+        "modified": "2025-08-15T00:11:50.295461Z",
+        "type": ".json"
+      },
+      {
+        "name": "knowledge_graph.graphml",
+        "path": "graphs/knowledge_graph.graphml",
+        "size": 13430,
+        "modified": "2025-08-15T00:11:50.295461Z",
+        "type": ".graphml"
+      },
+      {
+        "name": "relationship_matrix.json",
+        "path": "graphs/relationship_matrix.json",
+        "size": 9295,
+        "modified": "2025-08-15T00:11:50.295461Z",
+        "type": ".json"
+      },
+      {
+        "name": "knowledge_graph.cypher",
+        "path": "graphs/knowledge_graph.cypher",
+        "size": 10956,
+        "modified": "2025-08-15T00:11:50.294461Z",
+        "type": ".cypher"
+      },
+      {
+        "name": "knowledge_graph.json",
+        "path": "graphs/knowledge_graph.json",
+        "size": 18746,
+        "modified": "2025-08-15T00:11:50.294461Z",
+        "type": ".json"
+      }
+    ]
+  },
+  "search_index": [
+    {
+      "title": "sample.json",
+      "path": "ontologies/sample.json",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [
+        "sample",
+        "frameworks",
+        "components",
+        "description",
+        "brre",
+        "taxonomies",
+        "message",
+        "billing",
+        "name",
+        "holofractor",
+        "concepts",
+        "kairos",
+        "term",
+        "relations",
+        "medscribe",
+        "hierarchy",
+        "autoagency",
+        "definition",
+        "category"
+      ],
+      "size": 1445,
+      "modified": "2025-08-15T00:08:04.012355Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "ontologies/taxonomies/.gitkeep",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.536932Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "ontologies/frameworks/.gitkeep",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.537932Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "ontologies/concepts/.gitkeep",
+      "category": "ontologies",
+      "type": "file",
+      "keywords": [],
+      "size": 185,
+      "modified": "2025-08-15T00:10:41.266836Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "parsings/markdown/.gitkeep",
+      "category": "parsings",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.538932Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "parsings/structured/.gitkeep",
+      "category": "parsings",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.539932Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "parsings/extracted/.gitkeep",
+      "category": "parsings",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.540932Z"
+    },
+    {
+      "title": "sample.json",
+      "path": "vectors/sample.json",
+      "category": "vectors",
+      "type": "file",
+      "keywords": [
+        "sample",
+        "reasoning",
+        "concept",
+        "workflow",
+        "brre",
+        "usage",
+        "note",
+        "clinical",
+        "method",
+        "time",
+        "process",
+        "kairos",
+        "decision",
+        "engine",
+        "documents",
+        "type",
+        "title",
+        "vectors"
+      ],
+      "size": 751,
+      "modified": "2025-08-15T00:08:19.910494Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "vectors/indices/.gitkeep",
+      "category": "vectors",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.534932Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "vectors/embeddings/.gitkeep",
+      "category": "vectors",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.535932Z"
+    },
+    {
+      "title": "knowledge_graph.cypher",
+      "path": "graphs/knowledge_graph.cypher",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [
+        "knowledge",
+        "graph"
+      ],
+      "size": 10956,
+      "modified": "2025-08-15T00:11:50.294461Z"
+    },
+    {
+      "title": "knowledge_graph.json",
+      "path": "graphs/knowledge_graph.json",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [
+        "knowledge",
+        "graph",
+        "concept",
+        "technology",
+        "hipaa",
+        "kairos",
+        "edges",
+        "metadata",
+        "format",
+        "temporal",
+        "methodology",
+        "architecture",
+        "workflow",
+        "name",
+        "holofractor",
+        "origin",
+        "uses",
+        "medscribe",
+        "product",
+        "hierarchy",
+        "type",
+        "facilitates"
+      ],
+      "size": 18746,
+      "modified": "2025-08-15T00:11:50.294461Z"
+    },
+    {
+      "title": "graph_metadata.json",
+      "path": "graphs/graph_metadata.json",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [
+        "graph",
+        "metadata",
+        "concept",
+        "technology",
+        "feature",
+        "standard",
+        "cypher",
+        "includes",
+        "process",
+        "enforces",
+        "uses",
+        "product",
+        "graphml",
+        "automates",
+        "matrix",
+        "leverages",
+        "facilitates",
+        "processes",
+        "json",
+        "contains",
+        "implements",
+        "represents"
+      ],
+      "size": 1076,
+      "modified": "2025-08-15T00:11:50.295461Z"
+    },
+    {
+      "title": "sample.json",
+      "path": "graphs/sample.json",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [
+        "sample",
+        "concept",
+        "description",
+        "brre",
+        "technology",
+        "note",
+        "name",
+        "target",
+        "kairos",
+        "edges",
+        "uses",
+        "medscribe",
+        "product",
+        "statistics",
+        "format",
+        "source",
+        "type",
+        "temporal",
+        "category",
+        "confidence",
+        "implements"
+      ],
+      "size": 1331,
+      "modified": "2025-08-15T00:08:35.616634Z"
+    },
+    {
+      "title": "knowledge_graph.graphml",
+      "path": "graphs/knowledge_graph.graphml",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [
+        "knowledge",
+        "graph"
+      ],
+      "size": 13430,
+      "modified": "2025-08-15T00:11:50.295461Z"
+    },
+    {
+      "title": "relationship_matrix.json",
+      "path": "graphs/relationship_matrix.json",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [
+        "relationship",
+        "matrix",
+        "brre",
+        "holofractor",
+        "hipaa",
+        "kairos",
+        "medscribe",
+        "autoagency",
+        "lgpd"
+      ],
+      "size": 9295,
+      "modified": "2025-08-15T00:11:50.295461Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "graphs/knowledge/.gitkeep",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.532932Z"
+    },
+    {
+      "title": ".gitkeep",
+      "path": "graphs/relationships/.gitkeep",
+      "category": "graphs",
+      "type": "file",
+      "keywords": [],
+      "size": 0,
+      "modified": "2025-08-15T00:10:51.533932Z"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+name: Sync Documentation Background
+
+on:
+  # Trigger when the docs repository is updated
+  repository_dispatch:
+    types: [docs-updated]
+  
+  # Allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      docs_repo:
+        description: 'Source docs repository'
+        required: true
+        default: 'myselfgus/docs'
+        type: string
+      target_branch:
+        description: 'Target branch for updates'
+        required: true
+        default: 'main'
+        type: string
+
+  # Also trigger when this workflow file is updated
+  push:
+    paths:
+      - '.github/workflows/docs-sync.yml'
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout voither_landing
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Setup Python for processing
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml markdown beautifulsoup4 nltk scikit-learn numpy
+
+      - name: Checkout docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.docs_repo || 'myselfgus/docs' }}
+          path: ./temp-docs
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Process and organize documentation
+        run: |
+          python .github/scripts/process-docs.py \
+            --source "./temp-docs" \
+            --target "./background" \
+            --timestamp "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+      - name: Generate embeddings and vectors
+        run: |
+          python .github/scripts/generate-embeddings.py \
+            --input "./background" \
+            --output "./background/vectors"
+
+      - name: Create knowledge graph
+        run: |
+          python .github/scripts/create-knowledge-graph.py \
+            --input "./background" \
+            --output "./background/graphs"
+
+      - name: Update content metadata
+        run: |
+          python .github/scripts/update-metadata.py \
+            --background-dir "./background" \
+            --commit-sha "${{ github.sha }}" \
+            --docs-repo "${{ github.event.inputs.docs_repo || 'myselfgus/docs' }}"
+
+      - name: Clean up temporary files
+        run: rm -rf ./temp-docs
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add background/
+          git commit -m "docs: sync background content from docs repository
+
+          - Updated: $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)
+          - Source: ${{ github.event.inputs.docs_repo || 'myselfgus/docs' }}
+          - Commit: ${{ github.sha }}"
+          git push
+
+      - name: Create summary
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          echo "## Documentation Sync Complete 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully synchronized documentation from \`${{ github.event.inputs.docs_repo || 'myselfgus/docs' }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Updated Content Areas:" >> $GITHUB_STEP_SUMMARY
+          echo "- 📚 Ontologies: Conceptual frameworks and taxonomies" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 Parsings: Structured content analysis" >> $GITHUB_STEP_SUMMARY
+          echo "- 🧮 Vectors/Embeddings: Semantic representations" >> $GITHUB_STEP_SUMMARY
+          echo "- 🕸️ Graphs: Knowledge relationships and connections" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sync Details:" >> $GITHUB_STEP_SUMMARY
+          echo "- Timestamp: $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)" >> $GITHUB_STEP_SUMMARY
+          echo "- Target: \`background/\` directory" >> $GITHUB_STEP_SUMMARY
+          echo "- Processing: Systematic organization with 4 invariant axes" >> $GITHUB_STEP_SUMMARY

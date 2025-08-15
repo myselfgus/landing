@@ -1,0 +1,73 @@
+{
+  "background_system": {
+    "version": "1.0.0",
+    "last_updated": "2025-08-15T00:11:50.337311Z",
+    "axes": {
+      "ontologies": {
+        "enabled": true,
+        "description": "Conceptual frameworks and taxonomies",
+        "processing": [
+          "extraction",
+          "categorization",
+          "hierarchies"
+        ]
+      },
+      "parsings": {
+        "enabled": true,
+        "description": "Structured content analysis",
+        "processing": [
+          "markdown",
+          "yaml",
+          "text_extraction"
+        ]
+      },
+      "vectors": {
+        "enabled": true,
+        "description": "Semantic representations",
+        "processing": [
+          "tfidf",
+          "embeddings",
+          "similarity_matrices"
+        ]
+      },
+      "graphs": {
+        "enabled": true,
+        "description": "Knowledge relationships",
+        "processing": [
+          "entity_extraction",
+          "relationship_mapping",
+          "graph_formats"
+        ]
+      }
+    }
+  },
+  "sync_configuration": {
+    "docs_repository": "myselfgus/docs",
+    "trigger_events": [
+      "repository_dispatch",
+      "workflow_dispatch"
+    ],
+    "auto_processing": true,
+    "output_formats": [
+      "json",
+      "cypher",
+      "graphml"
+    ],
+    "retention": {
+      "sync_history_records": 10,
+      "max_file_age_days": 90
+    }
+  },
+  "integration": {
+    "landing_page": {
+      "context_injection": true,
+      "search_integration": true,
+      "semantic_enhancement": true
+    },
+    "api_endpoints": {
+      "content_search": "/api/background/search",
+      "concept_lookup": "/api/background/concepts",
+      "graph_query": "/api/background/graph"
+    }
+  }
+}

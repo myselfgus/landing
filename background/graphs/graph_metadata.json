@@ -1,0 +1,44 @@
+{
+  "input_directory": "/home/runner/work/voither_landing/voither_landing/background",
+  "output_directory": "/home/runner/work/voither_landing/voither_landing/background/graphs",
+  "total_entities": 29,
+  "total_relationships": 54,
+  "entity_distribution": {
+    "product": 3,
+    "technology": 3,
+    "concept": 6,
+    "process": 3,
+    "standard": 4,
+    "feature": 0
+  },
+  "relationship_types": [
+    "AUTOMATES",
+    "BELONGS_TO_CATEGORY",
+    "LEVERAGES",
+    "FACILITATES",
+    "ANALYZES",
+    "IMPLEMENTS",
+    "INSTANCE_OF",
+    "REPRESENTS",
+    "BELONGS_TO",
+    "COMPLIES_WITH",
+    "INCLUDES",
+    "PROCESSES",
+    "ENFORCES",
+    "USES",
+    "CONTAINS"
+  ],
+  "files_generated": [
+    "knowledge_graph.json",
+    "knowledge_graph.cypher",
+    "knowledge_graph.graphml",
+    "relationship_matrix.json",
+    "graph_metadata.json"
+  ],
+  "format_support": {
+    "json": "General purpose, web applications",
+    "cypher": "Neo4j graph database import",
+    "graphml": "Visualization tools (Gephi, Cytoscape)",
+    "matrix": "Mathematical analysis, algorithms"
+  }
+}

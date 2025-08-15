@@ -1,0 +1,244 @@
+{
+  "sync_info": {
+    "last_sync": "2025-08-15T00:11:50.337311Z",
+    "commit_sha": "test-commit-sha",
+    "docs_repository": "myselfgus/docs",
+    "sync_trigger": "docs_repository_update"
+  },
+  "content_statistics": {
+    "directories": {
+      "ontologies": {
+        "total_files": 4,
+        "total_size": 1630,
+        "subdirectories": {
+          "taxonomies": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.536932Z"
+          },
+          "frameworks": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.537932Z"
+          },
+          "concepts": {
+            "total_files": 1,
+            "total_size": 185,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:41.266836Z"
+          }
+        },
+        "file_types": {
+          ".json": 1,
+          "no_extension": 3
+        },
+        "last_modified": "2025-08-15T00:10:51.537932Z"
+      },
+      "parsings": {
+        "total_files": 3,
+        "total_size": 0,
+        "subdirectories": {
+          "markdown": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.538932Z"
+          },
+          "structured": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.539932Z"
+          },
+          "extracted": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.540932Z"
+          }
+        },
+        "file_types": {
+          "no_extension": 3
+        },
+        "last_modified": "2025-08-15T00:10:51.540932Z"
+      },
+      "vectors": {
+        "total_files": 3,
+        "total_size": 751,
+        "subdirectories": {
+          "indices": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.534932Z"
+          },
+          "embeddings": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.535932Z"
+          }
+        },
+        "file_types": {
+          ".json": 1,
+          "no_extension": 2
+        },
+        "last_modified": "2025-08-15T00:10:51.535932Z"
+      },
+      "graphs": {
+        "total_files": 8,
+        "total_size": 54834,
+        "subdirectories": {
+          "knowledge": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.532932Z"
+          },
+          "relationships": {
+            "total_files": 1,
+            "total_size": 0,
+            "subdirectories": {},
+            "file_types": {
+              "no_extension": 1
+            },
+            "last_modified": "2025-08-15T00:10:51.533932Z"
+          }
+        },
+        "file_types": {
+          ".cypher": 1,
+          ".json": 4,
+          ".graphml": 1,
+          "no_extension": 2
+        },
+        "last_modified": "2025-08-15T00:11:50.295461Z"
+      }
+    },
+    "files": {},
+    "total_size": 57215,
+    "content_types": {
+      ".json": 6,
+      "no_extension": 10,
+      ".cypher": 1,
+      ".graphml": 1
+    }
+  },
+  "organization": {
+    "axes": [
+      {
+        "name": "ontologies",
+        "description": "Conceptual frameworks and taxonomies",
+        "subdirectories": [
+          "concepts",
+          "taxonomies",
+          "frameworks"
+        ]
+      },
+      {
+        "name": "parsings",
+        "description": "Structured content analysis",
+        "subdirectories": [
+          "markdown",
+          "structured",
+          "extracted"
+        ]
+      },
+      {
+        "name": "vectors",
+        "description": "Semantic representations",
+        "subdirectories": [
+          "embeddings",
+          "indices"
+        ]
+      },
+      {
+        "name": "graphs",
+        "description": "Knowledge relationships and connections",
+        "subdirectories": [
+          "knowledge",
+          "relationships"
+        ]
+      }
+    ]
+  },
+  "quality_metrics": {
+    "completeness": {
+      "ontologies": {
+        "file_count": 4,
+        "has_content": true,
+        "size_bytes": 1630
+      },
+      "parsings": {
+        "file_count": 3,
+        "has_content": true,
+        "size_bytes": 0
+      },
+      "vectors": {
+        "file_count": 3,
+        "has_content": true,
+        "size_bytes": 751
+      },
+      "graphs": {
+        "file_count": 8,
+        "has_content": true,
+        "size_bytes": 54834
+      }
+    },
+    "coverage": {
+      "axes_populated": 4,
+      "total_axes": 4,
+      "coverage_percentage": 100.0
+    },
+    "freshness": "2025-08-15T00:11:50.337311Z"
+  },
+  "system_info": {
+    "format_version": "1.0",
+    "generator": "docs-sync-automation",
+    "encoding": "utf-8"
+  },
+  "sync_history": [
+    {
+      "timestamp": "2025-08-15T00:09:51.146432Z",
+      "commit_sha": "test-commit-sha",
+      "docs_repository": "myselfgus/docs",
+      "sync_type": "automatic",
+      "status": "completed"
+    },
+    {
+      "timestamp": "2025-08-15T00:11:50.337311Z",
+      "commit_sha": "test-commit-sha",
+      "docs_repository": "myselfgus/docs",
+      "sync_type": "automatic",
+      "status": "completed"
+    }
+  ]
+}
