@@ -17,7 +17,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
 <body>
     <div id="page-container">
@@ -34,9 +33,10 @@
             </div>
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="#technology" data-key="sectionTitleTechnology">The Voither Difference</a></li>
+                    <li><a href="#technology" data-key="navFeatures">Features</a></li>
                     <li><a href="#how-it-works" data-key="sectionTitleHowItWorks">How It Works</a></li>
                     <li><a href="#augmented-ai" data-key="sectionTitleUpdates">Latest Updates & Roadmap</a></li>
+                    <li><a href="#testimonials" data-key="navTestimonials">Testimonials</a></li>
                     <li><a href="#about" data-key="navTitleAbout" class="nav-quote">About Voither</a></li>
                     <li><a href="#contact" data-key="navContact">Contact & FAQ</a></li>
                     <li class="medscribe-nav-group">
@@ -84,14 +84,14 @@
                                 <span class="partner-logo-text" data-key="msForStartups"></span>
                             </div>
                             <div class="partner-item hide-on-mobile">
-                                <img src="https://assets.santanderx.com/images/logos/logo-santanderx.png" alt="Santander X Logo" class="partner-img-logo santander-x-logo" />
-                            </div>
-                            <div class="partner-item hide-on-mobile">
                                <img src="https://miro.medium.com/v2/resize:fit:1400/1*9VNthQb_I7B0voN97E21hg.png" alt="MongoDB Logo" class="partner-img-logo mongodb-logo" />
                             </div>
                         </div>
                     </div>
                     <div class="header-actions">
+                        <button id="chat-bubble-button" class="chat-bubble" aria-label="Open chatbot">
+                            <i class="fa-solid fa-comment-dots"></i>
+                        </button>
                     </div>
                 </nav>
             </header>
@@ -99,9 +99,10 @@
             <main>
                 <section class="hero-section hero-section-1" id="home">
                     <div class="hero-visual-container">
-                       <div class="hero-visual"></div>
+                       <div class="hero-visual"><span></span></div>
                     </div>
                     <div class="hero-content">
+                        <p class="hero-pre-title" data-key="heroPreTitle"></p>
                         <h1 data-key="heroTitleNew"></h1>
                         <p class="hero-subtext" data-key="heroPitchNew"></p>
                         <div class="hero-actions">
@@ -119,42 +120,42 @@
                         </div>
                         <div class="tech-grid">
                             <div class="tech-card">
-                                <div class="tech-visual tech-visual-1"></div>
+                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1-dPaBexSUJi1Tipca1VaIx0DcW4UxiBB" alt="A female software developer working on a computer in a modern laboratory."></div>
                                 <div class="tech-content">
                                     <h3 data-key="techPane1Title"></h3>
                                     <p data-key="techPane1Desc"></p>
                                 </div>
                             </div>
                              <div class="tech-card">
-                                <div class="tech-visual tech-visual-2"></div>
+                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1dmqeuDtl_EJQ_KeA_2Y5-4Lhn_UiLAmk" alt="A doctor reviewing a digital interface with compliance checklists and security icons."></div>
                                 <div class="tech-content">
                                     <h3 data-key="feature2Title"></h3>
                                     <p data-key="feature2Desc"></p>
                                 </div>
                             </div>
                             <div class="tech-card">
-                                <div class="tech-visual tech-visual-4"></div>
+                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1jAmM9tseIlFUoBfyiRjoLfpT698-O2Ue" alt="A doctor looking at his smartwatch with a digital ECG line overlayed in the foreground."></div>
                                 <div class="tech-content">
                                     <h3 data-key="feature1Title"></h3>
                                     <p data-key="feature1Desc"></p>
                                 </div>
                             </div>
                              <div class="tech-card">
-                                <div class="tech-visual tech-visual-5"></div>
+                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1UmK6jmom3JoTr7XIjyL5JoKwslDkSW5l" alt="Abstract visualization of a complex neural network or data graph with glowing nodes and connections."></div>
                                 <div class="tech-content">
                                     <h3 data-key="feature3Title"></h3>
                                     <p data-key="feature3Desc"></p>
                                 </div>
                             </div>
                              <div class="tech-card">
-                                <div class="tech-visual tech-visual-6"></div>
+                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1WeWAkoLnt3q6ZG4t33DmyblMc8Iqv1vV" alt="Two diverse medical professionals pointing at and analyzing a complex line graph on a futuristic transparent screen."></div>
                                 <div class="tech-content">
                                     <h3 data-key="feature4Title"></h3>
                                     <p data-key="feature4Desc"></p>
                                 </div>
                             </div>
                              <div class="tech-card">
-                                <div class="tech-visual tech-visual-3"></div>
+                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1unKseFtgPJgr-aZ3QT-B01ltAPLii8K8" alt="A data processing pipeline with icons representing different stages of analysis, from voice input to final report."></div>
                                 <div class="tech-content">
                                     <h3 data-key="techPane3Title"></h3>
                                     <p data-key="techPane3Desc"></p>
@@ -169,8 +170,12 @@
                         <div class="section-header">
                             <h2 class="section-title" data-key="sectionTitleHowItWorks">How It Works</h2>
                         </div>
-                        <!-- Restored timeline layout: each item is connected by a central line. This structure
-                             allows rich content per step and a clear narrative flow. -->
+                        <div class="video-placeholder-container">
+                            <div class="video-placeholder" aria-label="Video demonstration of Voither">
+                                <iframe src="https://www.youtube.com/embed/t9KvKnMykT4?loop=1&playlist=t9KvKnMykT4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-caption" data-key="videoCaption"></p>
+                        </div>
                         <div class="how-it-works-timeline">
                             <div class="timeline-item">
                                 <div class="timeline-content">
@@ -220,28 +225,28 @@
                         </div>
                          <div class="augmented-ai-grid">
                             <div class="update-card card-1">
-                                <div class="card-visual card-visual-1"></div>
+                                <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/15_G4p8q_17NdRhIgj72i7mdKMQ7llrr6" alt="Two female doctors, one in a white coat and one in scrubs, collaborating while looking at a tablet computer."></div>
                                 <div class="update-content">
                                     <h3 data-key="pioneer1Title"></h3>
                                     <p data-key="pioneer1Desc"></p>
                                 </div>
                             </div>
                             <div class="update-card card-2">
-                                 <div class="card-visual card-visual-2"></div>
+                                 <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/1J8_TQZ_99Ax_Unh1On1nfqVnTGZnb1gB" alt="An abstract representation of a patient's digital twin, with glowing neural network-like connections."></div>
                                 <div class="update-content">
                                     <h3 data-key="pioneer2Title"></h3>
                                     <p data-key="pioneer2Desc"></p>
                                 </div>
                             </div>
                              <div class="update-card card-3">
-                                 <div class="card-visual card-visual-3"></div>
+                                 <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/11eRqrZeWU5mRcMvOtRXM8qwzSK0A0jfK" alt="A diverse team of four professionals in a meeting room, focused on a large screen displaying 'AUTOMATION PACKAGES'."></div>
                                 <div class="update-content">
                                     <h3 data-key="pioneer3Title"></h3>
                                     <p data-key="pioneer3Desc"></p>
                                 </div>
                             </div>
                             <div class="update-card card-4">
-                                 <div class="card-visual card-visual-4"></div>
+                                 <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/1dhFZ3TuQYZi_rK6eTe-7mbrw-1uvbizw" alt="A futuristic dashboard showing graphs and data points representing real-world health outcomes."></div>
                                 <div class="update-content">
                                     <h3 data-key="pioneer4Title"></h3>
                                     <p data-key="pioneer4Desc"></p>
@@ -251,12 +256,76 @@
                     </div>
                 </section>
                 
-                <section class="content-section quote-section" id="about">
+                <section class="content-section" id="testimonials">
                     <div class="container">
-                        <blockquote>
-                            <span data-key="thesis">"Today, clinical practice is about talking and writing—but systems only understand checkboxes. Voither is born to listen to human language, turn it into objective signals, and act, with no learning curve. This is only possible because we bring together three things that almost no one has in the same place: a reasoning engine 'with time inside' (BRRE), proprietary languages that turn law into code (.ee), and a timed E2E pipeline from conversation to action."</span>
-                        </blockquote>
-                        <cite data-key="quoteAttribution"></cite>
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="sectionTitleTestimonials"></h2>
+                        </div>
+                        <div class="testimonials-grid">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <blockquote>
+                                        <p data-key="testimonial1Quote"></p>
+                                    </blockquote>
+                                    <cite>
+                                        <span class="testimonial-name" data-key="testimonial1Name"></span>
+                                        <span class="testimonial-title" data-key="testimonial1Title"></span>
+                                    </cite>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <blockquote>
+                                        <p data-key="testimonial2Quote"></p>
+                                    </blockquote>
+                                    <cite>
+                                        <span class="testimonial-name" data-key="testimonial2Name"></span>
+                                        <span class="testimonial-title" data-key="testimonial2Title"></span>
+                                    </cite>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <blockquote>
+                                        <p data-key="testimonial3Quote"></p>
+                                    </blockquote>
+                                    <cite>
+                                        <span class="testimonial-name" data-key="testimonial3Name"></span>
+                                        <span class="testimonial-title" data-key="testimonial3Title"></span>
+                                    </cite>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="about">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="aboutSectionTitle">About Voither</h2>
+                        </div>
+                        <div class="about-grid">
+                            <div class="founder-profile">
+                                <img src="https://lh3.googleusercontent.com/d/1M-l8t0BQ2qWTEsdH5Nxbc0t3Wg--a2iR" alt="Photo of Dr. Gustavo Mendes, Founder & CEO of Voither" class="founder-photo">
+                                <h3 class="founder-name" data-key="founderName"></h3>
+                                <p class="founder-title" data-key="founderTitle"></p>
+                                <div class="founder-socials">
+                                    <a href="https://linkedin.com/in/drgustavomendes" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                        <i class="fa-brands fa-linkedin"></i>
+                                    </a>
+                                    <a href="https://github.com/myselfgus" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                                <p class="founder-bio" data-key="founderBio"></p>
+                            </div>
+                            <div class="founder-quote">
+                                <blockquote>
+                                    <span data-key="thesis"></span>
+                                </blockquote>
+                                <cite data-key="quoteAttribution"></cite>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 
@@ -304,7 +373,28 @@
                             <div class="contact-info">
                                 <h2 class="section-title" data-key="contactTitle"></h2>
                                 <p class="section-subtitle" data-key="contactSubtitle"></p>
-                                <a href="mailto:hello@voither.com" class="cta-button large" data-key="contactButton"></a>
+                                
+                                <form id="contact-form" class="contact-form" aria-live="polite">
+                                    <div class="form-group">
+                                        <label for="name" data-key="formLabelName"></label>
+                                        <input type="text" id="name" name="name" required placeholder="" data-key="formPlaceholderName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" data-key="formLabelEmail"></label>
+                                        <input type="email" id="email" name="email" required placeholder="" data-key="formPlaceholderEmail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message" data-key="formLabelMessage"></label>
+                                        <textarea id="message" name="message" rows="5" required placeholder="" data-key="formPlaceholderMessage"></textarea>
+                                    </div>
+                                    <button type="submit" class="cta-button large" data-key="formSubmitButton"></button>
+                                </form>
+
+                                <div id="form-success-message" class="form-success-message" style="display: none;">
+                                    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                    <h3 data-key="formSuccessTitle"></h3>
+                                    <p data-key="formSuccessMessage"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -318,7 +408,29 @@
             </main>
         </div>
     </div>
+
+    <!-- Chatbot structure -->
+    <div id="chatbot-container">
+        <div id="chatbot-overlay"></div>
+        <div id="chatbot-modal" role="dialog" aria-modal="true" aria-labelledby="chatbot-title">
+            <div class="chatbot-header">
+                <h3 id="chatbot-title" class="chatbot-title" data-key="chatbotTitle"></h3>
+                <button id="chatbot-close-button" class="chatbot-close-button" aria-label="Close chatbot">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages" aria-live="polite">
+                <!-- Messages will be injected here -->
+            </div>
+            <div class="chatbot-input-area">
+                <input type="text" id="chatbot-input" class="chatbot-input" placeholder="" data-key="chatbotPlaceholder" aria-label="Your message">
+                <button id="chatbot-send-button" class="chatbot-send-button" aria-label="Send message">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
