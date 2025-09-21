@@ -6,6 +6,51 @@ import { GoogleGenAI, Chat } from "@google/genai";
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // --- Feature Flags ---
+    // Default configuration for feature flags.
+    // Can be overridden for testing/rollouts via localStorage, e.g., localStorage.setItem('ff_chatbot', 'false');
+    const featureFlags: { [key: string]: boolean } = {
+        pioneersSection: true, // Controls the "Augmented-AI for Healthcare" section
+        chatbot: true,         // Controls the entire chatbot feature
+    };
+
+    /**
+     * Checks if a feature is enabled.
+     * It first checks localStorage for an override (prefixed with 'ff_'),
+     * then falls back to the default configuration.
+     * @param {string} flagName The name of the feature flag.
+     * @returns {boolean} True if the feature is enabled, false otherwise.
+     */
+    const isFeatureEnabled = (flagName: string): boolean => {
+        const override = localStorage.getItem(`ff_${flagName}`);
+        if (override !== null) {
+            return override === 'true';
+        }
+        return featureFlags[flagName] ?? false;
+    };
+
+    /**
+     * Applies feature flags to the DOM.
+     * Hides elements with a data-feature-flag attribute if the corresponding flag is disabled.
+     */
+    const applyFeatureFlags = () => {
+        document.querySelectorAll<HTMLElement>('[data-feature-flag]').forEach(element => {
+            const flagName = element.dataset.featureFlag;
+            if (flagName && !isFeatureEnabled(flagName)) {
+                element.style.display = 'none';
+
+                // If the flagged element is a section with an ID, hide its corresponding nav link.
+                if (element.tagName === 'SECTION' && element.id) {
+                    const navLink = document.querySelector(`.sidebar-nav a[href="#${element.id}"]`);
+                    if (navLink && navLink.parentElement) {
+                        navLink.parentElement.style.display = 'none';
+                    }
+                }
+            }
+        });
+    };
+
+
     // --- Gemini Chatbot ---
     let chat: Chat | null = null;
     const ai = new GoogleGenAI({apiKey: process.env.API_KEY});
@@ -194,6 +239,11 @@ document.addEventListener("DOMContentLoaded", () => {
             chatbotPlaceholder: "Ask about Voither...",
             chatbotInitialMessage: "Hello! I'm the Voither assistant. How can I help you learn about our clinical intelligence platform?",
             chatbotErrorMessage: "Sorry, I'm having trouble connecting. Please try again later.",
+
+            // Cookie Consent
+            cookieConsentText: "We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.",
+            cookieAccept: "Accept",
+            cookieDecline: "Decline",
         },
         pt: {
             pageTitle: "Voither | Inteligência Clínica em Tempo Real",
@@ -311,6 +361,11 @@ document.addEventListener("DOMContentLoaded", () => {
             chatbotPlaceholder: "Pergunte sobre a Voither...",
             chatbotInitialMessage: "Olá! Sou o assistente da Voither. Como posso ajudar você a conhecer nossa plataforma de inteligência clínica?",
             chatbotErrorMessage: "Desculpe, estou com problemas de conexão. Por favor, tente novamente mais tarde.",
+
+            // Cookie Consent
+            cookieConsentText: "Usamos cookies para melhorar sua experiência. Ao continuar a visitar este site, você concorda com nosso uso de cookies.",
+            cookieAccept: "Aceitar",
+            cookieDecline: "Recusar",
         },
     };
     
@@ -320,6 +375,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const translatableElements = document.querySelectorAll<HTMLElement>('[data-key]');
     const chatMessagesContainer = document.getElementById('chatbot-messages') as HTMLElement;
 
+    // FIX: Define chat message functions in a broader scope to be accessible by setLanguage.
+    const addMessage = (content: string, type: 'user' | 'bot') => {
+        if (!chatMessagesContainer) return;
+        const messageWrapper = document.createElement('div');
+        messageWrapper.className = `chat-message ${type}-message`;
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        messageContent.textContent = content;
+        messageWrapper.appendChild(messageContent);
+        chatMessagesContainer.appendChild(messageWrapper);
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+    };
+    
+    const addBotMessage = (content: string) => addMessage(content, 'bot');
+    const addUserMessage = (content: string) => addMessage(content, 'user');
 
     const setLanguage = (lang: Language) => {
         if (!translations[lang]) return;
@@ -349,7 +419,9 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('voither-lang', lang);
 
         // Update initial chatbot message if chat is visible
-        if (chatMessagesContainer && chatMessagesContainer.children.length <= 1) {
+        if (isFeatureEnabled('chatbot') && chatMessagesContainer && chatMessagesContainer.children.length <= 1) {
+            // FIX: Clear existing message to prevent duplicates on language change.
+            chatMessagesContainer.innerHTML = '';
             addBotMessage(translations[lang].chatbotInitialMessage);
         }
     };
@@ -429,6 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Activate sidebar nav link
         let currentSectionId = '';
         sections.forEach(section => {
+            if (section.style.display === 'none') return; // Skip hidden sections
             const sectionTop = section.offsetTop;
             if (window.scrollY >= sectionTop - 150) {
                 currentSectionId = section.getAttribute('id') || '';
@@ -525,102 +598,128 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Chatbot Logic ---
-    const chatbotContainer = document.getElementById('chatbot-container');
-    const chatBubbleButton = document.getElementById('chat-bubble-button');
-    const chatbotCloseButton = document.getElementById('chatbot-close-button');
-    const chatbotOverlay = document.getElementById('chatbot-overlay');
-    const chatbotInput = document.getElementById('chatbot-input') as HTMLInputElement;
-    const chatbotSendButton = document.getElementById('chatbot-send-button');
+    if (isFeatureEnabled('chatbot')) {
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatBubbleButtons = document.querySelectorAll('.js-open-chat');
+        const chatbotCloseButton = document.getElementById('chatbot-close-button');
+        const chatbotOverlay = document.getElementById('chatbot-overlay');
+        const chatbotInput = document.getElementById('chatbot-input') as HTMLInputElement;
+        const chatbotSendButton = document.getElementById('chatbot-send-button');
 
-    const toggleChatbot = (show: boolean) => {
-        if (show) {
-            chatbotContainer?.classList.add('visible');
-            chatbotInput?.focus();
-            if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
-                 const currentLang = (document.documentElement.lang as Language) || 'en';
-                 addBotMessage(translations[currentLang].chatbotInitialMessage);
+        const toggleChatbot = (show: boolean) => {
+            if (show) {
+                chatbotContainer?.classList.add('visible');
+                chatbotInput?.focus();
+                if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
+                    const currentLang = (document.documentElement.lang as Language) || 'en';
+                    addBotMessage(translations[currentLang].chatbotInitialMessage);
+                }
+            } else {
+                chatbotContainer?.classList.remove('visible');
             }
-        } else {
-            chatbotContainer?.classList.remove('visible');
+        };
+        
+        const showTypingIndicator = () => {
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'chat-message bot-message';
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-content typing-indicator">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>`;
+            chatMessagesContainer?.appendChild(typingIndicator);
+            if (chatMessagesContainer) {
+                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+            }
+        };
+
+        const removeTypingIndicator = () => {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        };
+        
+        const handleSendMessage = async () => {
+            if (!chatbotInput) return;
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+
+            addUserMessage(message);
+            chatbotInput.value = '';
+            showTypingIndicator();
+
+            try {
+                if (!chat) initializeChat();
+                if (!chat) throw new Error("Chat not initialized");
+
+                const response = await chat.sendMessage({ message });
+                
+                removeTypingIndicator();
+                addBotMessage(response.text);
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                const currentLang = (document.documentElement.lang as Language) || 'en';
+                removeTypingIndicator();
+                addBotMessage(translations[currentLang].chatbotErrorMessage);
+            }
+        };
+
+        chatBubbleButtons.forEach(button => {
+            button.addEventListener('click', () => toggleChatbot(true));
+        });
+        chatbotCloseButton?.addEventListener('click', () => toggleChatbot(false));
+        chatbotOverlay?.addEventListener('click', () => toggleChatbot(false));
+        chatbotSendButton?.addEventListener('click', handleSendMessage);
+        chatbotInput?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleSendMessage();
+            }
+        });
+    }
+
+    // --- Cookie Consent Logic ---
+    const initializeCookieConsent = () => {
+        const banner = document.getElementById('cookie-consent-banner');
+        const acceptBtn = document.getElementById('cookie-accept-btn');
+        const declineBtn = document.getElementById('cookie-decline-btn');
+
+        if (!banner || !acceptBtn || !declineBtn) return;
+
+        const hideBanner = () => {
+            banner.classList.add('hidden');
+        };
+
+        const consent = localStorage.getItem('voither-cookie-consent');
+        if (consent === null) {
+            banner.classList.remove('hidden');
         }
+
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('voither-cookie-consent', 'accepted');
+            hideBanner();
+        });
+
+        declineBtn.addEventListener('click', () => {
+            localStorage.setItem('voither-cookie-consent', 'declined');
+            hideBanner();
+        });
     };
+
+
+    // --- Initial Load ---
+    applyFeatureFlags(); // Apply feature flags to the DOM
     
-    const addMessage = (content: string, type: 'user' | 'bot') => {
-        const messageWrapper = document.createElement('div');
-        messageWrapper.className = `chat-message ${type}-message`;
-        const messageContent = document.createElement('div');
-        messageContent.className = 'message-content';
-        messageContent.textContent = content;
-        messageWrapper.appendChild(messageContent);
-        chatMessagesContainer?.appendChild(messageWrapper);
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    };
-    
-    const addBotMessage = (content: string) => addMessage(content, 'bot');
-    const addUserMessage = (content: string) => addMessage(content, 'user');
-
-    const showTypingIndicator = () => {
-        const typingIndicator = document.createElement('div');
-        typingIndicator.className = 'chat-message bot-message';
-        typingIndicator.id = 'typing-indicator';
-        typingIndicator.innerHTML = `
-            <div class="message-content typing-indicator">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>`;
-        chatMessagesContainer?.appendChild(typingIndicator);
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    };
-
-    const removeTypingIndicator = () => {
-        const indicator = document.getElementById('typing-indicator');
-        if (indicator) {
-            indicator.remove();
-        }
-    };
-    
-    const handleSendMessage = async () => {
-        const message = chatbotInput.value.trim();
-        if (!message) return;
-
-        addUserMessage(message);
-        chatbotInput.value = '';
-        showTypingIndicator();
-
-        try {
-            if (!chat) initializeChat();
-            if (!chat) throw new Error("Chat not initialized");
-
-            const response = await chat.sendMessage({ message });
-            
-            removeTypingIndicator();
-            addBotMessage(response.text);
-
-        } catch (error) {
-            console.error("Gemini API Error:", error);
-            const currentLang = (document.documentElement.lang as Language) || 'en';
-            removeTypingIndicator();
-            addBotMessage(translations[currentLang].chatbotErrorMessage);
-        }
-    };
-
-    chatBubbleButton?.addEventListener('click', () => toggleChatbot(true));
-    chatbotCloseButton?.addEventListener('click', () => toggleChatbot(false));
-    chatbotOverlay?.addEventListener('click', () => toggleChatbot(false));
-    chatbotSendButton?.addEventListener('click', handleSendMessage);
-    chatbotInput?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSendMessage();
-        }
-    });
-
-    // --- Initial Language Load ---
     const savedLang = localStorage.getItem('voither-lang') as Language | null;
     const initialLang: Language = savedLang || 'en';
     setLanguage(initialLang);
     
+    initializeCookieConsent();
+
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
 });

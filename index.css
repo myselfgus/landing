@@ -69,7 +69,7 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.6;
+    line-height: 1.9;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -114,9 +114,9 @@ body.light-theme.scrolled .sidebar {
 }
 
 .logo {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     font-size: 1.7rem;
-    font-weight: 700;
+    font-weight: 900;
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.05em;
@@ -143,7 +143,7 @@ body.light-theme.scrolled .sidebar {
     font-weight: 500;
     font-size: 0.95rem;
     transition: color 0.2s ease, background-color 0.2s ease;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
 }
 
 .sidebar-nav a:hover {
@@ -172,7 +172,7 @@ body.light-theme.scrolled .sidebar {
     background-color: transparent;
     border: 1px solid var(--grid-color);
     color: var(--text-secondary);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     font-weight: 500;
     font-size: 0.95rem;
     padding: 0.5rem 0.75rem;
@@ -192,7 +192,7 @@ body.light-theme.scrolled .sidebar {
 }
 
 .compliance-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -210,7 +210,7 @@ body.light-theme.scrolled .sidebar {
 }
 
 .compliance-item {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
     padding: 0.25rem 0.6rem;
@@ -285,7 +285,7 @@ main {
 
 /* --- Typography --- */
 h1, h2, h3, .faq-question {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 h1 {
@@ -312,7 +312,7 @@ body.light-theme h1 {
 
 h2.section-title {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 600;
+    font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.025em;
     text-align: left;
@@ -331,7 +331,7 @@ p {
     color: var(--text-secondary);
     font-size: clamp(0.95rem, 1vw, 1.05rem);
     max-width: 65ch;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 a {
@@ -345,7 +345,7 @@ a:hover {
 }
 
 .view-all-link {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-secondary);
@@ -386,9 +386,9 @@ body.scrolled .main-header {
 .partner-banner {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.5rem;
 }
 
 .partner-logos {
@@ -410,19 +410,19 @@ body.scrolled .main-header {
 }
 
 .partner-img-logo {
-    height: 20px;
+    height: 22px;
     width: auto;
     object-fit: contain;
     transition: all 0.3s ease-in-out;
 }
 
 .partner-img-logo.mongodb-logo {
-    max-height: 20px;
+    max-height: 22px;
 }
 
 body.scrolled .partner-logo {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
 }
 
 body.scrolled .partner-img-logo {
@@ -434,13 +434,23 @@ body.scrolled .partner-img-logo.mongodb-logo {
 }
 
 .partner-logo-text {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Segoe', sans-serif;
     font-weight: 600;
     color: var(--text-primary);
 }
 
 .header-logo-mobile {
     display: none;
+}
+
+.header-divider-mobile {
+    display: none;
+}
+
+.partner-logos-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Matches the parent gap for desktop consistency */
 }
 
 .header-actions {
@@ -452,7 +462,7 @@ body.scrolled .partner-img-logo.mongodb-logo {
 
 /* --- CTA Button Styles --- */
 .cta-button {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     padding: 0.75rem 1.5rem;
@@ -616,9 +626,9 @@ body.light-theme .hero-visual {
 .hero-pre-title {
     display: inline-block;
     padding: 0.5rem 1.25rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
     color: var(--text-primary);
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -655,15 +665,15 @@ body.light-theme .hero-pre-title {
     background: transparent;
     border: 1px solid var(--grid-color);
     color: var(--text-secondary);
-    padding: 0.7rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     border-radius: 8px;
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 400;
+    font-size: 0.95rem;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
     cursor: pointer;
     position: relative;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .hero-action-button:hover {
@@ -1522,6 +1532,11 @@ body.light-theme .form-group textarea:focus {
     color: var(--text-primary);
 }
 
+/* --- Mobile Floating Action Buttons --- */
+.mobile-fab-container {
+    display: none; /* Hidden on desktop */
+}
+
 
 /* --- Chatbot Styles --- */
 .chat-bubble {
@@ -1776,8 +1791,8 @@ body.light-theme .chatbot-input {
 .how-it-works-timeline .timeline-item:nth-child(4) { transition-delay: 0.3s; }
 .how-it-works-timeline .timeline-item:nth-child(5) { transition-delay: 0.4s; }
 
-.testimonials-grid .testimonial-card:nth-child(2) { transition-delay: 0.1s; }
-.testimonials-grid .testimonial-card:nth-child(3) { transition-delay: 0.2s; }
+.testimonials-grid .testimonial-card:nth-child(2) { transition-delay: 0.15s; }
+.testimonials-grid .testimonial-card:nth-child(3) { transition-delay: 0.3s; }
 
 
 /* --- Card Image & Hover Effect --- */
@@ -1797,12 +1812,192 @@ body.light-theme .chatbot-input {
     animation-play-state: running;
 }
 
+/* --- Cookie Consent Banner --- */
+.cookie-consent-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 1001;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--grid-color);
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.cookie-consent-banner.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.cookie-consent-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.cookie-consent-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    max-width: 60ch;
+    margin: 0;
+}
+
+.cookie-consent-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.cookie-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cookie-btn.primary {
+    background: var(--cta-bg);
+    color: var(--cta-text);
+}
+.cookie-btn.primary:hover {
+    background: var(--cta-hover-bg);
+}
+
+.cookie-btn.secondary {
+    background: transparent;
+    border: 1px solid var(--grid-color);
+    color: var(--text-secondary);
+}
+.cookie-btn.secondary:hover {
+    color: var(--text-primary);
+    background: var(--bg-primary);
+}
+
+
 /* --- Responsive Design --- */
 @media (max-width: 1024px) {
-    .main-header .container {
-        /* Add space on the right for the fixed mobile menu button */
-        padding-right: 64px;
+    /* --- Floating Header Pill --- */
+    .main-header {
+        position: fixed;
+        width: auto;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.5rem 1.25rem;
+        border-radius: 999px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        border: 1px solid var(--grid-color);
+        background-color: rgba(26, 28, 32, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: none; /* No scroll animation */
     }
+    body.light-theme .main-header {
+         background-color: rgba(249, 249, 251, 0.8);
+    }
+    
+    /* REMOVE scroll animation by making padding static */
+    body.scrolled .main-header {
+        padding: 0.5rem 1.25rem;
+    }
+    
+    .main-header .container {
+        padding: 0;
+        width: 100%;
+    }
+
+    .header-actions {
+        display: none;
+    }
+
+    /* --- Alignment and Proportionality Fixes --- */
+    .partner-banner {
+        width: 100%;
+    }
+    
+    /* Main flex container */
+    .partner-logos {
+        display: flex;
+        align-items: center; /* PERFECT VERTICAL ALIGNMENT FOR ALL ITEMS */
+        gap: 1rem;
+    }
+    
+    /* Voither logo on the left */
+    .header-logo-mobile {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+    
+    .header-divider-mobile {
+        display: block;
+        width: 1px;
+        height: 24px;
+        background-color: var(--grid-color);
+        flex-shrink: 0;
+    }
+    
+    /* Partner logos group on the right */
+    .partner-logos-group {
+        display: flex;
+        align-items: center; /* VERTICAL ALIGNMENT */
+        gap: 1rem;
+    }
+
+    /* Individual partner item */
+    .partner-item {
+        display: flex;
+        align-items: center; /* VERTICAL ALIGNMENT */
+        gap: 0.5rem;
+    }
+    
+    /* --- Standardize logo sizes and REMOVE scroll animation --- */
+    .partner-logo {
+        width: 16px;
+        height: 16px;
+    }
+    .partner-img-logo {
+        height: 20px;
+    }
+    .partner-img-logo.mongodb-logo {
+        max-height: 20px;
+    }
+    
+    /* Override desktop scroll effects to keep sizes static on mobile */
+    body.scrolled .partner-logo {
+        width: 16px;
+        height: 16px;
+    }
+    body.scrolled .partner-img-logo {
+        height: 20px;
+    }
+    body.scrolled .partner-img-logo.mongodb-logo {
+        max-height: 20px;
+    }
+
+    .partner-logo-text {
+        display: inline !important;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        font-weight: 500;
+        line-height: 1; /* Helps with vertical alignment */
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
+    
     .sidebar {
         transform: translateX(-100%);
         border-right: none;
@@ -1817,6 +2012,9 @@ body.light-theme .chatbot-input {
     }
     .mobile-menu-toggle {
         display: block;
+        position: static; /* Override fixed positioning */
+        background: none;
+        padding: 0;
     }
     .contact-grid {
         grid-template-columns: 1fr;
@@ -1834,6 +2032,43 @@ body.light-theme .chatbot-input {
     }
     .faq-question {
         text-align: center;
+    }
+    
+    /* --- Floating Action Button Pill --- */
+    .mobile-fab-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 250;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: rgba(26, 28, 32, 0.75); /* var(--bg-secondary) with alpha */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--grid-color);
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    body.light-theme .mobile-fab-container {
+        background-color: rgba(249, 249, 251, 0.8); /* var(--bg-secondary) with alpha */
+    }
+    .chat-bubble {
+        width: auto;
+        height: auto;
+        background: none;
+        box-shadow: none;
+        animation: none;
+        color: var(--text-secondary);
+        transition: color 0.2s ease;
+        font-size: 1.4rem;
+    }
+    .chat-bubble:hover {
+        transform: none;
+        box-shadow: none;
+        color: var(--text-primary);
     }
 }
 
@@ -1873,14 +2108,6 @@ body.light-theme .chatbot-input {
     .faq-title {
         text-align: left;
     }
-    
-    .hide-on-mobile {
-        display: none;
-    }
-
-    .header-logo-mobile {
-        display: block;
-    }
 
     /* Timeline on Mobile */
     .how-it-works-timeline::after {
@@ -1900,5 +2127,18 @@ body.light-theme .chatbot-input {
     }
     .timeline-item::after {
         left: 12px;
+    }
+
+    /* Cookie Banner on Mobile */
+    .cookie-consent-banner {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+    .cookie-consent-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
     }
 }
