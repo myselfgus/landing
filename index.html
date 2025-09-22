@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-key="pageTitle">VOITHER MedicalScribe | The Future of Clinical Intelligence</title>
+    <title data-key="pageTitle">VOITHER | AI-Native Private Edge Cloud</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Manrope:wght@700&family=Montserrat:wght@800&family=Poppins:wght@400;500;700&family=Roboto+Mono:wght@700&family=Roboto:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Montserrat:wght@800&family=Poppins:wght@400;500;700&family=Roboto+Mono:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css" />
-    <!-- Font Awesome for scalable vector icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 <script type="importmap">
 {
   "imports": {
@@ -28,17 +27,13 @@
             </div>
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="#technology" data-key="navFeatures">Features</a></li>
-                    <li><a href="#how-it-works" data-key="sectionTitleHowItWorks">How It Works</a></li>
-                    <li><a href="#augmented-ai" data-key="sectionTitleUpdates">Latest Updates & Roadmap</a></li>
-                    <li><a href="#testimonials" data-key="navTestimonials">Testimonials</a></li>
-                    <li><a href="#about" data-key="navTitleAbout" class="nav-quote">About Voither</a></li>
+                    <li><a href="#solution" data-key="navSolution">The Solution</a></li>
+                    <li><a href="#architecture" data-key="navArchitecture">The Architecture</a></li>
+                    <li><a href="#impact" data-key="navImpact">The Impact</a></li>
+                    <li><a href="#application" data-key="navApplication">In Action</a></li>
+                    <li><a href="#research" data-key="navResearch">Foundations</a></li>
+                    <li><a href="#about" data-key="navAbout" class="nav-quote">About</a></li>
                     <li><a href="#contact" data-key="navContact">Contact & FAQ</a></li>
-                    <li class="medscribe-nav-group">
-                        <button class="medscribe-button" data-key="medscribeButton">MEDSCRIBE</button>
-                        <button class="medscribe-button" data-key="holofractorButton">HOLOFRACTOR</button>
-                        <button class="medscribe-button" data-key="peeraiButton">PEER-AI</button>
-                    </li>
                 </ul>
             </nav>
             <div class="compliance-section">
@@ -47,18 +42,12 @@
                     <span class="compliance-item" data-key="complianceLGPD"></span>
                     <span class="compliance-item" data-key="complianceHIPAA"></span>
                     <span class="compliance-item" data-key="complianceFHIR"></span>
-                    <span class="compliance-item" data-key="complianceRDoC"></span>
-                    <span class="compliance-item" data-key="complianceHiTOP"></span>
-                    <span class="compliance-item" data-key="complianceBigFive"></span>
-                    <span class="compliance-item" data-key="compliancePERMA"></span>
+                    <span class="compliance-item" data-key="complianceANVISA"></span>
+                    <span class="compliance-item" data-key="complianceISO13485"></span>
                 </div>
             </div>
             <div class="sidebar-footer">
                 <button class="lang-switcher" aria-label="Toggle language">EN</button>
-                <button class="theme-switcher" aria-label="Toggle theme">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                </button>
             </div>
         </aside>
         
@@ -80,15 +69,17 @@
                                     </svg>
                                     <span class="partner-logo-text" data-key="msForStartups"></span>
                                 </div>
-                                <div class="partner-item hide-on-mobile">
-                                   <img src="https://miro.medium.com/v2/resize:fit:1400/1*9VNthQb_I7B0voN97E21hg.png" alt="MongoDB Logo" class="partner-img-logo mongodb-logo" />
+                                <div class="partner-divider"></div>
+                                <div class="partner-item">
+                                   <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Cloudflare_Logo.png" alt="Cloudflare Logo" class="partner-img-logo" />
+                                   <span class="partner-logo-text" data-key="cfForStartups"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="header-actions">
                          <button class="chat-bubble js-open-chat" aria-label="Open chatbot" data-feature-flag="chatbot">
-                            <i class="fa-solid fa-comment-dots"></i>
+                            <i data-lucide="message-circle-question"></i>
                         </button>
                     </div>
                 </nav>
@@ -96,211 +87,253 @@
             
             <main>
                 <section class="hero-section hero-section-1" id="home">
-                    <div class="hero-visual-container">
-                       <div class="hero-visual"><span></span></div>
-                    </div>
                     <div class="hero-content">
-                        <p class="hero-pre-title" data-key="heroPreTitle"></p>
                         <h1 data-key="heroTitleNew"></h1>
                         <p class="hero-subtext" data-key="heroPitchNew"></p>
                         <div class="hero-actions">
-                            <button class="hero-action-button" data-key="heroInvestorsButton"></button>
-                            <button class="hero-action-button" data-key="heroDevButton"></button>
-                            <button class="hero-action-button" data-key="heroHealthButton"></button>
+                            <a href="#solution" class="cta-button large" data-key="heroCtaPrimary"></a>
+                            <a href="#contact" class="hero-action-button" data-key="heroCtaSecondary"></a>
                         </div>
                     </div>
                 </section>
-                
-                <section class="content-section" id="technology">
+
+                <section class="content-section" id="solution">
                     <div class="container">
                         <div class="section-header">
-                            <h2 class="section-title" data-key="sectionTitleTechnology"></h2>
+                            <h2 class="section-title" data-key="solutionTitle">From Barrier to Breakthrough</h2>
                         </div>
-                        <div class="tech-grid">
-                            <div class="tech-card">
-                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1-dPaBexSUJi1Tipca1VaIx0DcW4UxiBB" alt="A female software developer working on a computer in a modern laboratory."></div>
-                                <div class="tech-content">
-                                    <h3 data-key="techPane1Title"></h3>
-                                    <p data-key="techPane1Desc"></p>
+                        <p class="section-subtitle" data-key="solutionSubtitle">Healthcare's biggest challenges are architectural. We built the new architecture to solve them at their foundation.</p>
+                        <div class="solution-grid">
+                             <!-- Pair 1 -->
+                            <div class="solution-pair glass-card">
+                                <div class="solution-side">
+                                    <h3 data-key="solutionSolution1Title">Voither Edge Cloud</h3>
+                                    <p data-key="solutionSolution1Desc"></p>
                                 </div>
                             </div>
-                             <div class="tech-card">
-                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1dmqeuDtl_EJQ_KeA_2Y5-4Lhn_UiLAmk" alt="A doctor reviewing a digital interface with compliance checklists and security icons."></div>
-                                <div class="tech-content">
-                                    <h3 data-key="feature2Title"></h3>
-                                    <p data-key="feature2Desc"></p>
+
+                             <!-- Pair 2 -->
+                            <div class="solution-pair reversed glass-card">
+                                <div class="solution-side">
+                                    <h3 data-key="solutionSolution2Title">HealthOS</h3>
+                                    <p data-key="solutionSolution2Desc"></p>
                                 </div>
                             </div>
-                            <div class="tech-card">
-                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1jAmM9tseIlFUoBfyiRjoLfpT698-O2Ue" alt="A doctor looking at his smartwatch with a digital ECG line overlayed in the foreground."></div>
-                                <div class="tech-content">
-                                    <h3 data-key="feature1Title"></h3>
-                                    <p data-key="feature1Desc"></p>
-                                </div>
-                            </div>
-                             <div class="tech-card">
-                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1UmK6jmom3JoTr7XIjyL5JoKwslDkSW5l" alt="Abstract visualization of a complex neural network or data graph with glowing nodes and connections."></div>
-                                <div class="tech-content">
-                                    <h3 data-key="feature3Title"></h3>
-                                    <p data-key="feature3Desc"></p>
-                                </div>
-                            </div>
-                             <div class="tech-card">
-                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1WeWAkoLnt3q6ZG4t33DmyblMc8Iqv1vV" alt="Two diverse medical professionals pointing at and analyzing a complex line graph on a futuristic transparent screen."></div>
-                                <div class="tech-content">
-                                    <h3 data-key="feature4Title"></h3>
-                                    <p data-key="feature4Desc"></p>
-                                </div>
-                            </div>
-                             <div class="tech-card">
-                                <div class="tech-visual"><img src="https://lh3.googleusercontent.com/d/1unKseFtgPJgr-aZ3QT-B01ltAPLii8K8" alt="A data processing pipeline with icons representing different stages of analysis, from voice input to final report."></div>
-                                <div class="tech-content">
-                                    <h3 data-key="techPane3Title"></h3>
-                                    <p data-key="techPane3Desc"></p>
+                            
+                            <!-- Pair 3 -->
+                            <div class="solution-pair glass-card">
+                                <div class="solution-side">
+                                    <h3 data-key="solutionSolution3Title">Mestral Engine</h3>
+                                    <p data-key="solutionSolution3Desc"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
                 
-                <section class="content-section" id="how-it-works">
+                <section class="content-section" id="architecture">
                     <div class="container">
                         <div class="section-header">
-                            <h2 class="section-title" data-key="sectionTitleHowItWorks">How It Works</h2>
+                            <h2 class="section-title" data-key="architectureTitle">A Turnkey Platform for Healthcare</h2>
                         </div>
-                        <div class="video-placeholder-container">
-                            <div class="video-placeholder" aria-label="Video demonstration of Voither">
-                                <iframe src="https://www.youtube.com/embed/t9KvKnMykT4?loop=1&playlist=t9KvKnMykT4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <p class="section-subtitle" data-key="architectureSubtitle">We deliver and manage a complete, vertically-integrated solution—from silicon to application—eliminating complexity and guaranteeing results.</p>
+                        <div class="architecture-pillars-grid">
+                            <div class="architecture-pillar-card glass-card">
+                                <i data-lucide="server"></i>
+                                <h3 data-key="architecturePillar1Title"></h3>
+                                <p data-key="architecturePillar1Desc"></p>
                             </div>
-                            <p class="video-caption" data-key="videoCaption"></p>
+                            <div class="architecture-pillar-card glass-card">
+                                <i data-lucide="satellite-dish"></i>
+                                <h3 data-key="architecturePillar2Title"></h3>
+                                <p data-key="architecturePillar2Desc"></p>
+                            </div>
+                            <div class="architecture-pillar-card glass-card">
+                                <i data-lucide="shield-half"></i>
+                                <h3 data-key="architecturePillar3Title"></h3>
+                                <p data-key="architecturePillar3Desc"></p>
+                            </div>
                         </div>
-                        <div class="how-it-works-timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <i class="fa-solid fa-microphone-lines timeline-icon" aria-hidden="true"></i>
-                                    <h3 data-key="howItWorksStep1Title"></h3>
-                                    <p data-key="howItWorksStep1Desc"></p>
+
+                        <div class="section-divider">
+                            <h3 class="section-divider-title" data-key="techDeepDiveTitle">Technology Deep Dive</h3>
+                            <p class="section-divider-subtitle" data-key="techDeepDiveSubtitle">Our architecture is a vertically integrated stack where each layer is purpose-built for the next, ensuring maximum performance, security, and resilience. Click on any component to learn more.</p>
+                        </div>
+
+                        <div class="tech-diagram-container">
+                            <div class="diagram-labels">
+                                <span>External Health Units</span>
+                                <span>Coordination Cloud (Anonymized Metadata)</span>
+                            </div>
+                            <div class="data-flow-line incoming"></div>
+                            <div class="data-flow-line outgoing"></div>
+                            <div class="data-flow-line sync"></div>
+                            
+                            <div class="tech-diagram glass-card">
+                                <!-- Layer 1: Voither Private Edge Cloud (Hardware) -->
+                                <button class="diagram-layer voither-cloud" data-modal-target="voither">
+                                    <div class="layer-label-container">
+                                        <i data-lucide="server"></i>
+                                        <span class="layer-label" data-key="stackVoitherTitle"></span>
+                                    </div>
+                                    <div class="node-icons">
+                                        <i data-lucide="monitor"></i>
+                                        <i data-lucide="monitor"></i>
+                                        <i data-lucide="monitor"></i>
+                                    </div>
+                                </button>
+
+                                <!-- Layer 2: HealthOS (Operating System) -->
+                                <button class="diagram-layer health-os" data-modal-target="healthos">
+                                     <div class="layer-label-container">
+                                        <i data-lucide="disc-3"></i>
+                                        <span class="layer-label" data-key="stackHealthOSTitle"></span>
+                                    </div>
+                                </button>
+                                
+                                <!-- Layer 3: Mestral Engine (AI Brain) -->
+                                <div class="diagram-layer mestral-engine">
+                                    <button class="mestral-main-node" data-modal-target="mestral">
+                                        <i data-lucide="brain-circuit"></i>
+                                        <span data-key="stackMestralTitle"></span>
+                                    </button>
+                                    <div class="mestral-sub-nodes">
+                                        <button class="sub-node" data-modal-target="pir"><span data-key="mestralPIRTitle"></span></button>
+                                        <button class="sub-node" data-modal-target="roe"><span data-key="mestralROETitle"></span></button>
+                                        <button class="sub-node" data-modal-target="rms"><span data-key="mestralRMSTitle"></span></button>
+                                        <button class="sub-node" data-modal-target="rre"><span data-key="mestralRRETitle"></span></button>
+                                        <button class="sub-node" data-modal-target="mdl"><span data-key="mestralMDLTitle"></span></button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <i class="fa-solid fa-wave-square timeline-icon" aria-hidden="true"></i>
-                                    <h3 data-key="howItWorksStep2Title"></h3>
-                                    <p data-key="howItWorksStep2Desc"></p>
-                                </div>
+                        </div>
+                    </div>
+                </section>
+                                
+                <section class="content-section" id="impact">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="impactTitle"></h2>
+                        </div>
+                        <p class="section-subtitle" data-key="impactSubtitle"></p>
+                        <div class="impact-grid">
+                            <div class="impact-card glass-card">
+                                <span class="impact-value" data-key="impact1Value"></span>
+                                <h3 data-key="impact1Title"></h3>
+                                <p data-key="impact1Desc"></p>
                             </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <i class="fa-solid fa-file-lines timeline-icon" aria-hidden="true"></i>
-                                    <h3 data-key="howItWorksStep3Title"></h3>
-                                    <p data-key="howItWorksStep3Desc"></p>
-                                </div>
+                            <div class="impact-card glass-card">
+                                <span class="impact-value" data-key="impact2Value"></span>
+                                <h3 data-key="impact2Title"></h3>
+                                <p data-key="impact2Desc"></p>
                             </div>
-                            <div class="timeline-item">
-                                <div class="timeline-content">
-                                    <i class="fa-solid fa-bolt timeline-icon" aria-hidden="true"></i>
-                                    <h3 data-key="howItWorksStep4Title"></h3>
-                                    <p data-key="howItWorksStep4Desc"></p>
-                                </div>
+                            <div class="impact-card glass-card">
+                                <span class="impact-value" data-key="impact3Value"></span>
+                                <h3 data-key="impact3Title"></h3>
+                                <p data-key="impact3Desc"></p>
                             </div>
-                            <!-- Result card: summarises the outcome of the previous steps -->
-                            <div class="timeline-item result-card">
-                                <div class="timeline-content">
-                                    <i class="fa-solid fa-circle-check timeline-icon" aria-hidden="true"></i>
-                                    <h3 data-key="howItWorksResultTitle"></h3>
-                                    <p data-key="howItWorksResultDesc"></p>
-                                </div>
+                             <div class="impact-card glass-card">
+                                <span class="impact-value" data-key="impact4Value"></span>
+                                <h3 data-key="impact4Title"></h3>
+                                <p data-key="impact4Desc"></p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section class="content-section" id="augmented-ai" data-feature-flag="pioneersSection">
+                <section class="content-section" id="application" data-feature-flag="pioneersSection">
                      <div class="container">
                         <div class="section-header">
-                            <h2 class="section-title" data-key="sectionTitleUpdates">Latest Updates & Roadmap</h2>
-                            <a href="#" class="view-all-link" data-key="viewAll">View all</a>
+                            <h2 class="section-title" data-key="applicationTitle"></h2>
                         </div>
-                         <div class="augmented-ai-grid">
-                            <div class="update-card card-1">
-                                <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/15_G4p8q_17NdRhIgj72i7mdKMQ7llrr6" alt="Two female doctors, one in a white coat and one in scrubs, collaborating while looking at a tablet computer."></div>
-                                <div class="update-content">
-                                    <h3 data-key="pioneer1Title"></h3>
-                                    <p data-key="pioneer1Desc"></p>
-                                </div>
+                        <p class="section-subtitle" data-key="applicationSubtitle"></p>
+                        <div class="application-tabs glass-card">
+                            <div class="tab-nav">
+                                <button class="tab-link active" data-tab="tab-1" data-key="pioneer1Title"></button>
+                                <button class="tab-link" data-tab="tab-2" data-key="pioneer2Title"></button>
+                                <button class="tab-link" data-tab="tab-3" data-key="pioneer3Title"></button>
+                                <button class="tab-link" data-tab="tab-4" data-key="pioneer4Title"></button>
                             </div>
-                            <div class="update-card card-2">
-                                 <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/1J8_TQZ_99Ax_Unh1On1nfqVnTGZnb1gB" alt="An abstract representation of a patient's digital twin, with glowing neural network-like connections."></div>
-                                <div class="update-content">
-                                    <h3 data-key="pioneer2Title"></h3>
-                                    <p data-key="pioneer2Desc"></p>
+                            <div class="tab-content">
+                                <div id="tab-1" class="tab-pane active">
+                                    <div class="tab-pane-content">
+                                        <div class="tab-text">
+                                            <h3 data-key="pioneer1Title"></h3>
+                                            <p data-key="pioneer1Desc"></p>
+                                        </div>
+                                        <div class="tab-image">
+                                            <img src="https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/25287f31-8a1a-4c2d-2090-f94d3a669100/public" alt="Abstract translucent geometric shapes with iridescent reflections, representing intelligent bed regulation.">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                             <div class="update-card card-3">
-                                 <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/11eRqrZeWU5mRcMvOtRXM8qwzSK0A0jfK" alt="A diverse team of four professionals in a meeting room, focused on a large screen displaying 'AUTOMATION PACKAGES'."></div>
-                                <div class="update-content">
-                                    <h3 data-key="pioneer3Title"></h3>
-                                    <p data-key="pioneer3Desc"></p>
+                                <div id="tab-2" class="tab-pane">
+                                     <div class="tab-pane-content">
+                                        <div class="tab-text">
+                                            <h3 data-key="pioneer2Title"></h3>
+                                            <p data-key="pioneer2Desc"></p>
+                                        </div>
+                                        <div class="tab-image">
+                                            <img src="https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/f7a6f95c-5e42-4f01-f2f2-899479b1d900/public" alt="Abstract flowing translucent forms with colorful refractions, representing automated NLP triage.">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="update-card card-4">
-                                 <div class="card-visual"><img src="https://lh3.googleusercontent.com/d/1dhFZ3TuQYZi_rK6eTe-7mbrw-1uvbizw" alt="A futuristic dashboard showing graphs and data points representing real-world health outcomes."></div>
-                                <div class="update-content">
-                                    <h3 data-key="pioneer4Title"></h3>
-                                    <p data-key="pioneer4Desc"></p>
+                                <div id="tab-3" class="tab-pane">
+                                     <div class="tab-pane-content">
+                                        <div class="tab-text">
+                                            <h3 data-key="pioneer3Title"></h3>
+                                            <p data-key="pioneer3Desc"></p>
+                                        </div>
+                                        <div class="tab-image">
+                                            <img src="https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/86435c24-5d5d-4f81-2292-911244e83700/public" alt="A sequence of abstract geometric objects with light passing through them, representing dynamic and autonomous queues.">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <section class="content-section" id="testimonials">
-                    <div class="container">
-                        <div class="section-header">
-                            <h2 class="section-title" data-key="sectionTitleTestimonials"></h2>
-                        </div>
-                        <div class="testimonials-grid">
-                            <div class="testimonial-card">
-                                <div class="testimonial-content">
-                                    <blockquote>
-                                        <p data-key="testimonial1Quote"></p>
-                                    </blockquote>
-                                    <cite>
-                                        <span class="testimonial-name" data-key="testimonial1Name"></span>
-                                        <span class="testimonial-title" data-key="testimonial1Title"></span>
-                                    </cite>
-                                </div>
-                            </div>
-                            <div class="testimonial-card">
-                                <div class="testimonial-content">
-                                    <blockquote>
-                                        <p data-key="testimonial2Quote"></p>
-                                    </blockquote>
-                                    <cite>
-                                        <span class="testimonial-name" data-key="testimonial2Name"></span>
-                                        <span class="testimonial-title" data-key="testimonial2Title"></span>
-                                    </cite>
-                                </div>
-                            </div>
-                            <div class="testimonial-card">
-                                <div class="testimonial-content">
-                                    <blockquote>
-                                        <p data-key="testimonial3Quote"></p>
-                                    </blockquote>
-                                    <cite>
-                                        <span class="testimonial-name" data-key="testimonial3Name"></span>
-                                        <span class="testimonial-title" data-key="testimonial3Title"></span>
-                                    </cite>
+                                <div id="tab-4" class="tab-pane">
+                                     <div class="tab-pane-content">
+                                        <div class="tab-text">
+                                            <h3 data-key="pioneer4Title"></h3>
+                                            <p data-key="pioneer4Desc"></p>
+                                        </div>
+                                        <div class="tab-image">
+                                            <img src="https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/2e382590-f04b-4873-10d6-1bbd2ba34700/public" alt="An interconnected network of translucent shapes with iridescent highlights, representing automated transfer orchestration.">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
+                <section class="content-section" id="research">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title" data-key="researchTitle"></h2>
+                        </div>
+                        <p class="section-subtitle" data-key="researchSubtitle"></p>
+                        <div class="research-grid">
+                            <a href="#" class="research-card glass-card">
+                                <h3 data-key="research1Title"></h3>
+                                <p data-key="research1Desc"></p>
+                                <span class="research-link" data-key="researchLink"></span>
+                            </a>
+                            <a href="#" class="research-card glass-card">
+                                <h3 data-key="research2Title"></h3>
+                                <p data-key="research2Desc"></p>
+                                <span class="research-link" data-key="researchLink"></span>
+                            </a>
+                            <a href="#" class="research-card glass-card">
+                                <h3 data-key="research3Title"></h3>
+                                <p data-key="research3Desc"></p>
+                                <span class="research-link" data-key="researchLink"></span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                
                 <section class="content-section" id="about">
                     <div class="container">
                         <div class="section-header">
-                            <h2 class="section-title" data-key="aboutSectionTitle">About Voither</h2>
+                            <h2 class="section-title" data-key="aboutSectionTitle"></h2>
                         </div>
                         <div class="about-grid">
                             <div class="founder-profile">
@@ -309,10 +342,10 @@
                                 <p class="founder-title" data-key="founderTitle"></p>
                                 <div class="founder-socials">
                                     <a href="https://linkedin.com/in/drgustavomendes" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                        <i class="fa-brands fa-linkedin"></i>
+                                        <i data-lucide="linkedin"></i>
                                     </a>
                                     <a href="https://github.com/myselfgus" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                                        <i class="fa-brands fa-github"></i>
+                                        <i data-lucide="github"></i>
                                     </a>
                                 </div>
                                 <p class="founder-bio" data-key="founderBio"></p>
@@ -328,47 +361,25 @@
                 </section>
                 
                 <section class="content-section" id="contact">
-                    <div class="contact-bg-glow"></div>
                     <div class="container">
                         <div class="contact-grid">
                             <div class="faq-container">
-                                <h3 class="faq-title" data-key="faqTitle"></h3>
-                                <div class="faq-accordion">
-                                    <div class="faq-item">
-                                        <button class="faq-question">
-                                            <span data-key="faqQ1"></span>
-                                        </button>
-                                        <div class="faq-answer">
-                                            <p data-key="faqA1"></p>
+                                <div id="interactive-faq" class="interactive-faq">
+                                    <div id="faq-response-area" class="faq-response-area glass-card">
+                                        <p class="faq-welcome" data-key="faqWelcome"></p>
+                                        <div id="faq-suggested-questions" class="faq-suggested-questions">
+                                            <!-- Buttons injected by JS -->
                                         </div>
                                     </div>
-                                    <div class="faq-item">
-                                        <button class="faq-question">
-                                            <span data-key="faqQ2"></span>
+                                    <div class="faq-input-area">
+                                        <input type="text" id="faq-input" class="faq-input" placeholder="" data-key="faqPlaceholder" aria-label="Ask a question about Voither">
+                                        <button id="faq-send-btn" class="faq-send-btn" aria-label="Ask question">
+                                            <i data-lucide="arrow-up"></i>
                                         </button>
-                                        <div class="faq-answer">
-                                            <p data-key="faqA2"></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-item">
-                                        <button class="faq-question">
-                                            <span data-key="faqQ3"></span>
-                                        </button>
-                                        <div class="faq-answer">
-                                            <p data-key="faqA3"></p>
-                                        </div>
-                                    </div>
-                                    <div class="faq-item">
-                                        <button class="faq-question">
-                                            <span data-key="faqQ4"></span>
-                                        </button>
-                                        <div class="faq-answer">
-                                            <p data-key="faqA4"></p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="contact-info">
+                            <div class="contact-info glass-card contact-form-container">
                                 <h2 class="section-title" data-key="contactTitle"></h2>
                                 <p class="section-subtitle" data-key="contactSubtitle"></p>
                                 
@@ -389,7 +400,7 @@
                                 </form>
 
                                 <div id="form-success-message" class="form-success-message" style="display: none;">
-                                    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                    <i data-lucide="check-circle-2" aria-hidden="true"></i>
                                     <h3 data-key="formSuccessTitle"></h3>
                                     <p data-key="formSuccessMessage"></p>
                                 </div>
@@ -397,12 +408,6 @@
                         </div>
                     </div>
                 </section>
-                
-                <footer class="main-footer">
-                     <div class="container footer-content">
-                        <p class="copyright" data-key="copyright">&copy; 2025 VOITHER. All rights reserved.</p>
-                    </div>
-                </footer>
             </main>
         </div>
     </div>
@@ -410,11 +415,11 @@
     <!-- Mobile Floating Action Button Pill -->
     <div class="mobile-fab-container">
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-            <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <i data-lucide="menu" class="icon-menu"></i>
+            <i data-lucide="x" class="icon-close"></i>
         </button>
         <button class="chat-bubble js-open-chat" aria-label="Open chatbot" data-feature-flag="chatbot">
-            <i class="fa-solid fa-comment-dots"></i>
+            <i data-lucide="message-circle-question"></i>
         </button>
     </div>
 
@@ -425,7 +430,7 @@
             <div class="chatbot-header">
                 <h3 id="chatbot-title" class="chatbot-title" data-key="chatbotTitle"></h3>
                 <button id="chatbot-close-button" class="chatbot-close-button" aria-label="Close chatbot">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <i data-lucide="x"></i>
                 </button>
             </div>
             <div id="chatbot-messages" class="chatbot-messages" aria-live="polite">
@@ -434,8 +439,24 @@
             <div class="chatbot-input-area">
                 <input type="text" id="chatbot-input" class="chatbot-input" placeholder="" data-key="chatbotPlaceholder" aria-label="Your message">
                 <button id="chatbot-send-button" class="chatbot-send-button" aria-label="Send message">
-                    <i class="fa-solid fa-paper-plane"></i>
+                    <i data-lucide="send"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Info Modal for Tech Diagram -->
+    <div id="info-modal-container">
+        <div id="info-modal-overlay"></div>
+        <div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+            <div class="info-modal-header">
+                <h3 id="info-modal-title" class="info-modal-title"></h3>
+                <button id="info-modal-close-button" class="info-modal-close-button" aria-label="Close details">
+                     <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div id="info-modal-body" class="info-modal-body">
+                <p id="info-modal-description"></p>
             </div>
         </div>
     </div>

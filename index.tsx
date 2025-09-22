@@ -4,23 +4,24 @@
  */
 import { GoogleGenAI, Chat } from "@google/genai";
 
+// Declare Lucide on the window object for global access
+declare global {
+    interface Window {
+        lucide: {
+            createIcons: (options?: any) => void;
+        };
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // --- Feature Flags ---
-    // Default configuration for feature flags.
-    // Can be overridden for testing/rollouts via localStorage, e.g., localStorage.setItem('ff_chatbot', 'false');
-    const featureFlags: { [key: string]: boolean } = {
-        pioneersSection: true, // Controls the "Augmented-AI for Healthcare" section
-        chatbot: true,         // Controls the entire chatbot feature
+    const featureFlags: { [key:string]: boolean } = {
+        pioneersSection: true,
+        chatbot: true,
     };
 
-    /**
-     * Checks if a feature is enabled.
-     * It first checks localStorage for an override (prefixed with 'ff_'),
-     * then falls back to the default configuration.
-     * @param {string} flagName The name of the feature flag.
-     * @returns {boolean} True if the feature is enabled, false otherwise.
-     */
     const isFeatureEnabled = (flagName: string): boolean => {
         const override = localStorage.getItem(`ff_${flagName}`);
         if (override !== null) {
@@ -29,17 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return featureFlags[flagName] ?? false;
     };
 
-    /**
-     * Applies feature flags to the DOM.
-     * Hides elements with a data-feature-flag attribute if the corresponding flag is disabled.
-     */
     const applyFeatureFlags = () => {
         document.querySelectorAll<HTMLElement>('[data-feature-flag]').forEach(element => {
             const flagName = element.dataset.featureFlag;
             if (flagName && !isFeatureEnabled(flagName)) {
                 element.style.display = 'none';
-
-                // If the flagged element is a section with an ID, hide its corresponding nav link.
                 if (element.tagName === 'SECTION' && element.id) {
                     const navLink = document.querySelector(`.sidebar-nav a[href="#${element.id}"]`);
                     if (navLink && navLink.parentElement) {
@@ -49,17 +44,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     };
-
+    
 
     // --- Gemini Chatbot ---
     let chat: Chat | null = null;
     const ai = new GoogleGenAI({apiKey: process.env.API_KEY});
 
     const initializeChat = () => {
-        const systemInstruction = `You are a helpful and friendly assistant for Voither, a company specializing in AI for clinical intelligence. 
-        Your goal is to answer questions about the company, its products (like MEDSCRIBE, HOLOFRACTOR, PEER-AI), and its technology. 
-        Keep your answers concise, informative, and maintain a professional but approachable tone. 
-        If you don't know an answer, say that you don't have that information.`;
+        const systemInstruction = `You are an expert assistant for Voither. Your tone is professional, visionary, and precise. Your main goal is to explain Voither's paradigm-shifting approach to potential investors and partners.
+
+        **Core Thesis: A New Architecture for Healthcare**
+        Voither is pioneering a new fundamental architecture for healthcare that solves two core problems: the **Cloud Automation Barrier** (cloud latency prevents real-time automation) and the **Data Privacy Crisis** (sensitive data is vulnerable in the cloud).
+
+        **The Solution (Problem -> Solution Mapping):**
+        - **Problem: The Cloud Automation Barrier.** Cloud latency and privacy risks prevent real-time automation.
+        - **Solution: Voither Private Edge Cloud.** An on-site mesh of Apple Silicon nodes that brings AI processing to the data, eliminating these barriers.
+        - **Problem: Insecure, Generic Systems.** Standard OSs aren't built for mission-critical, real-time healthcare AI.
+        - **Solution: HealthOS.** A secure, purpose-built operating system optimized for the Mestral Engine's autonomous tasks.
+        - **Problem: Anachronistic, Manual Workflows.** Healthcare runs on inefficient processes that cause burnout and errors.
+        - **Solution: Mestral Engine.** A powerful, locally-run LLM that automates complex clinical workflows in real-time.
+        - **Problem: Lack of integrated public health tools.** Critical public health workflows are fragmented.
+        - **Solution: Sortio Platform.** Voither's flagship public health platform that uses the full stack to automate workflows like triage and bed regulation.
+
+        **The Architecture (The Turnkey Advantage):**
+        Voither delivers a complete, managed, all-in-one solution. This is our business model and how we guarantee results.
+        - **Strategic Hardware (Apple Silicon):** We use **Mac Studio M3 Ultra nodes** for their unmatched power efficiency and local compute power.
+        - **Strategic Connectivity (Starlink):** A 'satellite-first' approach with **Starlink** creates a resilient mesh network independent of terrestrial fiber.
+        - **The All-in-One Guarantee:** By managing everything, we deliver unmatched **resilience, economy, and security**. This vertical integration is the foundation of our **Privacy by Design** promise: sensitive patient data (PHI) is processed on-site and *never* leaves the local premises.
+
+        **Key Principles:**
+        - **Privacy by Design (Non-Negotiable):** This is the core of our architecture. All PHI is processed locally within the encrypted HealthOS environment.
+        - **Interactive Architecture Diagram:** The "Architecture" section has an interactive diagram. Encourage users to click on the different layers (Voither Cloud, HealthOS, Mestral Engine) to understand how they work together.
+        - **Rhizome/Mesh Architecture:** A decentralized web of autonomous 'cells' (hospitals, clinics). A failure in one node does NOT compromise the entire network.
+
+        **Key Information & Corrections:**
+        - **Impact Metrics are Projections:** When asked about metrics (e.g., 85% TCO reduction), clarify that these are **projections and targets** based on our model, as we are in a pre-market phase.
+        - **It's NOT just for bad internet:** Our network is a strategic choice for **autonomy, resilience, and performance**.
+        - **It's NOT about latency:** Latency is the *symptom*. The real problem is the architectural dependency on the cloud. We solve the foundational problem, enabling true automation with inherent privacy.`;
         
         chat = ai.chats.create({
             model: 'gemini-2.5-flash',
@@ -69,657 +90,800 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
     
-    // --- Smooth Scroll Polyfill for older browsers ---
-    // The `html` element has `scroll-behavior: smooth` in CSS. This JS snippet
-    // acts as a polyfill for browsers that do not support this property.
-    const isSmoothScrollSupported = 'scrollBehavior' in document.documentElement.style;
+    // FIX: Moved addMessage to a higher scope to be accessible by the language switcher event listener.
+    // This resolves the "Cannot find name 'addMessage'" error.
+    const addMessage = (content: string, type: 'user' | 'bot') => {
+        const messagesContainer = document.getElementById('chatbot-messages');
+        if (!messagesContainer) return;
 
-    if (!isSmoothScrollSupported) {
+        const messageWrapper = document.createElement('div');
+        messageWrapper.className = `chat-message ${type}-message`;
+
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        messageContent.innerHTML = content; // Using innerHTML to support basic formatting like <strong>
+        
+        messageWrapper.appendChild(messageContent);
+        messagesContainer.appendChild(messageWrapper);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+
+    // --- Smooth Scroll Polyfill for older browsers ---
+    if (!('scrollBehavior' in document.documentElement.style)) {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (this: HTMLAnchorElement, e: MouseEvent) {
                 const hrefAttr = this.getAttribute('href');
-                // Ensure it's a valid on-page link
                 if (!hrefAttr || hrefAttr.length <= 1) return;
-
                 const targetElement = document.querySelector(hrefAttr);
                 if (targetElement) {
                     e.preventDefault();
-                    
                     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const startPosition = window.pageYOffset;
-                    const distance = targetPosition - startPosition;
-                    let startTime: number | null = null;
-                    const duration = 800; // ms
-
-                    const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
-                        t /= d / 2;
-                        if (t < 1) return c / 2 * t * t + b;
-                        t--;
-                        return -c / 2 * (t * (t - 2) - 1) + b;
-                    };
-
-                    const animation = (currentTime: number) => {
-                        if (startTime === null) startTime = currentTime;
-                        const timeElapsed = currentTime - startTime;
-                        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-                        window.scrollTo(0, run);
-                        if (timeElapsed < duration) {
-                            requestAnimationFrame(animation);
-                        } else {
-                            // After scrolling, update the hash in the URL
-                            if (history.pushState) {
-                                history.pushState(null, '', hrefAttr);
-                            } else {
-                                window.location.hash = hrefAttr;
-                            }
-                        }
-                    };
-                    
-                    requestAnimationFrame(animation);
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' }); // Simplified polyfill
                 }
             });
         });
     }
 
     // --- Translations and Language Switcher ---
-    const translations = {
+    const translations: { [key: string]: { [key: string]: string } } = {
         en: {
-            pageTitle: "Voither | Real-time Clinical Intelligence",
+            pageTitle: "Voither | The End of Manual Workflows in Healthcare",
             proudlyPartOf: "Proudly member of",
             msForStartups: "Microsoft for Startups",
-            mongoDBAtlas: "MongoDB Atlas",
+            cfForStartups: "Cloudflare for Startups",
             
-            heroPreTitle: "+150 patients monitored with impressive changes in clinical trajectories",
-            heroTitleNew: "Focus on Your Patient,<br>Not the Paperwork.",
-            heroPitchNew: "VOITHER MedicalScribe is your invisible AI partner, automating clinical documentation so you can dedicate your time to what truly matters: patient care.",
-            heroInvestorsButton: "Investors",
-            heroDevButton: "Developers",
-            heroHealthButton: "Health Professionals",
-
-            sectionTitleHowItWorks: "How It Works",
-            sectionTitleTechnology: "The Voither Difference",
-            sectionTitleUpdates: "Augmented-AI for Healthcare",
-            navFeatures: "Features",
-            navTestimonials: "Testimonials",
-            navTitleAbout: "About Voither",
-            navContact: "Contact & FAQ",
-            medscribeButton: "MEDSCRIBE",
-            holofractorButton: "HOLOFRACTOR",
-            peeraiButton: "PEER-AI",
-            viewAll: "View all",
-
-            feature1Title: "Clinical Timing is Everything",
-            feature1Desc: "It's not just what to do; it's when to intervene—supported by signals from context and session rhythm.",
-            feature2Title: "Compliance by Design",
-            feature2Desc: "Policies and standards (IEC 62304, HIPAA, FHIR) become code; if violated, it won't pass the build.",
-            feature3Title: "Rhizomatic Memory + Signal Layers",
-            feature3Desc: "A knowledge graph + vector representations + time series, with configurable encryption and retention.",
-            feature4Title: "Native Clinical Automation",
-            feature4Desc: "Clinical workflows with ROI per session and scaling guided by clinical metrics, not just CPU.",
+            heroTitleNew: "Autonomous Healthcare.",
+            heroPitchNew: "Voither delivers the new foundation for healthcare: an on-site AI platform that automates workflows with absolute privacy and resilience. The end of manual work is here.",
+            heroCtaPrimary: "Explore The Solution",
+            heroCtaSecondary: "Become a Partner",
             
-            videoCaption: "Watch a 2-minute demo to see Voither in action.",
-            howItWorksStep1Title: "You Talk.",
-            howItWorksStep1Desc: "The MED extracts clinical signals from speech (mood, energy, coherence, flexibility, agency, prosody...).",
-            howItWorksStep2Title: "Rhythm and Lived Time.",
-            howItWorksStep2Desc: "Our advanced reasoning engine weaves signals over time, maintains competing hypotheses, and indicates 'what changed' and when to act—with justification.",
-            howItWorksStep3Title: "Clinical Translation.",
-            howItWorksStep3Desc: "Calibration to frameworks like RDoC/HiTOP/Big Five/PERMA, providing a common language for the team.",
-            howItWorksStep4Title: "Automatic Action.",
-            howItWorksStep4Desc: "AUTOAGENCY executes documentation, orders, scheduling, and billing—with auditing and measured time savings.",
-            howItWorksResultTitle: "Visible Result.",
-            howItWorksResultDesc: "A clear before/after, proposed paths with pros/cons, and the paperwork ready—all in seconds.",
-
-            techPane1Title: "Temporal Reasoning Engine",
-            techPane3Title: "E2E Pipeline",
-            
-            techPane1Desc: "A reasoning engine that operates in lived time, not just clock time. It detects *when* to act, not just *what* to do.",
-            techPane3Desc: "A pipeline that connects speech to signal, decision, and paperwork in seconds, with measurable ROI.",
-
-            pioneer1Title: "Your Invisible Secretary",
-            pioneer1Desc: "Voither anticipates administrative tasks like renewing prescriptions, sending reminders, and pre-filling progress notes before you even ask.",
-            pioneer2Title: "The Patient's Digital Twin",
-            pioneer2Desc: "Between consultations, the system non-invasively observes the patient's rhythm, identifying the best intervention windows and preparing insights for the next session.",
-            pioneer3Title: "Ecosystem of Automations",
-            pioneer3Desc: "A future marketplace of 'automation packages' will allow you to activate validated protocols with one click, complete with built-in efficacy metrics and auditing.",
-            pioneer4Title: "Real-World Outcome Indicators",
-            pioneer4Desc: "Not just 'what to do,' but whether it worked—and for whom it works best—in a way that is simple to demonstrate.",
-            
-            sectionTitleTestimonials: "Trusted by Professionals",
-            testimonial1Quote: "Voither has fundamentally changed how I approach documentation. It saves me over an hour a day, time I now spend directly with my patients. It's a game-changer.",
-            testimonial1Name: "Maria Christina Luciano",
-            testimonial1Title: "Clinical Psychologist",
-            testimonial2Quote: "The accuracy of the clinical signal extraction is remarkable. It picks up on nuances that are easy to miss during a busy session, providing deeper insights for treatment planning.",
-            testimonial2Name: "Dr. Ana Gabriela",
-            testimonial2Title: "MD, Psychiatrist",
-            testimonial3Quote: "As a clinic manager, the 'Compliance by Design' feature gives me peace of mind. Integrating Voither was seamless, and the ROI was clear from the first week.",
-            testimonial3Name: "Simone Maria",
-            testimonial3Title: "Healthcare Clinic Officer",
-            
-            aboutSectionTitle: "The Mind Behind Voither",
-            founderName: "Dr. Gustavo Mendes",
-            founderTitle: "Founder & CEO | CRM/SP 218133",
-            founderBio: "Voither was founded by Dr. Gustavo Mendes e Silva, a psychiatrist (FAMEMA) and public administrator (UNESP). His unique journey combines deep clinical experience with a passion for systemic innovation, including work with the UN (UNFPA) and PAHO in Washington D.C., and winning the YouthAgainstAIDS Ahead Hackathon. Before Voither, he managed healthcare networks for São Paulo, witnessing the burdens that distract clinicians from patient care.",
-            thesis: `"Today, a clinic talks and writes—but systems only understand checkboxes. Voither is born to listen to human language, turn it into objective signals, and act, with no learning curve. This is only possible because we bring together three things that almost no one has in the same place: a temporal reasoning engine that understands clinical rhythm, a proprietary architecture that turns compliance into code, and a timed E2E pipeline from conversation to action."`,
-            quoteAttribution: "— Dr. Gustavo Mendes e Silva, Founder & CEO, Voither",
-
-            contactTitle: "Send us a Message",
-            contactSubtitle: "We'll get back to you as soon as possible.",
-            formLabelName: "Full Name",
-            formPlaceholderName: "Your Name",
-            formLabelEmail: "Email Address",
-            formPlaceholderEmail: "you@example.com",
-            formLabelMessage: "Message",
-            formPlaceholderMessage: "How can we help you today?",
-            formSubmitButton: "Send Message",
-            formSuccessTitle: "Thank You!",
-            formSuccessMessage: "Your message has been sent. We'll be in touch shortly.",
-            faqTitle: "Frequently Asked Questions",
-            faqQ1: "How does Voither ensure patient data privacy?",
-            faqA1: "Voither is built with a 'compliance by design' philosophy. Privacy and security rules (like HIPAA and LGPD) are embedded directly into our system's core architecture. This means any process that violates these rules simply won't execute, ensuring security by design, not as an afterthought. All data is encrypted both in transit and at rest.",
-            faqQ2: "Does it integrate with existing Electronic Health Records (EHRs)?",
-            faqA2: "Yes. Integration is a core part of our design. Voither uses the FHIR R4 standard to communicate seamlessly with modern EHR systems. Our E2E Pipeline is built to push structured documentation, orders, and billing information directly into your existing workflow, minimizing disruption.",
-            faqQ3: "What is the learning curve for a clinician?",
-            faqA3: "Virtually zero. Voither is designed to disappear into the background. The clinician just needs to have a natural conversation. The system listens, analyzes, and surfaces insights and automations without requiring complex training or changes to how you interact with a patient.",
-            faqQ4: "How is 'clinical timing' different from normal analysis?",
-            faqA4: "Most AI tools can tell you *what* was said. Our advanced reasoning engine is designed to understand *when* to act. It analyzes the rhythm, intensity, and context of the conversation to identify opportune moments for intervention, a concept traditional chronological analysis misses entirely. It’s about clinical timing, not just a transcript.",
+            navSolution: "The Solution",
+            navArchitecture: "The Architecture",
+            navImpact: "The Impact",
+            navApplication: "In Action",
+            navResearch: "Foundations",
+            navAbout: "About",
+            navContact: "Contact",
             
             complianceTitle: "Compliance",
             complianceLGPD: "LGPD",
             complianceHIPAA: "HIPAA",
             complianceFHIR: "FHIR",
-            complianceRDoC: "RDoC",
-            complianceHiTOP: "HiTOP",
-            complianceBigFive: "BigFive",
-            compliancePERMA: "PERMA",
+            complianceANVISA: "ANVISA RDC",
+            complianceISO13485: "ISO 13485",
 
-            copyright: "© 2025 VOITHER. All rights reserved.",
+            solutionTitle: "From Barrier to Breakthrough",
+            solutionSubtitle: "Healthcare's core challenges are architectural. We built the new architecture to solve them.",
+            solutionProblem1Title: "The Cloud Automation Barrier",
+            solutionProblem1Desc: "Cloud latency prevents real-time AI automation and exposes sensitive data.",
+            solutionSolution1Title: "Voither Edge Cloud",
+            solutionSolution1Desc: "An on-site mesh of Apple Silicon nodes that brings AI processing to the data, solving latency and privacy risks.",
+            solutionProblem2Title: "Insecure, Generic Systems",
+            solutionProblem2Desc: "General-purpose OSs lack the security and real-time focus for mission-critical healthcare AI.",
+            solutionSolution2Title: "HealthOS",
+            solutionSolution2Desc: "A secure, purpose-built OS that guarantees stability for autonomous AI workflows.",
+            solutionProblem3Title: "Anachronistic Workflows",
+            solutionProblem3Desc: "Manual, fragmented processes lead to burnout, errors, and critical delays in care.",
+            solutionSolution3Title: "Mestral Engine",
+            solutionSolution3Desc: "A powerful, locally-run LLM that automates complex clinical workflows in real-time.",
             
-            // Chatbot translations
-            chatbotTitle: "Voither Assistant",
-            chatbotPlaceholder: "Ask about Voither...",
-            chatbotInitialMessage: "Hello! I'm the Voither assistant. How can I help you learn about our clinical intelligence platform?",
-            chatbotErrorMessage: "Sorry, I'm having trouble connecting. Please try again later.",
+            architectureTitle: "A Turnkey Platform for Healthcare",
+            architectureSubtitle: "We deliver a complete, vertically-integrated solution—from silicon to application—to guarantee results.",
+            architecturePillar1Title: "Strategic Hardware: Apple Silicon",
+            architecturePillar1Desc: "Powered by **Mac Studio M3 Ultra nodes**, our managed hardware guarantees the local performance and efficiency required for real-time AI.",
+            architecturePillar2Title: "Resilient Connectivity: Starlink",
+            architecturePillar2Desc: "A 'satellite-first' approach with **Starlink** creates a high-availability mesh network independent of terrestrial fiber for radical resilience.",
+            architecturePillar3Title: "The All-in-One Advantage",
+            architecturePillar3Desc: "Our managed model ensures unmatched resilience, economy, and security, delivering absolute **Privacy by Design**.",
 
-            // Cookie Consent
-            cookieConsentText: "We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.",
+            techDeepDiveTitle: "Technology Deep Dive",
+            techDeepDiveSubtitle: "Our architecture is a vertically integrated stack where each layer is purpose-built for the next. Click any component to learn more.",
+            
+            stackVoitherTitle: "Voither Edge Cloud",
+            stackHealthOSTitle: "HealthOS",
+            stackMestralTitle: "Mestral Engine",
+            mestralPIRTitle: "PIR: Workflow Blueprint",
+            mestralROETitle: "ROE: The Conductor",
+            mestralRMSTitle: "RMS: Perfect Memory",
+            mestralRRETitle: "RRE: Reasoning Core",
+            mestralMDLTitle: "MDL: Intelligent Archivist",
+            mestralPIRDesc: "Translates complex clinical guidelines into structured, executable code, turning static PDFs into automated actions.",
+            mestralROEDesc: "The state machine that executes the PIR blueprint, orchestrating tasks and making the 'Next Best Action' decision.",
+            mestralRMSDesc: "An immutable log of every action and state change, ensuring 100% traceability and auditability.",
+            mestralRREDesc: "The semantic layer that 'understands' clinical context, allowing the system to make intelligent, data-driven decisions.",
+            mestralMDLDesc: "Uses semantic compression to efficiently store event data without losing critical information, vital for long-term edge storage.",
+            modalVoitherCloudDesc: "This is the foundational layer: a private, on-premise mesh network of high-performance Apple Silicon nodes (Mac Studio M3 Ultra). By bringing the infrastructure to the data, we eliminate cloud latency and ensure sensitive patient information never leaves the secure local network.",
+            modalHealthOSDesc: "HealthOS is the secure, real-time operating system running on Voither hardware. Unlike general-purpose OSs, HealthOS is hardened and optimized for the Mestral Engine's mission-critical tasks, guaranteeing the low latency required for autonomous AI.",
+            modalMestralEngineDesc: "The Mestral Engine is the AI brain of the system, running locally within HealthOS. It is a suite of specialized models that work together to understand, orchestrate, and automate complex clinical processes in real-time, directly at the point of care.",
+
+            impactTitle: "The Projected Impact of True Automation",
+            impactSubtitle: "By automating broken workflows, our platform is designed to deliver transformative results.",
+            impact1Value: "85%",
+            impact1Title: "Projected TCO Reduction",
+            impact1Desc: "Up to 85% TCO savings projected with our fully managed, all-in-one model.",
+            impact2Value: "<12 mo",
+            impact2Title: "Projected ROI",
+            impact2Desc: "Our turnkey model is designed to deliver a full return on investment in under 12 months.",
+            impact3Value: "40-70%",
+            impact3Title: "Target Admin Load Reduction",
+            impact3Desc: "Our goal is to reduce the administrative burden on clinicians by 40-70%.",
+            impact4Value: "<50ms",
+            impact4Title: "Local AI Automation",
+            impact4Desc: "Guaranteed low latency to enable real-time workflow automation at the point of care.",
+            
+            applicationTitle: "Sortio: Automation in Action",
+            applicationSubtitle: "Sortio, Voither's public health division, uses the Mestral Engine to automate critical bottlenecks in public health.",
+            
+            pioneer1Title: "Intelligent Bed Regulation",
+            pioneer1Desc: "Local AI automates bed allocation, targeting up to a 50% reduction in patient wait times.",
+            pioneer2Title: "Automated NLP Triage",
+            pioneer2Desc: "Clinicians use voice commands. The local LLM instantly understands, structures, and acts on the information.",
+            pioneer3Title: "Dynamic & Autonomous Queues",
+            pioneer3Desc: "Sortio runs a fully automated queueing system that re-prioritizes patients based on live clinical data.",
+            pioneer4Title: "Automated Transfer Orchestration",
+            pioneer4Desc: "The platform fully automates patient transfers, from request to coordination with emergency services.",
+
+            researchTitle: "Theoretical Foundations",
+            researchSubtitle: "Our work is built on established research in distributed systems, semantic modeling, and AI.",
+            research1Title: "Rhizomatic Structures in System Design",
+            research1Desc: "Using concepts from Deleuze and Guattari to build decentralized, non-hierarchical networks that are inherently fault-tolerant.",
+            research2Title: "Offline-First & Local-First Paradigms",
+            research2Desc: "Leveraging CRDTs and event sourcing to ensure data consistency and 100% functionality during network outages.",
+            research3Title: "Information Theory in Healthcare AI",
+            research3Desc: "Applying principles like Minimum Description Length (MDL) for efficient, semantic data compression without information loss.",
+            researchLink: "Read More",
+            
+            aboutSectionTitle: "The Mind Behind Voither",
+            founderName: "Dr. Gustavo Mendes",
+            founderTitle: "Founder & CEO | CRM/SP 218133",
+            founderBio: "Voither was founded by Dr. Gustavo Mendes e Silva, a psychiatrist (FAMEMA) and public administrator (UNESP). His unique journey combines deep clinical experience with a passion for systemic innovation, including work with the UN (UNFPA) and PAHO in Washington D.C., and winning the YouthAgainstAIDS Ahead Hackathon. Before Voither, he managed healthcare networks for São Paulo, witnessing the burdens that distract clinicians from patient care.",
+            thesis: `"Healthcare systems are broken because they are manual. We built Voither to automate them from the ground up."`,
+            quoteAttribution: "— Dr. Gustavo Mendes e Silva, Founder & CEO, Voither",
+
+            contactTitle: "Become a Foundational Partner",
+            contactSubtitle: "We are seeking investors and partners to build the future of public health.",
+            formLabelName: "Full Name",
+            formPlaceholderName: "Your Name",
+            formLabelEmail: "Email Address",
+            formPlaceholderEmail: "you@example.com",
+            formLabelMessage: "Message",
+            formPlaceholderMessage: "Tell us how you'd like to collaborate...",
+            formSubmitButton: "Send Message",
+            formSuccessTitle: "Thank You!",
+            formSuccessMessage: "Your message has been sent. We'll be in touch shortly.",
+            
+            faqTitle: "Ask Anything",
+            faqWelcome: "Have a question? Ask our AI assistant.",
+            faqPlaceholder: "Ask about Voither's technology...",
+            faqQ1: "What is a 'Private Edge Cloud'?",
+            faqA1: "An architecture where AI processing occurs on local hardware. By design, all patient data remains on-site, ensuring maximum privacy and offline functionality. Our cloud layer only handles anonymized metadata.",
+            faqQ2: "How do you guarantee operation during internet outages?",
+            faqA2: "Our 'Offline-First' design ensures all critical functions run 100% on local hardware. Data syncs automatically when connectivity is restored.",
+            faqQ3: "What hardware is required?",
+            faqA3: "Our platform uses specific hardware (Mac Studio M3 Ultra nodes). This enables powerful local AI with massive energy savings, fully managed by Voither.",
+            faqQ4: "Does Voither replace our existing EHR?",
+            faqA4: "No. Voither is a non-disruptive overlay that integrates with and enhances your existing EHR with intelligent automation, requiring no costly migration.",
+            faqQ5: "Voither, HealthOS, and Sortio?",
+            faqA5: "Voither is the company and our Edge Cloud infrastructure. HealthOS is the secure OS. The Mestral Engine is the AI 'brain'. Sortio is our public health platform that uses the entire stack.",
+            faqQ6: "Why is HealthOS a core part of the stack?",
+            faqA6: "Standard OSs are not built for mission-critical, real-time AI. HealthOS is purpose-built to guarantee the stability and security for autonomous clinical workflows.",
+            faqQ7: "Is this only for places with bad internet?",
+            faqA7: "No. It's a strategic choice for any facility prioritizing data privacy, resilience, and the real-time performance needed for true automation. It's about autonomy, not just connectivity.",
+            faqQ8: "How does the 'all-in-one' model benefit us?",
+            faqA8: "By delivering a fully managed, turnkey solution, we eliminate complexity, reduce your TCO, and guarantee performance, security, and resilience.",
+            
+            chatbotTitle: "Voither AI Assistant",
+            chatbotGreeting: "Hello! How can I help you understand Voither's technology?",
+            chatbotPlaceholder: "Ask about our technology...",
+            copyright: "&copy; 2025 VOITHER. All rights reserved.",
+
+            cookieConsentText: "We use cookies to enhance your browsing experience and analyze our traffic. By clicking 'Accept', you consent to our use of cookies.",
             cookieAccept: "Accept",
             cookieDecline: "Decline",
         },
         pt: {
-            pageTitle: "Voither | Inteligência Clínica em Tempo Real",
-            proudlyPartOf: "Membro orgulhoso de",
+            pageTitle: "Voither | O Fim dos Fluxos de Trabalho Manuais na Saúde",
+            proudlyPartOf: "Orgulhosamente membro de",
             msForStartups: "Microsoft for Startups",
-            mongoDBAtlas: "MongoDB Atlas",
-
-            heroPreTitle: "+150 pacientes acompanhados com mudanças impressionantes de trajetórias clínicas",
-            heroTitleNew: "Foque no seu Paciente,<br>não na Papelada.",
-            heroPitchNew: "O VOITHER MedicalScribe é seu parceiro de IA invisível, automatizando a documentação clínica para que você possa dedicar seu tempo ao que realmente importa: o cuidado com o paciente.",
-            heroInvestorsButton: "Investidores",
-            heroDevButton: "Desenvolvedores",
-            heroHealthButton: "Profissionais de Saúde",
+            cfForStartups: "Cloudflare for Startups",
             
-            sectionTitleHowItWorks: "Como Funciona",
-            sectionTitleTechnology: "O Diferencial Voither",
-            sectionTitleUpdates: "IA-Aumentada para Saúde",
-            navFeatures: "Funcionalidades",
-            navTestimonials: "Depoimentos",
-            navTitleAbout: "Sobre a Voither",
-            navContact: "Contato & FAQ",
-            medscribeButton: "MEDSCRIBE",
-            holofractorButton: "HOLOFRACTOR",
-            peeraiButton: "PEER-AI",
-            viewAll: "Ver tudo",
-
-            feature1Title: "O Timing Clínico é Essencial",
-            feature1Desc: "Não é só o que fazer; é quando intervir — sustentado por sinais do contexto e do ritmo da sessão.",
-            feature2Title: "Compliance por Design",
-            feature2Desc: "Políticas e normas (IEC 62304, HIPAA, FHIR, LGPD) viram código; se violar, não passa no build.",
-            feature3Title: "Memória rizomática + camadas de sinal",
-            feature3Desc: "Grafo + representações vetoriais + séries temporais; criptografia e retenção configuráveis.",
-            feature4Title: "Automação clínica nativa",
-            feature4Desc: "Workflows clínicos com ROI por sessão e escalonamento guiado por métrica clínica (não só CPU).",
-
-            videoCaption: "Assista a uma demonstração de 2 minutos para ver a Voither em ação.",
-            howItWorksStep1Title: "Você conversa.",
-            howItWorksStep1Desc: "O MED extrai sinais clínicos da fala (humor, energia, coerência, flexibilidade, agência, prosódia…).",
-            howItWorksStep2Title: "Ritmo e tempo vivido.",
-            howItWorksStep2Desc: "Nosso motor de raciocínio avançado costura os sinais no tempo, mantém hipóteses concorrentes e indica “o que mudou” e quando agir — com justificativa.",
-            howItWorksStep3Title: "Tradução clínica.",
-            howItWorksStep3Desc: "Calibração para frameworks como RDoC/HiTOP/Big Five/PERMA, dando linguagem comum ao time.",
-            howItWorksStep4Title: "Ação automática.",
-            howItWorksStep4Desc: "AUTOAGENCY executa documentação, pedidos, agendamentos e billing — com auditoria e economia de tempo medidas.",
-            howItWorksResultTitle: "Resultado visível.",
-            howItWorksResultDesc: "Antes/depois claro, proposta de caminhos com prós/contras e a papelada pronta — tudo em segundos.",
-
-            techPane1Title: "Motor de Raciocínio Temporal",
-            techPane3Title: "Pipeline E2E",
+            heroTitleNew: "Saúde Autônoma.",
+            heroPitchNew: "A Voither entrega a nova fundação para a saúde: uma plataforma de IA local que automatiza fluxos de trabalho com privacidade e resiliência absolutas. O fim do trabalho manual chegou.",
+            heroCtaPrimary: "Explore a Solução",
+            heroCtaSecondary: "Seja um Parceiro",
             
-            techPane1Desc: "Um motor que raciocina no tempo vivido, não só no relógio. Ele detecta *quando* agir, não só *o que* fazer.",
-            techPane3Desc: "Um pipeline que conecta fala a sinal, decisão e documentação em segundos, com ROI mensurável.",
+            navSolution: "A Solução",
+            navArchitecture: "A Arquitetura",
+            navImpact: "O Impacto",
+            navApplication: "Em Ação",
+            navResearch: "Fundações",
+            navAbout: "Sobre",
+            navContact: "Contato",
 
-            pioneer1Title: "Seu Secretário Invisível",
-            pioneer1Desc: "O Voither antecipa tarefas administrativas como renovar receitas, lembrar retornos e pré-preencher evolutivos antes mesmo de você pedir.",
-            pioneer2Title: "O Gêmeo Digital do Paciente",
-            pioneer2Desc: "Entre consultas, o sistema observa o ritmo do paciente de forma não-invasiva, identificando as melhores janelas de intervenção e preparando insights para a próxima sessão.",
-            pioneer3Title: "Ecossistema de Automações",
-            pioneer3Desc: "Uma futura loja de 'pacotes de automação' permitirá ativar protocolos validados com um clique, com métricas de eficácia e auditoria embutidas.",
-            pioneer4Title: "Indicadores de Desfecho no Mundo Real",
-            pioneer4Desc: "Não só 'o que fazer', mas se funcionou — e para quem funciona melhor — de forma simples de demonstrar.",
-            
-            sectionTitleTestimonials: "Aprovado por Profissionais",
-            testimonial1Quote: "A Voither mudou fundamentalmente a forma como eu lido com a documentação. Economizo mais de uma hora por dia, tempo que agora dedico diretamente aos meus pacientes. É um divisor de águas.",
-            testimonial1Name: "Maria Christina Luciano",
-            testimonial1Title: "Psicóloga Clínica",
-            testimonial2Quote: "A precisão da extração de sinais clínicos é notável. Ele capta nuances que são fáceis de perder durante uma sessão agitada, fornecendo insights mais profundos para o planejamento do tratamento.",
-            testimonial2Name: "Dr. Ana Gabriela",
-            testimonial2Title: "MD, Psiquiatra",
-            testimonial3Quote: "Como gestora de uma clínica, a funcionalidade 'Compliance por Design' me dá tranquilidade. A integração da Voither foi perfeita e o ROI ficou claro desde a primeira semana.",
-            testimonial3Name: "Simone Maria",
-            testimonial3Title: "Supervisora de equipe de enfermagem",
-
-            aboutSectionTitle: "A Mente por Trás da Voither",
-            founderName: "Dr. Gustavo Mendes",
-            founderTitle: "Fundador & CEO | CRM/SP 218133",
-            founderBio: "A Voither foi fundada pelo Dr. Gustavo Mendes e Silva, médico psiquiatra (FAMEMA) e administrador público (UNESP). Sua jornada única combina profunda experiência clínica com uma paixão por inovação sistêmica, incluindo passagens pela ONU (UNFPA) e OPAS em Washington D.C., e a vitória no Ahead Hackathon da YouthAgainstAIDS. Antes da Voither, foi gestor de redes de saúde em São Paulo, onde testemunhou o peso administrativo que afasta os clínicos do cuidado ao paciente.",
-            thesis: `"Hoje, a clínica conversa e escreve — mas os sistemas só entendem checkboxes. A Voither nasce para ouvir a linguagem humana, transformar em sinais objetivos e agir, sem curva de aprendizado. Isso só é possível porque juntamos três coisas que quase ninguém tem no mesmo lugar: um motor de raciocínio temporal que entende o ritmo clínico, uma arquitetura proprietária que transforma compliance em código, e um pipeline E2E cronometrado da conversa à ação."`,
-            quoteAttribution: "— Dr. Gustavo Mendes e Silva, Fundador & CEO, Voither",
-            
-            contactTitle: "Envie-nos uma Mensagem",
-            contactSubtitle: "Retornaremos o mais breve possível.",
-            formLabelName: "Nome Completo",
-            formPlaceholderName: "Seu Nome",
-            formLabelEmail: "Endereço de E-mail",
-            formPlaceholderEmail: "voce@exemplo.com",
-            formLabelMessage: "Mensagem",
-            formPlaceholderMessage: "Como podemos ajudar hoje?",
-            formSubmitButton: "Enviar Mensagem",
-            formSuccessTitle: "Obrigado!",
-            formSuccessMessage: "Sua mensagem foi enviada. Entraremos em contato em breve.",
-            faqTitle: "Perguntas Frequentes",
-            faqQ1: "Como a Voither garante a privacidade dos dados dos pacientes?",
-            faqA1: "A Voither foi construída com a filosofia de 'compliance por design'. Regras de privacidade e segurança (como HIPAA e LGPD) são incorporadas diretamente na arquitetura do nosso sistema. Isso significa que qualquer processo que viole essas regras simplesmente não é executado, garantindo a segurança por design, não como um adendo. Todos os dados são criptografados em trânsito e em repouso.",
-            faqQ2: "A plataforma se integra com Prontuários Eletrônicos (PEP/EHR) existentes?",
-            faqA2: "Sim. A integração é parte central do nosso design. A Voither usa o padrão FHIR R4 para se comunicar de forma transparente com sistemas de PEP modernos. Nosso Pipeline E2E foi construído para enviar documentação estruturada, pedidos e informações de faturamento diretamente para o seu fluxo de trabalho existente, minimizando interrupções.",
-            faqQ3: "Qual é a curva de aprendizado para um clínico?",
-            faqA3: "Virtualmente zero. A Voither foi projetada para desaparecer no fundo. O clínico só precisa ter uma conversa natural. O sistema escuta, analisa e apresenta insights e automações sem exigir treinamento complexo ou mudanças na forma como você interage com os pacientes.",
-            faqQ4: "Como o 'timing clínico' da Voither se difere da análise convencional?",
-            faqA4: "A maioria das ferramentas de IA pode dizer *o que* foi dito. Nosso motor de raciocínio avançado foi projetado para entender *quando* agir. Ele analisa o ritmo, a intensidade e o contexto da conversa para identificar momentos oportunos de intervenção, um conceito que a análise cronológica tradicional ignora completamente. Trata-se do timing clínico, não apenas de uma transcrição.",
-            
             complianceTitle: "Conformidade",
             complianceLGPD: "LGPD",
             complianceHIPAA: "HIPAA",
             complianceFHIR: "FHIR",
-            complianceRDoC: "RDoC",
-            complianceHiTOP: "HiTOP",
-            complianceBigFive: "BigFive",
-            compliancePERMA: "PERMA",
+            complianceANVISA: "ANVISA RDC",
+            complianceISO13485: "ISO 13485",
 
-            copyright: "© 2025 VOITHER. Todos os direitos reservados.",
+            solutionTitle: "Da Barreira à Revolução",
+            solutionSubtitle: "Os desafios centrais da saúde são arquitetônicos. Nós construímos a nova arquitetura para resolvê-los.",
+            solutionProblem1Title: "A Barreira da Automação na Nuvem",
+            solutionProblem1Desc: "A latência da nuvem impede a automação com IA em tempo real e expõe dados sensíveis.",
+            solutionSolution1Title: "Voither Edge Cloud",
+            solutionSolution1Desc: "Uma malha local de nós Apple Silicon que leva o processamento de IA aos dados, resolvendo a latência e os riscos de privacidade.",
+            solutionProblem2Title: "Sistemas Genéricos e Inseguros",
+            solutionProblem2Desc: "SOs de propósito geral não têm o foco em segurança e tempo real para IA de missão crítica em saúde.",
+            solutionSolution2Title: "HealthOS",
+            solutionSolution2Desc: "Um SO seguro e construído sob medida que garante a estabilidade para fluxos de trabalho autônomos de IA.",
+            solutionProblem3Title: "Fluxos de Trabalho Anacrônicos",
+            solutionProblem3Desc: "Processos manuais e fragmentados causam esgotamento, erros e atrasos críticos no cuidado.",
+            solutionSolution3Title: "Mestral Engine",
+            solutionSolution3Desc: "Um poderoso LLM que roda localmente para automatizar fluxos de trabalho clínicos complexos em tempo real.",
             
-            // Chatbot translations
-            chatbotTitle: "Assistente Voither",
-            chatbotPlaceholder: "Pergunte sobre a Voither...",
-            chatbotInitialMessage: "Olá! Sou o assistente da Voither. Como posso ajudar você a conhecer nossa plataforma de inteligência clínica?",
-            chatbotErrorMessage: "Desculpe, estou com problemas de conexão. Por favor, tente novamente mais tarde.",
+            architectureTitle: "Uma Plataforma Turnkey para a Saúde",
+            architectureSubtitle: "Entregamos uma solução completa e verticalmente integrada — do silício à aplicação — para garantir resultados.",
+            architecturePillar1Title: "Hardware Estratégico: Apple Silicon",
+            architecturePillar1Desc: "Potencializada por nós **Mac Studio M3 Ultra**, nosso hardware gerenciado garante a performance e eficiência local para IA em tempo real.",
+            architecturePillar2Title: "Conectividade Resiliente: Starlink",
+            architecturePillar2Desc: "Uma abordagem 'satélite-primeiro' com a **Starlink** cria uma rede mesh de alta disponibilidade independente de fibra terrestre para resiliência radical.",
+            architecturePillar3Title: "A Vantagem 'All-in-One'",
+            architecturePillar3Desc: "Nosso modelo gerenciado assegura resiliência, economia e segurança inigualáveis, entregando **Privacidade desde a Concepção**.",
 
-            // Cookie Consent
-            cookieConsentText: "Usamos cookies para melhorar sua experiência. Ao continuar a visitar este site, você concorda com nosso uso de cookies.",
+            techDeepDiveTitle: "Mergulho Técnico na Tecnologia",
+            techDeepDiveSubtitle: "Nossa arquitetura é uma stack verticalmente integrada onde cada camada é construída para a próxima. Clique em qualquer componente para saber mais.",
+            
+            stackVoitherTitle: "Voither Edge Cloud",
+            stackHealthOSTitle: "HealthOS",
+            stackMestralTitle: "Mestral Engine",
+            mestralPIRTitle: "PIR: Blueprint do Fluxo",
+            mestralROETitle: "ROE: O Maestro",
+            mestralRMSTitle: "RMS: Memória Perfeita",
+            mestralRRETitle: "RRE: Núcleo de Raciocínio",
+            mestralMDLTitle: "MDL: Arquivista Inteligente",
+            mestralPIRDesc: "Traduz diretrizes clínicas complexas em código estruturado e executável, transformando PDFs estáticos em ações automatizadas.",
+            mestralROEDesc: "A máquina de estados que executa o blueprint do PIR, orquestrando tarefas e tomando a decisão da 'Próxima Melhor Ação'.",
+            mestralRMSDesc: "Um registro imutável de cada ação e mudança de estado, garantindo 100% de rastreabilidade e auditabilidade.",
+            mestralRREDesc: "A camada semântica que 'entende' o contexto clínico, permitindo que o sistema tome decisões inteligentes baseadas em dados.",
+            mestralMDLDesc: "Usa compressão semântica para armazenar dados de eventos de forma eficiente sem perder informação crítica.",
+            modalVoitherCloudDesc: "Esta é a camada fundamental: uma rede mesh privada e local de nós de alto desempenho Apple Silicon (Mac Studio M3 Ultra). Ao trazer a infraestrutura para os dados, eliminamos a latência da nuvem e garantimos que informações sensíveis de pacientes nunca saiam da rede local segura.",
+            modalHealthOSDesc: "O HealthOS é o sistema operacional seguro e de tempo real que roda no hardware Voither. Diferente de SOs de propósito geral, o HealthOS é reforçado e otimizado para as tarefas de missão crítica do Mestral Engine, garantindo a baixa latência necessária para IA autônoma.",
+            modalMestralEngineDesc: "O Mestral Engine é o cérebro de IA do sistema, rodando localmente no HealthOS. É um conjunto de modelos especializados que traballham juntos para orquestrar e automatizar processos clínicos complexos em tempo real, diretamente no ponto de atendimento.",
+
+            impactTitle: "O Impacto Projetado da Verdadeira Automação",
+            impactSubtitle: "Ao automatizar fluxos de trabalho quebrados, nossa plataforma é projetada para entregar resultados transformadores.",
+            impact1Value: "85%",
+            impact1Title: "Redução Projetada de TCO",
+            impact1Desc: "Até 85% de economia de TCO projetada com nosso modelo 'all-in-one' totalmente gerenciado.",
+            impact2Value: "<12 meses",
+            impact2Title: "ROI Projetado",
+            impact2Desc: "Nosso modelo turnkey é projetado para entregar um retorno completo do investimento em menos de 12 meses.",
+            impact3Value: "40-70%",
+            impact3Title: "Redução Alvo na Carga Admin.",
+            impact3Desc: "Nosso objetivo é reduzir a carga administrativa dos clínicos em 40-70%.",
+            impact4Value: "<50ms",
+            impact4Title: "Automação Local com IA",
+            impact4Desc: "Baixa latência garantida para permitir automação de fluxos de trabalho em tempo real no ponto de atendimento.",
+            
+            applicationTitle: "Sortio: Automação em Ação",
+            applicationSubtitle: "Sortio, a divisão de saúde pública da Voither, usa o Mestral Engine para automatizar gargalos críticos na saúde pública.",
+            
+            pioneer1Title: "Regulação Inteligente de Leitos",
+            pioneer1Desc: "A IA local automatiza a alocação de leitos, visando uma redução de até 50% nos tempos de espera dos pacientes.",
+            pioneer2Title: "Triagem Automatizada com PNL",
+            pioneer2Desc: "Clínicos usam comandos de voz. O LLM local entende, estrutura e age instantaneamente sobre a informação.",
+            pioneer3Title: "Filas Dinâmicas e Autônomas",
+            pioneer3Desc: "O Sortio opera um sistema de filas automatizado que reprioriza pacientes com base em dados clínicos ao vivo.",
+            pioneer4Title: "Orquestração de Transferências",
+            pioneer4Desc: "A plataforma automatiza totalmente as transferências de pacientes, desde a solicitação até a coordenação com serviços de emergência.",
+
+            researchTitle: "Fundações Teóricas",
+            researchSubtitle: "Nosso trabalho se baseia em pesquisas consolidadas em sistemas distribuídos, modelagem semântica e IA.",
+            research1Title: "Estruturas Rizomáticas em Design de Sistemas",
+            research1Desc: "Usando conceitos de Deleuze e Guattari para construir redes descentralizadas, não hierárquicas e inerentemente tolerantes a falhas.",
+            research2Title: "Paradigmas Offline-First e Local-First",
+            research2Desc: "Utilizando CRDTs e 'event sourcing' para garantir consistência de dados e 100% de funcionalidade durante quedas de rede.",
+            research3Title: "Teoria da Informação em IA na Saúde",
+            research3Desc: "Aplicando princípios como MDL (Minimum Description Length) para compressão de dados semântica e eficiente.",
+            researchLink: "Leia Mais",
+            
+            aboutSectionTitle: "A Mente por Trás da Voither",
+            founderName: "Dr. Gustavo Mendes",
+            founderTitle: "Fundador & CEO | CRM/SP 218133",
+            founderBio: "A Voither foi fundada pelo Dr. Gustavo Mendes e Silva, psiquiatra (FAMEMA) e administrador público (UNESP). Sua jornada única combina profunda experiência clínica com uma paixão por inovação sistêmica, incluindo trabalho com a ONU (UNFPA) e OPAS em Washington D.C., e a vitória no hackathon YouthAgainstAIDS Ahead. Antes da Voither, ele gerenciou redes de saúde para São Paulo, testemunhando os fardos que distraem os clínicos do cuidado ao paciente.",
+            thesis: `"Os sistemas de saúde estão quebrados porque são manuais. Construímos a Voither para automatizá-los desde o início."`,
+            quoteAttribution: "— Dr. Gustavo Mendes e Silva, Fundador & CEO, Voither",
+
+            contactTitle: "Torne-se um Parceiro Fundador",
+            contactSubtitle: "Buscamos investidores e parceiros para construir o futuro da saúde pública.",
+            formLabelName: "Nome Completo",
+            formPlaceholderName: "Seu Nome",
+            formLabelEmail: "Endereço de Email",
+            formPlaceholderEmail: "voce@exemplo.com",
+            formLabelMessage: "Mensagem",
+            formPlaceholderMessage: "Conte-nos como gostaria de colaborar...",
+            formSubmitButton: "Enviar Mensagem",
+            formSuccessTitle: "Obrigado!",
+            formSuccessMessage: "Sua mensagem foi enviada. Entraremos em contato em breve.",
+            
+            faqTitle: "Pergunte Qualquer Coisa",
+            faqWelcome: "Tem uma pergunta? Pergunte ao nosso assistente de IA.",
+            faqPlaceholder: "Pergunte sobre a tecnologia da Voither...",
+            faqQ1: "O que é uma 'Private Edge Cloud'?",
+            faqA1: "Uma arquitetura onde o processamento de IA ocorre em hardware local. Por design, todos os dados de pacientes permanecem no local, garantindo máxima privacidade e funcionalidade offline. Nossa nuvem lida apenas com metadados anônimos.",
+            faqQ2: "Como garantem a operação durante quedas de internet?",
+            faqA2: "Nosso design 'Offline-First' garante que todas as funções críticas rodem 100% em hardware local. Os dados sincronizam automaticamente quando a conectividade é restaurada.",
+            faqQ3: "Qual hardware é necessário?",
+            faqA3: "Nossa plataforma usa hardware específico (nós Mac Studio M3 Ultra). Isso permite uma IA local poderosa com enorme economia de energia, totalmente gerenciada pela Voither.",
+            faqQ4: "A Voither substitui nosso Prontuário Eletrônico (PEP)?",
+            faqA4: "Não. A Voither é uma camada não disruptiva que se integra e aprimora seu PEP existente com automação inteligente, sem exigir uma migração custosa.",
+            faqQ5: "Voither, HealthOS e Sortio?",
+            faqA5: "Voither é a empresa e nossa infraestrutura de Edge Cloud. HealthOS é o SO seguro. O Mestral Engine é o 'cérebro' de IA. Sortio é nossa plataforma de saúde pública que usa toda a stack.",
+            faqQ6: "Por que o HealthOS é uma parte central da stack?",
+            faqA6: "SOs padrão não são construídos para IA de missão crítica em tempo real. O HealthOS é feito sob medida para garantir a estabilidade e segurança para fluxos de trabalho clínicos autônomos.",
+            faqQ7: "Isso é só para lugares com internet ruim?",
+            faqA7: "Não. É uma escolha estratégica para qualquer unidade que priorize privacidade de dados, resiliência e a performance em tempo real necessária para a verdadeira automação. É sobre autonomia.",
+            faqQ8: "Como o modelo 'all-in-one' nos beneficia?",
+            faqA8: "Ao entregar uma solução 'turnkey' totalmente gerenciada, eliminamos a complexidade, reduzimos seu TCO e garantimos performance, segurança e resiliência.",
+
+            chatbotTitle: "Assistente de IA Voither",
+            chatbotGreeting: "Olá! Como posso ajudar a entender a tecnologia da Voither?",
+            chatbotPlaceholder: "Pergunte sobre nossa tecnologia...",
+            copyright: "&copy; 2025 VOITHER. Todos os direitos reservados.",
+
+            cookieConsentText: "Usamos cookies para aprimorar sua experiência de navegação e analisar nosso tráfego. Ao clicar em 'Aceitar', você concorda com nosso uso de cookies.",
             cookieAccept: "Aceitar",
             cookieDecline: "Recusar",
-        },
+        }
     };
-    
-    type Language = keyof typeof translations;
 
-    const langSwitcher = document.querySelector<HTMLButtonElement>('.lang-switcher');
-    const translatableElements = document.querySelectorAll<HTMLElement>('[data-key]');
-    const chatMessagesContainer = document.getElementById('chatbot-messages') as HTMLElement;
+    let currentLang = localStorage.getItem('lang') || 'en';
 
-    // FIX: Define chat message functions in a broader scope to be accessible by setLanguage.
-    const addMessage = (content: string, type: 'user' | 'bot') => {
-        if (!chatMessagesContainer) return;
-        const messageWrapper = document.createElement('div');
-        messageWrapper.className = `chat-message ${type}-message`;
-        const messageContent = document.createElement('div');
-        messageContent.className = 'message-content';
-        messageContent.textContent = content;
-        messageWrapper.appendChild(messageContent);
-        chatMessagesContainer.appendChild(messageWrapper);
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    };
-    
-    const addBotMessage = (content: string) => addMessage(content, 'bot');
-    const addUserMessage = (content: string) => addMessage(content, 'user');
-
-    const setLanguage = (lang: Language) => {
+    const setLanguage = (lang: string) => {
         if (!translations[lang]) return;
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
 
-        translatableElements.forEach(element => {
-            const key = element.dataset.key as keyof typeof translations[Language];
+        document.querySelectorAll<HTMLElement>('[data-key]').forEach(element => {
+            const key = element.dataset.key;
             if (key && translations[lang][key]) {
-                const translation = translations[lang][key];
-                
-                // Handle placeholders for input and textarea
-                if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && element.hasAttribute('placeholder')) {
-                    (element as HTMLInputElement | HTMLTextAreaElement).placeholder = translation;
-                } else if (key === 'navTitleAbout' && element.closest('.sidebar-nav')) {
-                    element.textContent = translations[lang]['navTitleAbout'];
-                } else if (translation.includes('<') && translation.includes('>')) {
-                    element.innerHTML = translation;
-                } else {
-                    element.textContent = translation;
-                }
+                element.innerHTML = translations[lang][key];
             }
         });
+        
+        document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-key^="formPlaceholder"], [data-key="faqPlaceholder"]').forEach(element => {
+            const key = element.dataset.key;
+             if (key && translations[lang][key]) {
+                element.placeholder = translations[lang][key];
+            }
+        });
+        
+        const langSwitcher = document.querySelector('.lang-switcher');
+        if (langSwitcher) langSwitcher.textContent = lang.toUpperCase();
         
         document.documentElement.lang = lang;
-        if (langSwitcher) {
-            langSwitcher.textContent = lang.toUpperCase();
-        }
-        localStorage.setItem('voither-lang', lang);
-
-        // Update initial chatbot message if chat is visible
-        if (isFeatureEnabled('chatbot') && chatMessagesContainer && chatMessagesContainer.children.length <= 1) {
-            // FIX: Clear existing message to prevent duplicates on language change.
-            chatMessagesContainer.innerHTML = '';
-            addBotMessage(translations[lang].chatbotInitialMessage);
-        }
     };
 
-    if (langSwitcher) {
-        langSwitcher.addEventListener('click', () => {
-            const currentLang = (document.documentElement.lang as Language) || 'en';
-            const newLang: Language = currentLang === 'en' ? 'pt' : 'en';
-            setLanguage(newLang);
-        });
-    }
 
-    // --- Theme Switcher Logic ---
-    const themeSwitcher = document.querySelector<HTMLButtonElement>('.theme-switcher');
-    const body = document.body;
-
-    const applyTheme = (theme: string) => {
-        if (theme === 'light') {
-            body.classList.add('light-theme');
-        } else {
-            body.classList.remove('light-theme');
-        }
-    };
-
-    const savedTheme = localStorage.getItem('voither-theme');
-    // Default to light theme. Only use dark theme if it's explicitly saved.
-    if (savedTheme === 'dark') {
-        applyTheme('dark');
-    } else {
-        applyTheme('light');
-    }
-
-    if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-            const newTheme = body.classList.contains('light-theme') ? 'dark' : 'light';
-            localStorage.setItem('voither-theme', newTheme);
-            applyTheme(newTheme);
-        });
-    }
-    
-    // --- Mobile Menu Logic ---
-    const mobileMenuToggle = document.querySelector<HTMLButtonElement>('.mobile-menu-toggle');
-    const contentWrapper = document.querySelector<HTMLElement>('.content-wrapper');
-
-    const closeSidebar = () => {
-        if (body.classList.contains('sidebar-open')) {
-            body.classList.remove('sidebar-open');
-            if (mobileMenuToggle) {
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                mobileMenuToggle.classList.remove('active');
-            }
-        }
-    };
-
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', () => {
-            const isOpened = body.classList.toggle('sidebar-open');
-            mobileMenuToggle.setAttribute('aria-expanded', isOpened.toString());
-            mobileMenuToggle.classList.toggle('active', isOpened);
-        });
-    }
-    
-    if (contentWrapper) {
-        contentWrapper.addEventListener('click', closeSidebar);
-    }
-
-    // --- Scroll Handlers ---
+    // --- Active Nav Link on Scroll ---
     const sections = document.querySelectorAll<HTMLElement>('section[id]');
-    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.sidebar-nav a');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
 
-    // Close sidebar on nav link click (for mobile)
-    navLinks.forEach(link => {
-        link.addEventListener('click', closeSidebar);
-    });
-
-    const handleScroll = () => {
-        // Activate sidebar nav link
-        let currentSectionId = '';
-        sections.forEach(section => {
-            if (section.style.display === 'none') return; // Skip hidden sections
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 150) {
-                currentSectionId = section.getAttribute('id') || '';
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
-                link.classList.add('active');
-            }
-        });
-        
-        // Add scrolled class to body for styling header/sidebar
-        if (window.scrollY > 10) {
-            body.classList.add('scrolled');
-        } else {
-            body.classList.remove('scrolled');
-        }
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.4
     };
-    
-    // --- FAQ Accordion Logic ---
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer') as HTMLElement | null;
 
-        if (question && answer) {
-            question.addEventListener('click', () => {
-                const wasActive = item.classList.contains('active');
-                
-                // Close all other items before opening a new one
-                faqItems.forEach(i => {
-                    if (i !== item) {
-                        i.classList.remove('active');
-                        (i.querySelector('.faq-answer') as HTMLElement).style.maxHeight = '0px';
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
                     }
                 });
+            }
+        });
+    }, observerOptions);
 
-                // Toggle the clicked item
-                if (!wasActive) {
-                    item.classList.add('active');
-                    answer.style.maxHeight = `${answer.scrollHeight}px`;
-                } else {
-                    item.classList.remove('active');
-                    answer.style.maxHeight = '0px';
-                }
-            });
-        }
+    sections.forEach(section => {
+        sectionObserver.observe(section);
     });
-
-    // --- Animation on Scroll ---
-    const animatedElements = document.querySelectorAll('.tech-card, .timeline-item, .testimonial-card');
-    const observer = new IntersectionObserver((entries) => {
+    
+    // --- Scroll Animations ---
+    const animatedElements = document.querySelectorAll('.architecture-pillar-card, .impact-card, .solution-pair, .research-card');
+    const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => scrollObserver.observe(el));
+    
+    
+    // --- Mobile Menu ---
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    mobileMenuToggle?.addEventListener('click', () => {
+        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+        mobileMenuToggle.classList.toggle('active');
+        document.body.classList.toggle('sidebar-open');
     });
 
-    animatedElements.forEach(el => {
-        observer.observe(el);
+    // Close sidebar when a link is clicked
+    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (document.body.classList.contains('sidebar-open')) {
+                mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+                mobileMenuToggle?.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            }
+        });
     });
 
-    // --- Form Submission Logic ---
-    const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
-    const successMessage = document.getElementById('form-success-message') as HTMLElement | null;
-    const contactInfoContainer = document.querySelector('.contact-info');
 
-    if (contactForm && successMessage && contactInfoContainer) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    // --- Interactive FAQ ---
+    const setupInteractiveFAQ = () => {
+        const responseArea = document.getElementById('faq-response-area');
+        const input = document.getElementById('faq-input') as HTMLInputElement;
+        const sendBtn = document.getElementById('faq-send-btn') as HTMLButtonElement;
+        const suggestedQuestionsContainer = document.getElementById('faq-suggested-questions');
+
+        if (!responseArea || !input || !sendBtn || !suggestedQuestionsContainer) return;
+
+        // Build knowledge base from translations
+        const faqKeys = Object.keys(translations.en).filter(k => k.startsWith('faqQ'));
+        
+        const askQuestion = async (question: string) => {
+             // On first question, add a class to hide the welcome message/suggestions
+            if (!responseArea.classList.contains('conversation-started')) {
+                responseArea.classList.add('conversation-started');
+            }
+
+            // Create and display the user's question safely
+            const userQuestionDiv = document.createElement('div');
+            userQuestionDiv.className = 'faq-user-question';
+            const userLabel = document.createElement('span');
+            userLabel.className = 'faq-label';
+            userLabel.textContent = 'You';
+            const userParagraph = document.createElement('p');
+            userParagraph.textContent = question; // Safely sets text content
+            userQuestionDiv.appendChild(userLabel);
+            userQuestionDiv.appendChild(userParagraph);
+            responseArea.appendChild(userQuestionDiv);
+
+            // Create and display the bot's placeholder answer
+            const botAnswerDiv = document.createElement('div');
+            botAnswerDiv.className = 'faq-bot-answer';
+            botAnswerDiv.innerHTML = `<span class="faq-label">Voither AI</span><p class="thinking">Thinking...</p>`;
+            responseArea.appendChild(botAnswerDiv);
             
-            const name = contactForm.querySelector<HTMLInputElement>('#name')?.value;
-            const email = contactForm.querySelector<HTMLInputElement>('#email')?.value;
-            const message = contactForm.querySelector<HTMLTextAreaElement>('#message')?.value;
+            responseArea.scrollTop = responseArea.scrollHeight; // Scroll to bottom
 
-            if (name && email && message) {
-                contactForm.style.display = 'none';
-                
-                const title = contactInfoContainer.querySelector<HTMLElement>('.section-title');
-                const subtitle = contactInfoContainer.querySelector<HTMLElement>('.section-subtitle');
-                if (title) title.style.display = 'none';
-                if (subtitle) subtitle.style.display = 'none';
+            sendBtn.disabled = true;
+            input.disabled = true;
 
-                successMessage.style.display = 'block';
-            }
-        });
-    }
+            try {
+                const response = await ai.models.generateContent({
+                    model: 'gemini-2.5-flash',
+                    contents: question,
+                });
+                const answer = response.text;
 
-    // --- Chatbot Logic ---
-    if (isFeatureEnabled('chatbot')) {
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const chatBubbleButtons = document.querySelectorAll('.js-open-chat');
-        const chatbotCloseButton = document.getElementById('chatbot-close-button');
-        const chatbotOverlay = document.getElementById('chatbot-overlay');
-        const chatbotInput = document.getElementById('chatbot-input') as HTMLInputElement;
-        const chatbotSendButton = document.getElementById('chatbot-send-button');
-
-        const toggleChatbot = (show: boolean) => {
-            if (show) {
-                chatbotContainer?.classList.add('visible');
-                chatbotInput?.focus();
-                if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
-                    const currentLang = (document.documentElement.lang as Language) || 'en';
-                    addBotMessage(translations[currentLang].chatbotInitialMessage);
+                const answerParagraph = botAnswerDiv.querySelector('p');
+                if (answerParagraph) {
+                    answerParagraph.classList.remove('thinking');
+                    answerParagraph.innerHTML = answer.replace(/\n/g, '<br>');
                 }
-            } else {
-                chatbotContainer?.classList.remove('visible');
+
+            } catch (error) {
+                console.error("FAQ AI Error:", error);
+                const answerParagraph = botAnswerDiv.querySelector('p');
+                if (answerParagraph) {
+                    answerParagraph.classList.remove('thinking');
+                    answerParagraph.textContent = `Sorry, I couldn't find an answer to that. Please try rephrasing your question.`;
+                }
+            } finally {
+                sendBtn.disabled = false;
+                input.disabled = false;
+                input.focus();
+                responseArea.scrollTop = responseArea.scrollHeight; // Scroll again after response
             }
         };
+        
+        const handleSubmit = () => {
+            const question = input.value.trim();
+            if (question) {
+                askQuestion(question);
+                input.value = '';
+            }
+        };
+
+        sendBtn.addEventListener('click', handleSubmit);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSubmit();
+            }
+        });
+
+        // Populate suggested questions
+        suggestedQuestionsContainer.innerHTML = '';
+        faqKeys.forEach(key => {
+            const button = document.createElement('button');
+            button.className = 'faq-suggestion-btn';
+            button.textContent = translations[currentLang][key];
+            button.addEventListener('click', () => {
+                const questionText = button.textContent;
+                if(questionText) askQuestion(questionText);
+            });
+            suggestedQuestionsContainer.appendChild(button);
+        });
+    };
+    
+    // --- Application Tabs ---
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const tabId = link.getAttribute('data-tab');
+
+            tabLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            tabPanes.forEach(pane => {
+                pane.classList.remove('active');
+                if (pane.id === tabId) {
+                    pane.classList.add('active');
+                }
+            });
+        });
+    });
+    
+    // --- Contact Form ---
+    const contactForm = document.getElementById('contact-form');
+    const successMessage = document.getElementById('form-success-message');
+
+    contactForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Here you would typically send form data to a server
+        // For this demo, we'll just show the success message
+        if(contactForm && successMessage) {
+            contactForm.style.display = 'none';
+            successMessage.style.display = 'block';
+        }
+    });
+    
+     // --- Chatbot UI Logic ---
+    const setupChatbotUI = () => {
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const openButtons = document.querySelectorAll('.js-open-chat');
+        const closeButton = document.getElementById('chatbot-close-button');
+        const overlay = document.getElementById('chatbot-overlay');
+        // FIX: Cast sendButton to HTMLButtonElement to access the 'disabled' property.
+        const sendButton = document.getElementById('chatbot-send-button') as HTMLButtonElement;
+        const input = document.getElementById('chatbot-input') as HTMLInputElement;
+        const messagesContainer = document.getElementById('chatbot-messages');
+
+        if (!chatbotContainer || !closeButton || !overlay || !sendButton || !input || !messagesContainer) return;
+
+        const openChat = () => chatbotContainer.classList.add('visible');
+        const closeChat = () => chatbotContainer.classList.remove('visible');
+
+        openButtons.forEach(btn => btn.addEventListener('click', openChat));
+        closeButton.addEventListener('click', closeChat);
+        overlay.addEventListener('click', closeChat);
         
         const showTypingIndicator = () => {
             const typingIndicator = document.createElement('div');
-            typingIndicator.className = 'chat-message bot-message';
-            typingIndicator.id = 'typing-indicator';
-            typingIndicator.innerHTML = `
-                <div class="message-content typing-indicator">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>`;
-            chatMessagesContainer?.appendChild(typingIndicator);
-            if (chatMessagesContainer) {
-                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-            }
+            typingIndicator.className = 'chat-message bot-message typing-indicator';
+            typingIndicator.innerHTML = '<div class="message-content"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         };
 
         const removeTypingIndicator = () => {
-            const indicator = document.getElementById('typing-indicator');
+            const indicator = messagesContainer.querySelector('.typing-indicator');
             if (indicator) {
-                indicator.remove();
+                messagesContainer.removeChild(indicator);
             }
         };
-        
-        const handleSendMessage = async () => {
-            if (!chatbotInput) return;
-            const message = chatbotInput.value.trim();
-            if (!message) return;
 
-            addUserMessage(message);
-            chatbotInput.value = '';
+        const handleSendMessage = async () => {
+            const userMessage = input.value.trim();
+            if (!userMessage) return;
+
+            addMessage(userMessage, 'user');
+            input.value = '';
+            input.disabled = true;
+            sendButton.disabled = true;
+
             showTypingIndicator();
 
             try {
-                if (!chat) initializeChat();
-                if (!chat) throw new Error("Chat not initialized");
-
-                const response = await chat.sendMessage({ message });
-                
-                removeTypingIndicator();
-                addBotMessage(response.text);
-
+                if (!chat) initializeChat(); // Ensure chat is initialized
+                if (chat) {
+                    const response = await chat.sendMessage({ message: userMessage });
+                    const botResponse = response.text; // Use the direct .text property
+                    removeTypingIndicator();
+                    addMessage(botResponse.replace(/\n/g, '<br>'), 'bot');
+                } else {
+                     throw new Error("Chat could not be initialized.");
+                }
             } catch (error) {
-                console.error("Gemini API Error:", error);
-                const currentLang = (document.documentElement.lang as Language) || 'en';
+                console.error("Error sending message:", error);
                 removeTypingIndicator();
-                addBotMessage(translations[currentLang].chatbotErrorMessage);
+                addMessage("Sorry, I'm having trouble connecting right now. Please try again later.", 'bot');
+            } finally {
+                 input.disabled = false;
+                 sendButton.disabled = false;
+                 input.focus();
             }
         };
 
-        chatBubbleButtons.forEach(button => {
-            button.addEventListener('click', () => toggleChatbot(true));
-        });
-        chatbotCloseButton?.addEventListener('click', () => toggleChatbot(false));
-        chatbotOverlay?.addEventListener('click', () => toggleChatbot(false));
-        chatbotSendButton?.addEventListener('click', handleSendMessage);
-        chatbotInput?.addEventListener('keydown', (e) => {
+        sendButton.addEventListener('click', handleSendMessage);
+        input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                e.preventDefault();
                 handleSendMessage();
             }
         });
-    }
+        
+        addMessage(translations[currentLang].chatbotGreeting || "Hello! How can I help you understand Voither's technology?", 'bot');
+    };
+    
+    // --- Technology Diagram Modal ---
+    const setupInfoModal = () => {
+        const modalContainer = document.getElementById('info-modal-container');
+        const modal = document.getElementById('info-modal');
+        const closeButton = document.getElementById('info-modal-close-button');
+        const overlay = document.getElementById('info-modal-overlay');
+        const titleEl = document.getElementById('info-modal-title');
+        const descEl = document.getElementById('info-modal-description');
+        const triggerButtons = document.querySelectorAll('[data-modal-target]');
 
-    // --- Cookie Consent Logic ---
-    const initializeCookieConsent = () => {
+        if (!modalContainer || !modal || !closeButton || !overlay || !titleEl || !descEl) return;
+        
+        const modalContent: { [key: string]: { titleKey: string; descKey: string } } = {
+            'voither': { titleKey: 'stackVoitherTitle', descKey: 'modalVoitherCloudDesc' },
+            'healthos': { titleKey: 'stackHealthOSTitle', descKey: 'modalHealthOSDesc' },
+            'mestral': { titleKey: 'stackMestralTitle', descKey: 'modalMestralEngineDesc' },
+            'pir': { titleKey: 'mestralPIRTitle', descKey: 'mestralPIRDesc' },
+            'roe': { titleKey: 'mestralROETitle', descKey: 'mestralROEDesc' },
+            'rms': { titleKey: 'mestralRMSTitle', descKey: 'mestralRMSDesc' },
+            'rre': { titleKey: 'mestralRRETitle', descKey: 'mestralRREDesc' },
+            'mdl': { titleKey: 'mestralMDLTitle', descKey: 'mestralMDLDesc' },
+        };
+
+        const openModal = (target: string) => {
+            const content = modalContent[target];
+            if (content && translations[currentLang]) {
+                titleEl.textContent = translations[currentLang][content.titleKey] || '';
+                descEl.innerHTML = translations[currentLang][content.descKey] || '';
+                modalContainer.classList.add('visible');
+            }
+        };
+
+        const closeModal = () => {
+            modalContainer.classList.remove('visible');
+        };
+
+        triggerButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const target = (button as HTMLElement).dataset.modalTarget;
+                if(target) openModal(target);
+            });
+        });
+
+        closeButton.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalContainer.classList.contains('visible')) {
+                closeModal();
+            }
+        });
+    };
+    
+    // --- Cookie Consent Banner ---
+    const setupCookieConsent = () => {
         const banner = document.getElementById('cookie-consent-banner');
         const acceptBtn = document.getElementById('cookie-accept-btn');
         const declineBtn = document.getElementById('cookie-decline-btn');
 
         if (!banner || !acceptBtn || !declineBtn) return;
+        
+        const consent = localStorage.getItem('cookie_consent');
+        
+        // If consent is already given or denied, do nothing.
+        if(consent) return;
 
-        const hideBanner = () => {
+        // Otherwise, show the banner.
+        setTimeout(() => {
+            banner.classList.remove('hidden');
+        }, 2000); // Show after 2 seconds
+
+        const handleConsent = (value: 'accepted' | 'declined') => {
+            localStorage.setItem('cookie_consent', value);
             banner.classList.add('hidden');
         };
 
-        const consent = localStorage.getItem('voither-cookie-consent');
-        if (consent === null) {
-            banner.classList.remove('hidden');
-        }
+        acceptBtn.addEventListener('click', () => handleConsent('accepted'));
+        declineBtn.addEventListener('click', () => handleConsent('declined'));
+    };
+    
+    // --- Header Scroll Effect ---
+    const setupHeaderScroll = () => {
+        const header = document.querySelector('.main-header');
+        if (!header) return;
 
-        acceptBtn.addEventListener('click', () => {
-            localStorage.setItem('voither-cookie-consent', 'accepted');
-            hideBanner();
-        });
+        const handleScroll = () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
 
-        declineBtn.addEventListener('click', () => {
-            localStorage.setItem('voither-cookie-consent', 'declined');
-            hideBanner();
-        });
+        window.addEventListener('scroll', handleScroll, { passive: true });
     };
 
+    // --- Initialization ---
+    const init = () => {
+        applyFeatureFlags();
+        setLanguage(currentLang);
+        
+        const langSwitcher = document.querySelector('.lang-switcher');
+        langSwitcher?.addEventListener('click', () => {
+            const newLang = currentLang === 'en' ? 'pt' : 'en';
+            setLanguage(newLang);
+            
+            if (chat) {
+                initializeChat(); 
+                const messagesContainer = document.getElementById('chatbot-messages');
+                if (messagesContainer) {
+                    messagesContainer.innerHTML = '';
+                     addMessage(translations[currentLang].chatbotGreeting || "Hello! How can I help you understand Voither's technology?", 'bot');
+                }
+            }
+            
+            const faqResponseArea = document.getElementById('faq-response-area');
+            if(faqResponseArea) {
+                faqResponseArea.classList.remove('conversation-started');
+                faqResponseArea.innerHTML = `
+                    <p class="faq-welcome" data-key="faqWelcome">${translations[newLang].faqWelcome}</p>
+                    <div id="faq-suggested-questions" class="faq-suggested-questions"></div>
+                `;
+                 const newWelcome = faqResponseArea.querySelector<HTMLElement>('[data-key="faqWelcome"]');
+                 if (newWelcome) {
+                     newWelcome.textContent = translations[newLang].faqWelcome;
+                 }
+            }
+            setupInteractiveFAQ();
+        });
+        
+        setupHeaderScroll();
+        setupInfoModal();
+        setupInteractiveFAQ();
+        if (isFeatureEnabled('chatbot')) {
+            setupChatbotUI();
+        }
+        setupCookieConsent();
 
-    // --- Initial Load ---
-    applyFeatureFlags(); // Apply feature flags to the DOM
-    
-    const savedLang = localStorage.getItem('voither-lang') as Language | null;
-    const initialLang: Language = savedLang || 'en';
-    setLanguage(initialLang);
-    
-    initializeCookieConsent();
+        if (window.lucide) {
+            window.lucide.createIcons({
+                attrs: {
+                    'stroke-width': 1.75,
+                }
+            });
+        }
+    };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    init();
 });
