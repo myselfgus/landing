@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
             chatbotPlaceholder: "Ask about our technology...",
             copyright: "&copy; 2025 VOITHER. All rights reserved.",
 
-            cookieConsentText: "We use cookies to enhance your browsing experience and analyze our traffic. By clicking 'Accept', you consent to our use of cookies.",
+            cookieConsentText: "We use cookies to improve your experience. By accepting, you agree to our policy.",
             cookieAccept: "Accept",
             cookieDecline: "Decline",
         },
@@ -432,7 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
             chatbotPlaceholder: "Pergunte sobre nossa tecnologia...",
             copyright: "&copy; 2025 VOITHER. Todos os direitos reservados.",
 
-            cookieConsentText: "Usamos cookies para aprimorar sua experiência de navegação e analisar nosso tráfego. Ao clicar em 'Aceitar', você concorda com nosso uso de cookies.",
+            cookieConsentText: "Usamos cookies para melhorar sua experiência. Ao aceitar, você concorda com nossa política.",
             cookieAccept: "Aceitar",
             cookieDecline: "Recusar",
         }
@@ -572,9 +572,18 @@ document.addEventListener("DOMContentLoaded", () => {
             input.disabled = true;
 
             try {
+                const faqSystemInstruction = `You are a specialized AI assistant for the Voither FAQ section. Your purpose is to provide concise, factual answers about Voither's technology.
+- **Scope:** Your knowledge is strictly limited to Voither's platform, architecture (Edge Cloud, HealthOS, Mestral Engine), business model, and the Sortio application.
+- **Behavior:** If a question falls outside this scope (e.g., general knowledge, other companies, opinions), you must politely decline and state that you can only answer questions about Voither.
+- **Tone:** Your tone must be professional, direct, and factual. Avoid conversational filler.
+- **Format:** Keep answers as short and to-the-point as possible, like a traditional FAQ. Do not invent information or speculate on future features.`;
+                
                 const response = await ai.models.generateContent({
                     model: 'gemini-2.5-flash',
                     contents: question,
+                    config: {
+                        systemInstruction: faqSystemInstruction,
+                    },
                 });
                 const answer = response.text;
 
@@ -857,13 +866,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if(faqResponseArea) {
                 faqResponseArea.classList.remove('conversation-started');
                 faqResponseArea.innerHTML = `
-                    <p class="faq-welcome" data-key="faqWelcome">${translations[newLang].faqWelcome}</p>
                     <div id="faq-suggested-questions" class="faq-suggested-questions"></div>
                 `;
-                 const newWelcome = faqResponseArea.querySelector<HTMLElement>('[data-key="faqWelcome"]');
-                 if (newWelcome) {
-                     newWelcome.textContent = translations[newLang].faqWelcome;
-                 }
             }
             setupInteractiveFAQ();
         });

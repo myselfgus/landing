@@ -44,11 +44,6 @@ body {
     line-height: 1.9;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
-    background-image: url('https://storage.googleapis.com/maker-suite-media/voither-assets/background-light-v2.jpg');
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: cover;
-    animation: subtle-bg-pan 90s ease-in-out infinite;
 }
 
 body.sidebar-open {
@@ -411,6 +406,55 @@ a:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
+/* === BUTTON COMPONENTS === */
+.btn-hero {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-hero.primary {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text-primary);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.2);
+}
+
+.btn-hero.primary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-hero.secondary {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-secondary);
+}
+
+.btn-hero.secondary:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+}
+
 
 /* --- Sections --- */
 .hero-section {
@@ -435,7 +479,7 @@ a:hover {
     background-image: url('https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/cd91f610-0e54-4ba5-67ef-a8aaea3fb800/public');
     background-size: cover;
     background-position: center;
-    animation: kenburns 30s infinite alternate ease-in-out;
+    animation: kenburns 15s infinite alternate ease-in-out;
     z-index: 0;
     transform-origin: center center;
 }
@@ -447,9 +491,8 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
     z-index: 0;
-    animation: hero-glow 5s infinite alternate ease-in-out;
+    animation: hero-glow 4s infinite alternate ease-in-out;
 }
 
 .hero-section h1 {
@@ -463,7 +506,7 @@ a:hover {
         transform: scale(1.0);
     }
     to {
-        transform: scale(1.25);
+        transform: scale(1.15);
     }
 }
 
@@ -472,7 +515,16 @@ a:hover {
         transform: scale(1.0);
     }
     to {
-        transform: scale(1.1);
+        transform: scale(1.15);
+    }
+}
+
+@keyframes subtle-zoom-out {
+    from {
+        transform: scale(1.05);
+    }
+    to {
+        transform: scale(1);
     }
 }
 
@@ -508,27 +560,6 @@ a:hover {
     margin-top: 1.5rem;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.hero-action-button {
-    background: transparent;
-    border: 1px solid var(--grid-color);
-    color: var(--text-secondary);
-    padding: 0.75rem 1.75rem;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-    cursor: pointer;
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-}
-
-.hero-action-button:hover {
-    color: var(--text-primary);
-    background: var(--card-bg);
-    border-color: var(--text-secondary);
 }
 
 .section-subtitle {
@@ -589,10 +620,7 @@ a:hover {
     background-size: cover;
     background-position: center;
     transition: transform 0.4s ease-out;
-}
-
-.solution-pair:hover::before {
-    transform: scale(1.03);
+    animation: subtle-zoom-out 15s infinite alternate ease-in-out;
 }
 
 .solution-grid .solution-pair:nth-child(1)::before {
@@ -648,7 +676,7 @@ a:hover {
     background-size: cover;
     background-position: center center;
     z-index: 1;
-    animation: subtle-bg-pan 90s ease-in-out infinite;
+    animation: subtle-bg-pan 20s ease-in-out infinite;
 }
 
 .architecture-pillars-grid {
@@ -893,7 +921,7 @@ a:hover {
     background-image: url('https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/230a559c-8dde-4a62-c923-44b4f9824e00/public');
     background-size: cover;
     background-position: center center;
-    animation: subtle-zoom 45s infinite alternate ease-in-out;
+    animation: subtle-zoom 18s infinite alternate ease-in-out;
 }
 
 #application .container {
@@ -1083,7 +1111,7 @@ a:hover {
     background-image: url('https://imagedelivery.net/ZSVIzNe6GQZrE_DQQqHAyw/15bd7f6b-0e7e-40b2-27e5-578c5d1faf00/public');
     background-size: cover;
     background-position: center;
-    animation: subtle-zoom 45s infinite alternate ease-in-out;
+    animation: subtle-zoom 18s infinite alternate ease-in-out;
 }
 
 #contact .container {
@@ -1095,8 +1123,15 @@ a:hover {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 5rem;
-    align-items: flex-start;
+    align-items: stretch;
 }
+
+.contact-grid > .faq-container {
+    min-height: 0; /* Prevents overflow in grid context */
+    display: flex;
+    flex-direction: column;
+}
+
 #contact .contact-info .section-title,
 #contact .contact-info .section-subtitle {
     text-align: left;
@@ -1108,18 +1143,40 @@ a:hover {
 #contact .contact-info .section-subtitle { margin-bottom: 2.5rem; }
 
 /* --- Interactive FAQ Styles --- */
+.faq-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.faq-header .section-subtitle {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .interactive-faq {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    height: 100%;
+    flex-grow: 1;
+    min-height: 0;
+    /* UNIFIED GLASS EFFECT */
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    max-height: 650px;
 }
 
 .faq-response-area {
     flex-grow: 1;
-    height: 450px;
-    background-color: var(--bg-primary);
-    border: 1px solid var(--grid-color);
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0,0,0,0.04);
     border-radius: 12px;
     padding: 1rem;
     display: flex;
@@ -1127,6 +1184,7 @@ a:hover {
     gap: 1.25rem;
     overflow-y: auto;
     position: relative;
+    min-height: 0;
 }
 
 .faq-response-area p {
@@ -1135,13 +1193,6 @@ a:hover {
     line-height: 1.6;
 }
 
-.faq-welcome {
-    color: var(--text-tertiary);
-    text-align: center;
-    margin: auto 0;
-}
-
-.faq-response-area.conversation-started > .faq-welcome,
 .faq-response-area.conversation-started > #faq-suggested-questions {
     display: none;
 }
@@ -1192,11 +1243,12 @@ a:hover {
     gap: 0.5rem;
     justify-content: center;
     padding-top: 1rem;
+    margin: auto 0;
 }
 
 .faq-suggestion-btn {
-    background: var(--bg-primary);
-    border: 1px solid var(--grid-color);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--text-secondary);
     font-family: 'Roboto', sans-serif;
     font-size: 0.85rem;
@@ -1207,43 +1259,50 @@ a:hover {
 }
 
 .faq-suggestion-btn:hover {
-    background: var(--bg-secondary);
+    background: rgba(255, 255, 255, 0.8);
     color: var(--text-primary);
-    border-color: var(--text-secondary);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 .faq-input-area {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
     margin-top: auto;
+    flex-shrink: 0;
 }
 
 .faq-input {
     flex-grow: 1;
-    background-color: var(--bg-primary);
-    border: 1px solid var(--grid-color);
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
     color: var(--text-primary);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.faq-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
 }
 
 .faq-input:focus {
     outline: none;
-    border-color: var(--highlight-color);
-    box-shadow: 0 0 0 2px rgba(81, 121, 219, 0.3);
+    border-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.08);
+    box-shadow: none;
 }
 
 .faq-send-btn {
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     background-color: var(--cta-bg);
     color: var(--cta-text);
     border: none;
-    border-radius: 8px;
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1350,30 +1409,27 @@ a:hover {
 
 
 /* --- Chatbot Styles --- */
-.chat-bubble {
+.chat-btn {
     width: 44px;
     height: 44px;
-    background-color: var(--highlight-color);
-    border: none;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
     border-radius: 50%;
-    color: white;
-    font-size: 1.2rem;
+    color: var(--text-secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(106, 169, 255, 0.4);
-    animation: liquid-morph 8s ease-in-out infinite;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
 }
-.chat-bubble:hover {
+.chat-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(106, 169, 255, 0.5);
-}
-@keyframes liquid-morph {
-    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    color: var(--text-primary);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border-color: rgba(0,0,0,0.15);
 }
 #chatbot-container {
     position: fixed;
@@ -1408,8 +1464,10 @@ a:hover {
     max-width: 420px;
     height: 70vh;
     max-height: 600px;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--grid-color);
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -1424,7 +1482,7 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--grid-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
 }
 .chatbot-title {
@@ -1490,24 +1548,31 @@ a:hover {
 .chatbot-input-area {
     display: flex;
     padding: 1rem 1.25rem;
-    border-top: 1px solid var(--grid-color);
+    border-top: none;
     gap: 0.75rem;
     flex-shrink: 0;
 }
 .chatbot-input {
     flex-grow: 1;
-    background-color: #FFFFFF;
-    border: 1px solid var(--grid-color);
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
     color: var(--text-primary);
     border-radius: 20px;
     padding: 0.5rem 1rem;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
 }
-.chatbot-input:focus { outline: none; border-color: var(--highlight-color); }
+.chatbot-input::placeholder {
+    color: var(--text-secondary);
+}
+.chatbot-input:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.08);
+}
 .chatbot-send-button {
-    background-color: var(--highlight-color);
+    background-color: var(--cta-bg);
     border: none;
     color: white;
     width: 40px;
@@ -1521,7 +1586,9 @@ a:hover {
     transition: background-color 0.2s ease;
     flex-shrink: 0;
 }
-.chatbot-send-button:hover { background-color: #5179db; }
+.chatbot-send-button:hover {
+    background-color: var(--cta-hover-bg);
+}
 
 /* --- Info Modal for Tech Diagram --- */
 #info-modal-container {
@@ -1636,12 +1703,15 @@ a:hover {
     position: fixed;
     bottom: 20px;
     left: 20px;
-    right: 20px;
+    right: auto;
+    max-width: 400px;
     z-index: 1001;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--grid-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -1656,7 +1726,7 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    padding: 1rem;
+    padding: 1.25rem;
 }
 .cookie-consent-text {
     font-size: 0.9rem;
@@ -1723,12 +1793,13 @@ a:hover {
         top: auto;
         transform: none;
         width: 100%;
-        background-color: rgba(249, 249, 251, 0.8);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--grid-color);
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         padding: 0.5rem 1rem;
         border-radius: 999px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     .partner-logos { display: flex; align-items: center; justify-content: center; gap: 1rem; }
     .header-logo-mobile { display: flex; align-items: center; font-size: 1.2rem; }
@@ -1785,28 +1856,31 @@ a:hover {
         display: flex;
         align-items: center;
         gap: 1rem;
-        background-color: rgba(249, 249, 251, 0.8);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--grid-color);
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 999px;
         padding: 0.5rem 1rem;
         box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     }
-    .chat-bubble {
+    .chat-btn {
         width: auto;
         height: auto;
         background: none;
         box-shadow: none;
-        animation: none;
         color: var(--text-secondary);
         transition: color 0.2s ease;
         font-size: 1.4rem;
+        border: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
-    .chat-bubble:hover {
+    .chat-btn:hover {
         transform: none;
         box-shadow: none;
         color: var(--text-primary);
+        background: none;
     }
 }
 
@@ -1834,7 +1908,7 @@ a:hover {
     #contact { padding: 4rem 0; }
     .architecture-pillars-grid, .research-grid, .impact-grid { grid-template-columns: 1fr; }
     .impact-grid { grid-template-columns: 1fr; }
-    .cookie-consent-banner { left: 10px; right: 10px; bottom: 10px; }
+    .cookie-consent-banner { left: 10px; right: 10px; bottom: 10px; max-width: none; }
     .cookie-consent-content { flex-direction: column; gap: 1rem; padding: 1rem; text-align: center; }
     .tab-nav { flex-wrap: wrap; }
     .tab-link { flex-basis: 50%; }
@@ -1847,4 +1921,46 @@ a:hover {
     .data-flow-line { display: none; } /* Hide complex lines on mobile */
     .health-os { width: 100%; }
     .mestral-engine { width: 100%; }
+}
+
+/* --- Desktop Animation Enhancements --- */
+@media (min-width: 1025px) {
+    @keyframes kenburns-desktop {
+        from { transform: scale(1.0); }
+        to { transform: scale(1.2); }
+    }
+
+    @keyframes subtle-zoom-out-desktop {
+        from { transform: scale(1.1); }
+        to { transform: scale(1); }
+    }
+    
+    @keyframes subtle-zoom-desktop {
+        from { transform: scale(1.0); }
+        to { transform: scale(1.2); }
+    }
+
+    .hero-section::before {
+        animation-name: kenburns-desktop;
+        animation-duration: 12s;
+    }
+
+    .solution-pair::before {
+        animation-name: subtle-zoom-out-desktop;
+        animation-duration: 12s;
+    }
+
+    #architecture {
+        animation-duration: 15s;
+    }
+
+    #application::before {
+        animation-name: subtle-zoom-desktop;
+        animation-duration: 15s;
+    }
+
+    #contact::before {
+        animation-name: subtle-zoom-desktop;
+        animation-duration: 15s;
+    }
 }

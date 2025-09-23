@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="header-actions">
-                         <button class="chat-bubble js-open-chat" aria-label="Open chatbot" data-feature-flag="chatbot">
+                         <button class="chat-btn js-open-chat" aria-label="Open chatbot" data-feature-flag="chatbot">
                             <i data-lucide="message-circle-question"></i>
                         </button>
                     </div>
@@ -91,8 +91,8 @@
                         <h1 data-key="heroTitleNew"></h1>
                         <p class="hero-subtext" data-key="heroPitchNew"></p>
                         <div class="hero-actions">
-                            <a href="#solution" class="cta-button large" data-key="heroCtaPrimary"></a>
-                            <a href="#contact" class="hero-action-button" data-key="heroCtaSecondary"></a>
+                            <a href="#solution" class="btn-hero primary" data-key="heroCtaPrimary"></a>
+                            <a href="#contact" class="btn-hero secondary" data-key="heroCtaSecondary"></a>
                         </div>
                     </div>
                 </section>
@@ -364,9 +364,12 @@
                     <div class="container">
                         <div class="contact-grid">
                             <div class="faq-container">
+                                <div class="faq-header">
+                                    <h2 class="section-title" data-key="faqTitle"></h2>
+                                    <p class="section-subtitle" data-key="faqWelcome"></p>
+                                </div>
                                 <div id="interactive-faq" class="interactive-faq">
                                     <div id="faq-response-area" class="faq-response-area glass-card">
-                                        <p class="faq-welcome" data-key="faqWelcome"></p>
                                         <div id="faq-suggested-questions" class="faq-suggested-questions">
                                             <!-- Buttons injected by JS -->
                                         </div>
@@ -418,7 +421,7 @@
             <i data-lucide="menu" class="icon-menu"></i>
             <i data-lucide="x" class="icon-close"></i>
         </button>
-        <button class="chat-bubble js-open-chat" aria-label="Open chatbot" data-feature-flag="chatbot">
+        <button class="chat-btn js-open-chat" aria-label="Open chatbot" data-feature-flag="chatbot">
             <i data-lucide="message-circle-question"></i>
         </button>
     </div>
