@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         en: {
             pageTitle: "Voither | The End of Manual Workflows in Healthcare",
             proudlyPartOf: "Proudly member of",
-            msForStartups: "Microsoft for Startups",
+            mongoForStartups: "MongoDB Atlas for Startups AI Track",
             cfForStartups: "Cloudflare for Startups",
             gfForStartups: "Google for Startups",
             
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
         pt: {
             pageTitle: "Voither | O Fim dos Fluxos de Trabalho Manuais na Saúde",
             proudlyPartOf: "Orgulhosamente membro de",
-            msForStartups: "Microsoft for Startups",
+            mongoForStartups: "MongoDB Atlas for Startups AI Track",
             cfForStartups: "Cloudflare for Startups",
             gfForStartups: "Google for Startups",
             

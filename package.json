@@ -6,15 +6,20 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "deploy:prod": "npm run build && wrangler pages deploy dist --env production",
+    "wrangler:dev": "wrangler pages dev dist --port 8788",
+    "wrangler:login": "wrangler auth login",
+    "wrangler:publish": "wrangler pages deploy dist --project-name landing-page"
   },
   "dependencies": {
     "@google/genai": "^1.13.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    
     "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "wrangler": "^4.41.0"
   }
 }

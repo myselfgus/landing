@@ -1,0 +1,27 @@
+name = "landing-page"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+# Environment variables for Gemini API
+[vars]
+# GEMINI_API_KEY will be set via wrangler secret
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "."
+watch_dir = "src"
+
+# Custom domains (configure after deployment)
+# [[route]]
+# pattern = "voither.com/*"
+# zone_name = "voither.com"
+
+# Development configuration
+[env.development]
+name = "landing-page-dev"
+
+# Production configuration
+[env.production]
+name = "landing-page"
