@@ -304,7 +304,7 @@ a:hover {
 
 .main-header nav {
     display: flex;
-    justify-content: center; /* Align items to the center */
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -357,6 +357,16 @@ a:hover {
     color: var(--text-primary);
 }
 
+.header-logo-desktop {
+    display: block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.05em;
+}
+
 .header-logo-mobile {
     display: none;
 }
@@ -370,7 +380,7 @@ a:hover {
     top: 16px;
     right: 40px;
     z-index: 101;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 1rem;
 }
@@ -1787,6 +1797,7 @@ a:hover {
     }
     .main-header .container { padding: 0; width: 100%; display: flex; justify-content: center; }
     .header-actions { display: none; }
+    .header-logo-desktop { display: none; }
     .partner-banner {
         position: static;
         left: auto;
@@ -1816,11 +1827,7 @@ a:hover {
     .partner-logo { width: 16px; height: 16px; }
     .partner-img-logo { height: 20px; }
     .partner-logo-text {
-        display: inline !important;
-        font-size: 0.7rem;
-        white-space: nowrap;
-        font-weight: 500;
-        line-height: 1;
+        display: none;
     }
     .hide-on-mobile { display: none !important; }
     .sidebar {
@@ -1962,5 +1969,32 @@ a:hover {
     #contact::before {
         animation-name: subtle-zoom-desktop;
         animation-duration: 15s;
+    }
+
+    /* --- Font size adjustments for better desktop readability --- */
+    p {
+        font-size: 1.1rem;
+    }
+
+    .hero-subtext,
+    .section-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .sidebar-nav a {
+        font-size: 1rem;
+    }
+    
+    .founder-quote blockquote {
+        font-size: 1.75rem;
+    }
+
+    /* Fine-tuning for specific paragraph contexts */
+    .architecture-pillar-card p,
+    .founder-bio,
+    .impact-card p,
+    .research-card p,
+    .tab-text p {
+        font-size: 1.05rem;
     }
 }

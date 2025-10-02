@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
             proudlyPartOf: "Proudly member of",
             msForStartups: "Microsoft for Startups",
             cfForStartups: "Cloudflare for Startups",
+            gfForStartups: "Google for Startups",
             
             heroTitleNew: "Autonomous Healthcare.",
             heroPitchNew: "Voither delivers the new foundation for healthcare: an on-site AI platform that automates workflows with absolute privacy and resilience. The end of manual work is here.",
@@ -286,6 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
             proudlyPartOf: "Orgulhosamente membro de",
             msForStartups: "Microsoft for Startups",
             cfForStartups: "Cloudflare for Startups",
+            gfForStartups: "Google for Startups",
             
             heroTitleNew: "Saúde Autônoma.",
             heroPitchNew: "A Voither entrega a nova fundação para a saúde: uma plataforma de IA local que automatiza fluxos de trabalho com privacidade e resiliência absolutas. O fim do trabalho manual chegou.",
